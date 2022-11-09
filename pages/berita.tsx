@@ -1,7 +1,9 @@
-
+import Layout from "../components/Layout";
 
 export default function berita() {
   return (
-    <div>berita</div>
-  )
+    <Layout>
+      <div>page berita</div>
+    </Layout>
+  );
 }
