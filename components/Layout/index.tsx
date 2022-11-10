@@ -1,7 +1,6 @@
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { ReactNode } from "react";
-
-import Sidebar from "../Sidebar";
 
 interface LayoutProps {
   children: ReactNode;
@@ -9,12 +8,15 @@ interface LayoutProps {
 
 export default function Layout(props: LayoutProps) {
   const { children } = props;
+
+  const { asPath, pathname } = useRouter();
+
   return (
     <div className="drawer">
       <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
       <div className="drawer-content flex flex-col">
         {/* <!-- Navbar --> */}
-        <div className="w-full navbar bg-base-300">
+        <div className="w-full navbar bg-blue-primary text-white relative">
           <div className="flex-none lg:hidden">
             <label htmlFor="my-drawer-3" className="btn btn-square btn-ghost">
               <svg
@@ -32,7 +34,33 @@ export default function Layout(props: LayoutProps) {
               </svg>
             </label>
           </div>
-          <div className="flex-1 px-2 mx-2">Navbar Title</div>
+          {/* Handle Navbar title */}
+          {asPath === "/berita" ? (
+            <>
+              <div className="flex absolute inset-x-24 justify-center pt-0.5 nav-bikunku">
+                <p>Berita Bikun</p>
+              </div>
+            </>
+          ) : asPath === "/rute" ? (
+            <>
+              {" "}
+              <div>Rute Bikun</div>
+            </>
+          ) : asPath === "/jadwal" ? (
+            <>
+              {" "}
+              <div>Jadwal Bikun</div>
+            </>
+          ) : asPath === "/bantuan" ? (
+            <>
+              {" "}
+              <div>FAQ</div>
+            </>
+          ) : (
+            <>default</>
+          )}
+          {/* <div className="flex-1 px-2 mx-2">Navbar Title</div> */}
+
           <div className="flex-none hidden lg:block px-2">
             <ul className="menu menu-horizontal space-x-2">
               <Link href="/">Beranda</Link>
@@ -45,11 +73,14 @@ export default function Layout(props: LayoutProps) {
           </div>
         </div>
         {/* <!-- Page content here --> */}
-        {children}
+        <div className="bg-blue-200 h-full">
+          
+          {children}
+        </div>
       </div>
       <div className="drawer-side">
         <label htmlFor="my-drawer-3" className="drawer-overlay"></label>
-        <ul className="menu p-4 w-80 bg-base-100">
+        <ul className="menu p-4 w-64 bg-base-100">
           {/* <!-- Sidebar content here --> */}
           <Link href="/">Beranda</Link>
           <Link href="/berita">Berita Bikun</Link>

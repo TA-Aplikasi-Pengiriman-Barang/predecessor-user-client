@@ -8,12 +8,12 @@ module.exports = {
   theme: {
     extend: {
       colors:{
-        'blue-primary': '#243c5a',
-        'blue-secondary': '#243c5a',
-        'red-primary': '#243c5a',
-        'yellow-primary': '#243c5a',
+        'blue-primary': '#4382EE',
+        'blue-secondary': '#71A8FA',
+        'red-primary': '#F25858',
+        'yellow-primary': '#EDC808',
         'grey-primary': '#243c5a',
-        'black-primary': '#243c5a',
+        'black-primary': '#494949',
       }
     },
   },

@@ -71,7 +71,7 @@ export default function Home() {
     // </div>
     <>
       <Layout>
-      <div>page landing</div>
+        <div>SI PALING BIKUN</div>
       </Layout>
     </>
   );
