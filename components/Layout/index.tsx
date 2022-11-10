@@ -10,6 +10,7 @@ export default function Layout(props: LayoutProps) {
   const { children } = props;
 
   const { asPath, pathname } = useRouter();
+  
 
   return (
     <div className="drawer">
@@ -35,7 +36,7 @@ export default function Layout(props: LayoutProps) {
             </label>
           </div>
           {/* Handle Navbar title */}
-          {asPath === "/berita" ? (
+          {asPath.includes("/berita") ? (
             <>
               <div className="flex absolute inset-x-24 justify-center pt-0.5 nav-bikunku">
                 <p>Berita Bikun</p>
@@ -68,7 +69,7 @@ export default function Layout(props: LayoutProps) {
               <Link href="/"></Link>
               <Link href="/">Rute Bikun</Link>
               <Link href="/">Jadwal Bikun</Link>
-              <Link href="/">Bantuan</Link>
+              <Link href="/bantuan">Bantuan</Link>
             </ul>
           </div>
         </div>
@@ -87,7 +88,7 @@ export default function Layout(props: LayoutProps) {
           <Link href="/"></Link>
           <Link href="/">Rute Bikun</Link>
           <Link href="/">Jadwal Bikun</Link>
-          <Link href="/">Bantuan</Link>
+          <Link href="/bantuan">Bantuan</Link>
         </ul>
       </div>
     </div>
