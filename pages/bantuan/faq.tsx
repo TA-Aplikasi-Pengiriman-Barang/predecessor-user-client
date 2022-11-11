@@ -4,9 +4,9 @@ export default function faq() {
   return (
     <Layout>
       <div className="bg-white h-full">
-        <div tabIndex={0} className="collapse collapse-arrow">
+        <div tabIndex={0} className="collapse collapse-arrow text-black-primary">
           <div className="collapse-title text-base font-semibold">
-            Apa itu bikun?
+            <p>Apa itu bikun?</p>
           </div>
           <div className="collapse-content">
             <p className="text-[#868686] text-[14px]">
@@ -19,9 +19,9 @@ export default function faq() {
           <hr />
         </div>
 
-        <div tabIndex={0} className="collapse collapse-arrow">
+        <div tabIndex={0} className="collapse collapse-arrow text-black-primary">
           <div className="collapse-title text-base font-semibold">
-            Apa itu bikun?
+            <p>Apa itu bikun?</p>
           </div>
           <div className="collapse-content">
             <p className="text-[#868686] text-[14px]">
@@ -34,9 +34,9 @@ export default function faq() {
           <hr />
         </div>
 
-        <div tabIndex={0} className="collapse collapse-arrow">
+        <div tabIndex={0} className="collapse collapse-arrow text-black-primary">
           <div className="collapse-title text-base font-semibold">
-            Apa itu bikun?
+            <p>Apa itu bikun?</p>
           </div>
           <div className="collapse-content">
             <p className="text-[#868686] text-[14px]">

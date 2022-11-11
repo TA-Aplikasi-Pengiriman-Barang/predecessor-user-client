@@ -8,7 +8,7 @@ export default function detail() {
     <Layout>
       <div className="h-full bg-white space-y-6 pt-6 px-6 bg-no-repeat bg-[right_top_-3rem]" style={{backgroundImage:`url(${beritaBG.src})`}}>
         <div className="space-y-1.5">
-          <h1 className="text-base font-medium">Bikun tidak beroperasi Senin, 31 Oktober 2022</h1>
+          <p className="text-base font-semibold">Bikun tidak beroperasi Senin, 31 Oktober 2022</p>
           <div className="flex space-x-1">
             <Image
               src={schedule}

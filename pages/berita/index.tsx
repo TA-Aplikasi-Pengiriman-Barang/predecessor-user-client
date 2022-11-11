@@ -16,20 +16,20 @@ export default function berita() {
         {/* filter */}
         <div className="flex justify-center space-x-3">
           <div className="border-[1px] rounded-full border-[#EAEAEA] px-6 bg-blue-primary text-white">
-            All
+            <p className="text-white">All</p>
           </div>
           <div className="border-[1px] rounded-full bg-[#FBFBFB] border-[#EAEAEA] px-6">
-            Today
+            <p>Today</p>
           </div>
           <div className="border-[1px] rounded-full bg-[#FBFBFB] border-[#EAEAEA] px-6">
-            Last 7 days
+            <p>Last 7 days</p>
           </div>
         </div>
 
         {isExist ? (
           <>
             {/* konten */}
-            <div className="flex flex-col space-y-4 px-4">
+            <div className="flex flex-col space-y-4 px-4 h-screen bg-white">
               {/* loop */}
               <Link href="/berita/detail" className="border-[1px] rounded-xl">
                 <div className="flex justify-between py-4 px-3">
@@ -39,7 +39,7 @@ export default function berita() {
 
                   <div className="w-5/6 lg:w-11/12">
                     <div className="flex flex-col space-y-[0.8] px-1 lg:px-2">
-                      <p className="truncate text-base">
+                      <p className="truncate text-base text-black-primary">
                         Bikun tidak beroperasi, 31 Oktober...
                       </p>
                       <p className="truncate text-xs text-[#959595]">
