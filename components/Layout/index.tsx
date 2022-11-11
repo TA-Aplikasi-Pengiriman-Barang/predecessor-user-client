@@ -54,8 +54,15 @@ export default function Layout(props: LayoutProps) {
             </>
           ) : asPath === "/bantuan" ? (
             <>
-              {" "}
-              <div>FAQ</div>
+              <div className="flex absolute inset-x-24 justify-center pt-0.5 nav-bikunku">
+                <p>Bantuan</p>
+              </div>
+            </>
+          ) : asPath === "/bantuan/faq" ? (
+            <>
+              <div className="flex absolute inset-x-24 justify-center pt-0.5 nav-bikunku">
+                <p>FAQ</p>
+              </div>
             </>
           ) : (
             <>default</>
