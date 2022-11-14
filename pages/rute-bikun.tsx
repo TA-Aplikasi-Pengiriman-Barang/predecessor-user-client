@@ -1,7 +1,4 @@
-import Head from "next/head";
 import Image from "next/image";
-import styles from "../styles/Home.module.css";
-import Sidebar from "../components/Sidebar";
 import Layout from "../components/Layout";
 import Draggable from "react-draggable";
 import { useState } from "react";
@@ -13,13 +10,7 @@ export default function rutebikun() {
   const [activeTabIndex, setActiveTabIndex] = useState(0);
   const addActive = (props: number) => {
     setActiveTabIndex(props);
-    console.log(activeTabIndex);
   };
-
-  const handleDrag = () => {
-    console.log("activeTabIndex");
-  };
-
   const array = ["All", "Rute Lurus", "Rute Belok"];
 
   return (
