@@ -5,6 +5,7 @@ export default function tentangbikunku() {
   return (
     <Layout>
       <div
+      id="front"
         className="h-full bg-white space-y-6 pt-6 px-6 bg-no-repeat bg-[right_top_-3rem]"
         style={{ backgroundImage: `url(${beritaBG.src})` }}
       >

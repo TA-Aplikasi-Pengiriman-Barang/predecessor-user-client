@@ -3,7 +3,7 @@ import Layout from "../../components/Layout";
 export default function faq() {
   return (
     <Layout>
-      <div className="bg-white h-full">
+      <div id="front" className="bg-white h-full">
         <div tabIndex={0} className="collapse collapse-arrow text-black-primary">
           <div className="collapse-title text-base font-semibold">
             <p>Apa itu bikun?</p>

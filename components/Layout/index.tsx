@@ -7,13 +7,11 @@ import location from "../../static/icon/location.svg";
 import calendar from "../../static/icon/calendar.svg";
 import Map from "../Map";
 import { MapContainer, TileLayer, useMap, Marker, Popup } from "react-leaflet";
-import dynamic from "next/dynamic"
-
+import dynamic from "next/dynamic";
 
 if (typeof window !== "undefined") {
   // browser code
 }
-
 
 interface LayoutProps {
   children: ReactNode;
@@ -25,20 +23,18 @@ export default function Layout(props: LayoutProps) {
   const { asPath, pathname } = useRouter();
 
   const isSlash = asPath.split("/").length - 1;
-  
+
   const position: [number, number] = [51.505, -0.09];
 
-  const MyAwesomeMap = dynamic(() => import("../Map"), { ssr:false })
-
-
+  const MyAwesomeMap = dynamic(() => import("../Map"), { ssr: false });
 
   return (
     <div className="drawer">
       <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
-      <div className="drawer-content flex flex-col">
+      <div className="relative drawer-content flex flex-col h-screen">
         {/* <!-- Navbar --> */}
         {/* {asPath.includes("/jadwal-bikun") ? (<></>) : (<></>)} */}
-        <div className="w-full navbar bg-blue-primary text-white relative">
+        <div className="w-full navbar bg-blue-primary text-white absolute sticky top-0 z-50">
           <div className="flex-none lg:hidden">
             <label htmlFor="my-drawer-3" className="btn btn-square btn-ghost">
               {isSlash > 1 ? (
@@ -71,45 +67,45 @@ export default function Layout(props: LayoutProps) {
           {asPath.includes("/berita") ? (
             <>
               <div className="flex absolute inset-x-24 justify-center pt-0.5 nav-bikunku">
-                Berita Bikun
+                <h1 className="font-semibold"> Berita Bikun</h1>
               </div>
             </>
           ) : asPath === "/rute-bikun" ? (
             <>
               {" "}
               <div className="flex absolute inset-x-24 justify-center pt-0.5 nav-bikunku">
-                Rute Bikun
+                <h1 className="font-semibold"> Rute Bikun</h1>
               </div>
             </>
           ) : asPath === "/jadwal-bikun" ? (
             <>
               {" "}
               <div className="flex absolute inset-x-24 justify-center pt-0.5 nav-bikunku">
-                Jadwal Bikun
+                <h1 className="font-semibold"> Jadwal Bikun</h1>
               </div>
             </>
           ) : asPath === "/bantuan" ? (
             <>
               <div className="flex absolute inset-x-24 justify-center pt-0.5 nav-bikunku">
-                Bantuan
+                <h1 className="font-semibold"> Bantuan</h1>
               </div>
             </>
           ) : asPath === "/bantuan/faq" ? (
             <>
               <div className="flex absolute inset-x-24 justify-center pt-0.5 nav-bikunku">
-                FAQ
+                <h1 className="font-semibold"> FAQ</h1>
               </div>
             </>
           ) : asPath === "/bantuan/kebijakan-privasi" ? (
             <>
               <div className="flex absolute inset-x-24 justify-center pt-0.5 nav-bikunku">
-                Kebijakan Privasi
+                <h1 className="font-semibold"> Kebijakan Privasi</h1>
               </div>
             </>
           ) : asPath === "/bantuan/tentang-bikunku" ? (
             <>
               <div className="flex absolute inset-x-24 justify-center pt-0.5 nav-bikunku">
-                Tentang BikunKu
+                <h1 className="font-semibold"> Tentang BikunKu</h1>
               </div>
             </>
           ) : (
@@ -128,7 +124,31 @@ export default function Layout(props: LayoutProps) {
           </div>
         </div>
 
-        {/* {asPath.includes("/jadwal-bikun") ? (
+        <div>          
+          <MyAwesomeMap>{children}</MyAwesomeMap>
+        </div>
+        {/* <div>          
+          {children}
+        </div> */}
+        
+        
+      </div>
+      <div className="drawer-side">
+        <label htmlFor="my-drawer-3" className="drawer-overlay"></label>
+        <ul className="menu p-4 w-64 bg-base-100">
+          {/* <!-- Sidebar content here --> */}
+          <Link href="/">Beranda</Link>
+          <Link href="/berita">Berita Bikun</Link>
+          <Link href="/rute-bikun">Rute Bikun</Link>
+          <Link href="/jadwal-bikun">Jadwal Bikun</Link>
+          <Link href="/bantuan">Bantuan</Link>
+        </ul>
+      </div>
+    </div>
+  );
+}
+
+      {/* {asPath.includes("/jadwal-bikun") ? (
           <div className="bg-blue-primary h-16 rounded-[0_0_1rem_1rem] z-10 flex justify-center">
             <div className="h-28 w-5/6 rounded-lg bg-white flex flex-col justify-center mt-2 px-4 space-y-3 drop-shadow-xl">
               <div className="flex space-x-2 rounded-full border-[1px] border-[#EAEAEA] bg-[#FAFAFA] px-4 py-2 text-sm">
@@ -156,27 +176,3 @@ export default function Layout(props: LayoutProps) {
             </Popup>
           </Marker>
         </MapContainer> */}
-        
-        <div className="bg-blue-200 h-full">
-          <div className="z-50">{children}</div>
-          <div className="h-full z-0">
-          <MyAwesomeMap></MyAwesomeMap>
-          </div>
-          
-          
-        </div>
-      </div>
-      <div className="drawer-side">
-        <label htmlFor="my-drawer-3" className="drawer-overlay"></label>
-        <ul className="menu p-4 w-64 bg-base-100">
-          {/* <!-- Sidebar content here --> */}
-          <Link href="/">Beranda</Link>
-          <Link href="/berita">Berita Bikun</Link>
-          <Link href="/rute-bikun">Rute Bikun</Link>
-          <Link href="/jadwal-bikun">Jadwal Bikun</Link>
-          <Link href="/bantuan">Bantuan</Link>
-        </ul>
-      </div>
-    </div>
-  );
-}

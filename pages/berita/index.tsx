@@ -12,7 +12,7 @@ export default function berita() {
   return (
     <Layout>
       {" "}
-      <div className="h-full bg-white space-y-6 pt-6">
+      <div id="front" className="space-y-6 pt-6">
         {/* filter */}
         <div className="flex justify-center space-x-3">
           <div className="border-[1px] rounded-full border-[#EAEAEA] px-6 bg-blue-primary text-white">
@@ -29,7 +29,7 @@ export default function berita() {
         {isExist ? (
           <>
             {/* konten */}
-            <div className="flex flex-col space-y-4 px-4 h-screen bg-white">
+            <div className="flex flex-col space-y-4 px-4 bg-white">
               {/* loop */}
               <Link href="/berita/detail" className="border-[1px] rounded-xl">
                 <div className="flex justify-between py-4 px-3">
