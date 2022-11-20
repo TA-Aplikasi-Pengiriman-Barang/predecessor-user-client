@@ -8,6 +8,18 @@ import calendar from "../../static/icon/calendar.svg";
 import Map from "../Map";
 import { MapContainer, TileLayer, useMap, Marker, Popup } from "react-leaflet";
 import dynamic from "next/dynamic";
+import bikunku from "../../static/icon/bikunku.svg";
+import ctaBerita from "../../static/icon/ctaBerita.svg";
+import navBeranda from "../../static/icon/navbar/navBeranda.svg";
+import navBerita from "../../static/icon/navbar/navBerita.svg";
+import navRute from "../../static/icon/navbar/navRute.svg";
+import navJadwal from "../../static/icon/navbar/navJadwal.svg";
+import navBantuan from "../../static/icon/navbar/navBantuan.svg";
+import navBerandaActive from "../../static/icon/navbar/navBerandaActive.svg";
+import navBeritaActive from "../../static/icon/navbar/navBeritaActive.svg";
+import navRuteActive from "../../static/icon/navbar/navRuteActive.svg";
+import navJadwalActive from "../../static/icon/navbar/navJadwalActive.svg";
+import navBantuanActive from "../../static/icon/navbar/navBantuanActive.svg";
 
 if (typeof window !== "undefined") {
   // browser code
@@ -31,7 +43,7 @@ export default function Layout(props: LayoutProps) {
   return (
     <div className="drawer">
       <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
-      <div className="relative drawer-content flex flex-col h-screen overflow-y-scroll">
+      <div className="relative drawer-content flex flex-col h-screen">
         {/* <!-- Navbar --> */}
         {/* {asPath.includes("/jadwal-bikun") ? (<></>) : (<></>)} */}
         <div className="w-full h-[8%] navbar bg-blue-primary text-white sticky top-0 z-50">
@@ -109,7 +121,14 @@ export default function Layout(props: LayoutProps) {
               </div>
             </>
           ) : (
-            <>default</>
+            <div>
+              <div className="flex absolute inset-x-24 justify-center pt-0.5 nav-bikunku">
+                <Image src={bikunku} alt="" />
+              </div>
+              <Link href="/berita" className="flex absolute inset-y-0 right-6 justify-center pt-0.5 nav-bikunku">
+                <Image src={ctaBerita} alt="" />
+              </Link>
+            </div>
           )}
           {/* <div className="flex-1 px-2 mx-2">Navbar Title</div> */}
 
@@ -124,19 +143,165 @@ export default function Layout(props: LayoutProps) {
           </div>
         </div>
 
-        <div>
+        {/* {asPath === "/" ? (
+          <>
+            <div id="front2" className="h-full top-[8%] overflow-y-hidden">
+              <MyAwesomeMap>{children}</MyAwesomeMap>
+            </div>
+          </>
+        ) : asPath.includes("/rute-bikun") ? (
+          <>
+            {" "}
+            <div id="front2" className="h-[92%] top-[8%] overflow-y-hidden">
+              <MyAwesomeMap>{children}</MyAwesomeMap>
+            </div>
+          </>
+        ) : (
+          <div>
+            <MyAwesomeMap>{children}</MyAwesomeMap>
+          </div>
+        )} */}
+
+        <div id="front2" className="h-[100%] top-[8%]">
           <MyAwesomeMap>{children}</MyAwesomeMap>
         </div>
+
+        {/* <div id="front2" className="h-[92%] top-[8%] overflow-y-hidden">
+          <MyAwesomeMap>{children}</MyAwesomeMap>
+        </div>
+        <div>
+          <MyAwesomeMap>{children}</MyAwesomeMap>
+        </div> */}
       </div>
       <div className="drawer-side">
         <label htmlFor="my-drawer-3" className="drawer-overlay"></label>
-        <ul className="menu p-4 w-64 bg-base-100">
+        <ul className="menu p-6 w-64 bg-base-100 space-y-4">
           {/* <!-- Sidebar content here --> */}
-          <Link href="/">Beranda</Link>
-          <Link href="/berita">Berita Bikun</Link>
-          <Link href="/rute-bikun">Rute Bikun</Link>
-          <Link href="/jadwal-bikun">Jadwal Bikun</Link>
-          <Link href="/bantuan">Bantuan</Link>
+          <Link href="/">
+            <div
+              className={
+                pathname === "/"
+                  ? "flex justify-between space-x-2.5 h-[44px] bg-[#EFF6FF] p-2 rounded-md"
+                  : "flex justify-between space-x-2.5 h-[44px] p-2"
+              }
+            >
+              <Image
+                src={pathname == "/" ? navBerandaActive : navBeranda}
+                alt=""
+              />
+              <p
+                className={
+                  pathname == "/"
+                    ? "my-auto flex-grow font-semibold text-blue-primary text-lg"
+                    : "my-auto flex-grow text-lg"
+                }
+              >
+                Beranda
+              </p>
+            </div>
+          </Link>
+          <Link href="/berita">
+            <div
+              className={
+                asPath.includes("/berita")
+                  ? "flex justify-between space-x-2.5 h-[44px] bg-[#EFF6FF] p-2 rounded-md"
+                  : "flex justify-between space-x-2.5 h-[44px] p-2"
+              }
+            >
+              <Image
+                src={asPath.includes("/berita") ? navBeritaActive : navBerita}
+                alt=""
+              />
+              <p
+                className={
+                  asPath.includes("/berita")
+                    ? "my-auto flex-grow font-semibold text-blue-primary text-lg"
+                    : "my-auto flex-grow text-lg"
+                }
+              >
+                Berita Bikun
+              </p>
+              <div className="my-auto text-xs bg-red-primary rounded-full h-6 w-6 text-center">
+                <p className="font-light py-1 text-white">2</p>
+              </div>
+            </div>
+          </Link>
+          <Link href="/rute-bikun">
+            {" "}
+            <div
+              className={
+                asPath.includes("/rute-bikun")
+                  ? "flex justify-between space-x-2.5 h-[44px] bg-[#EFF6FF] p-2 rounded-md"
+                  : "flex justify-between space-x-2.5 h-[44px] p-2"
+              }
+            >
+              <Image
+                src={asPath.includes("/rute-bikun") ? navRuteActive : navRute}
+                alt=""
+              />
+              <p
+                className={
+                  asPath.includes("/rute-bikun")
+                    ? "my-auto flex-grow font-semibold text-blue-primary text-lg"
+                    : "my-auto flex-grow text-lg"
+                }
+              >
+                Rute Bikun
+              </p>
+            </div>
+          </Link>
+          <Link href="/jadwal-bikun">
+            {" "}
+            <div
+              className={
+                asPath.includes("/jadwal-bikun")
+                  ? "flex justify-between space-x-2.5 h-[44px] bg-[#EFF6FF] p-2 rounded-md"
+                  : "flex justify-between space-x-2.5 h-[44px] p-2"
+              }
+            >
+              <Image
+                src={
+                  asPath.includes("/jadwal-bikun") ? navJadwalActive : navJadwal
+                }
+                alt=""
+              />
+              <p
+                className={
+                  asPath.includes("/jadwal-bikun")
+                    ? "my-auto flex-grow font-semibold text-blue-primary text-lg"
+                    : "my-auto flex-grow text-lg"
+                }
+              >
+                Jadwal Bikun
+              </p>
+            </div>
+          </Link>
+          <Link href="/bantuan">
+            {" "}
+            <div
+              className={
+                asPath.includes("/bantuan")
+                  ? "flex justify-between space-x-2.5 h-[44px] bg-[#EFF6FF] p-2 rounded-md"
+                  : "flex justify-between space-x-2.5 h-[44px] p-2"
+              }
+            >
+              <Image
+                src={
+                  asPath.includes("/bantuan") ? navBantuanActive : navBantuan
+                }
+                alt=""
+              />
+              <p
+                className={
+                  asPath.includes("/bantuan")
+                    ? "my-auto flex-grow font-semibold text-blue-primary text-lg"
+                    : "my-auto flex-grow text-lg"
+                }
+              >
+                Bantuan
+              </p>
+            </div>
+          </Link>
         </ul>
       </div>
     </div>

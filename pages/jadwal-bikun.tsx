@@ -7,8 +7,8 @@ import calendar from "../static/icon/calendar.svg";
 export default function jadwalbikun() {
   return (
     <Layout>
-      <div className="h-screen bg-white" id="front">
-        <div className="bg-blue-primary h-16 rounded-[0_0_1rem_1rem] flex justify-center  sticky top-16">
+      <div id="front" className="h-screen bg-white">
+        <div className="bg-blue-primary h-16 rounded-[0_0_1rem_1rem] flex justify-center">
           <div className="h-28 w-5/6 rounded-lg bg-white flex flex-col justify-center mt-2 px-4 space-y-3 drop-shadow-xl">
             <div className="flex space-x-2 rounded-full border-[1px] border-[#EAEAEA] bg-[#FAFAFA] px-4 py-2 text-sm">
               <Image src={location} alt="" />

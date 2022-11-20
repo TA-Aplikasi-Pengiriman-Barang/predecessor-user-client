@@ -56,7 +56,7 @@ export default function Map(props: MapProps) {
           </Marker>
         </MapContainer>
       </div>
-      <div className="bg-blue-200 h-full">{children}</div>
+      <div className="bg-blue-200">{children}</div>
     </div>
   );
 }
