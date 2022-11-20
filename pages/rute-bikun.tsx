@@ -16,9 +16,10 @@ export default function rutebikun() {
   return (
     <>
       <Layout>
-        <div className="overflow-y-hidden">
+        <div className="overflow-y-hidden" >
+          <p>asda</p>
           {/* SI PALING BIKUN */}
-          <div className="absolute bottom-0 bg-white h-24 w-full">
+          <div className="absolute bg-white h-[92%] bottom-[-80%] w-full">
             <Draggable
               axis="y"
               bounds={{ left: 0, top: -380, right: 0, bottom: 0 }}

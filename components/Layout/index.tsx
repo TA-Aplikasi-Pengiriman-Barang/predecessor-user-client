@@ -31,10 +31,10 @@ export default function Layout(props: LayoutProps) {
   return (
     <div className="drawer">
       <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
-      <div className="relative drawer-content flex flex-col h-screen">
+      <div className="relative drawer-content flex flex-col h-screen overflow-y-scroll">
         {/* <!-- Navbar --> */}
         {/* {asPath.includes("/jadwal-bikun") ? (<></>) : (<></>)} */}
-        <div className="w-full navbar bg-blue-primary text-white absolute sticky top-0 z-50">
+        <div className="w-full h-[8%] navbar bg-blue-primary text-white sticky top-0 z-50">
           <div className="flex-none lg:hidden">
             <label htmlFor="my-drawer-3" className="btn btn-square btn-ghost">
               {isSlash > 1 ? (
@@ -124,14 +124,9 @@ export default function Layout(props: LayoutProps) {
           </div>
         </div>
 
-        <div>          
+        <div>
           <MyAwesomeMap>{children}</MyAwesomeMap>
         </div>
-        {/* <div>          
-          {children}
-        </div> */}
-        
-        
       </div>
       <div className="drawer-side">
         <label htmlFor="my-drawer-3" className="drawer-overlay"></label>
@@ -148,7 +143,8 @@ export default function Layout(props: LayoutProps) {
   );
 }
 
-      {/* {asPath.includes("/jadwal-bikun") ? (
+{
+  /* {asPath.includes("/jadwal-bikun") ? (
           <div className="bg-blue-primary h-16 rounded-[0_0_1rem_1rem] z-10 flex justify-center">
             <div className="h-28 w-5/6 rounded-lg bg-white flex flex-col justify-center mt-2 px-4 space-y-3 drop-shadow-xl">
               <div className="flex space-x-2 rounded-full border-[1px] border-[#EAEAEA] bg-[#FAFAFA] px-4 py-2 text-sm">
@@ -163,9 +159,13 @@ export default function Layout(props: LayoutProps) {
           </div>
         ) : (
           <></>
-        )} */}
-        {/* <!-- Page content here --> */}
-        {/* <MapContainer center={position} zoom={13} scrollWheelZoom={false}>
+        )} */
+}
+{
+  /* <!-- Page content here --> */
+}
+{
+  /* <MapContainer center={position} zoom={13} scrollWheelZoom={false}>
           <TileLayer
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -175,4 +175,5 @@ export default function Layout(props: LayoutProps) {
               A pretty CSS3 popup. <br /> Easily customizable.
             </Popup>
           </Marker>
-        </MapContainer> */}
+        </MapContainer> */
+}

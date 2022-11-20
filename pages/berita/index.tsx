@@ -12,7 +12,7 @@ export default function berita() {
   return (
     <Layout>
       {" "}
-      <div id="front" className="space-y-6 pt-6">
+      <div id="front" className="bg-white space-y-6 pt-6">
         {/* filter */}
         <div className="flex justify-center space-x-3">
           <div className="border-[1px] rounded-full border-[#EAEAEA] px-6 bg-blue-primary text-white">

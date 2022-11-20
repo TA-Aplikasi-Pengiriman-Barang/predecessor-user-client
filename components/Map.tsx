@@ -39,7 +39,7 @@ export default function Map(props: MapProps) {
   const { children } = props;
   return (
     <div className="w-full">
-      <div className="h-full w-full" id="map">
+      <div className="h-[92%] w-full" id="map">
         <MapContainer
           center={[-6.366375, 106.829468]}
           zoom={16}
@@ -56,7 +56,7 @@ export default function Map(props: MapProps) {
           </Marker>
         </MapContainer>
       </div>
-      <div className="bg-blue-200 h-screen">{children}</div>
+      <div className="bg-blue-200 h-full">{children}</div>
     </div>
   );
 }

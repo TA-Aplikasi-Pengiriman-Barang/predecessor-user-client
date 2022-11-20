@@ -55,6 +55,11 @@ p {
   position: absolute;
   width: 100%;
 }
+#front2 {
+  z-index: 100 !important;
+  position: absolute;
+  width: 100%;
+}
 
 
 .no-scrollbar::-webkit-scrollbar {
