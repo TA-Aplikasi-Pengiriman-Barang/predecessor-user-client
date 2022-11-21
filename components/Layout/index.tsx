@@ -41,12 +41,12 @@ export default function Layout(props: LayoutProps) {
   const MyAwesomeMap = dynamic(() => import("../Map"), { ssr: false });
 
   return (
-    <div className="drawer">
+    <div className="drawer h-screen">
       <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
+
       <div className="relative drawer-content flex flex-col h-screen">
         {/* <!-- Navbar --> */}
-        {/* {asPath.includes("/jadwal-bikun") ? (<></>) : (<></>)} */}
-        <div className="w-full h-[8%] navbar bg-blue-primary text-white sticky top-0 z-50">
+        <div className="w-full h-[8%] navbar bg-blue-primary text-white sticky top-0">
           <div className="flex-none lg:hidden">
             <label htmlFor="my-drawer-3" className="btn btn-square btn-ghost">
               {isSlash > 1 ? (
@@ -125,12 +125,14 @@ export default function Layout(props: LayoutProps) {
               <div className="flex absolute inset-x-24 justify-center pt-0.5 nav-bikunku">
                 <Image src={bikunku} alt="" />
               </div>
-              <Link href="/berita" className="flex absolute inset-y-0 right-6 justify-center pt-0.5 nav-bikunku">
+              <Link
+                href="/berita"
+                className="flex absolute inset-y-0 right-6 justify-center pt-0.5 nav-bikunku"
+              >
                 <Image src={ctaBerita} alt="" />
               </Link>
             </div>
           )}
-          {/* <div className="flex-1 px-2 mx-2">Navbar Title</div> */}
 
           <div className="flex-none hidden lg:block px-2">
             <ul className="menu menu-horizontal space-x-2">
@@ -143,35 +145,10 @@ export default function Layout(props: LayoutProps) {
           </div>
         </div>
 
-        {/* {asPath === "/" ? (
-          <>
-            <div id="front2" className="h-full top-[8%] overflow-y-hidden">
-              <MyAwesomeMap>{children}</MyAwesomeMap>
-            </div>
-          </>
-        ) : asPath.includes("/rute-bikun") ? (
-          <>
-            {" "}
-            <div id="front2" className="h-[92%] top-[8%] overflow-y-hidden">
-              <MyAwesomeMap>{children}</MyAwesomeMap>
-            </div>
-          </>
-        ) : (
-          <div>
-            <MyAwesomeMap>{children}</MyAwesomeMap>
-          </div>
-        )} */}
-
-        <div id="front2" className="h-[100%] top-[8%]">
+        {/* Konten Navbar */}
+        <div id="frontt" className="h-[92%] overflow-y-hidden top-[8%]">
           <MyAwesomeMap>{children}</MyAwesomeMap>
         </div>
-
-        {/* <div id="front2" className="h-[92%] top-[8%] overflow-y-hidden">
-          <MyAwesomeMap>{children}</MyAwesomeMap>
-        </div>
-        <div>
-          <MyAwesomeMap>{children}</MyAwesomeMap>
-        </div> */}
       </div>
       <div className="drawer-side">
         <label htmlFor="my-drawer-3" className="drawer-overlay"></label>
@@ -308,37 +285,3 @@ export default function Layout(props: LayoutProps) {
   );
 }
 
-{
-  /* {asPath.includes("/jadwal-bikun") ? (
-          <div className="bg-blue-primary h-16 rounded-[0_0_1rem_1rem] z-10 flex justify-center">
-            <div className="h-28 w-5/6 rounded-lg bg-white flex flex-col justify-center mt-2 px-4 space-y-3 drop-shadow-xl">
-              <div className="flex space-x-2 rounded-full border-[1px] border-[#EAEAEA] bg-[#FAFAFA] px-4 py-2 text-sm">
-                <Image src={location} alt="" />
-                <input type="text" className="w-full  bg-[#FAFAFA] focus:outline-none" placeholder="Cari halte" />
-              </div>
-              <div className="flex space-x-1 rounded-full border-[1px] border-[#EAEAEA] bg-[#FAFAFA] mx-20 px-2 py-1 text-xs">
-              <Image src={calendar} alt="" />
-                <input type="date" className="w-full  bg-[#FAFAFA] focus:outline-none" placeholder="Filter By Time" />
-              </div>
-            </div>
-          </div>
-        ) : (
-          <></>
-        )} */
-}
-{
-  /* <!-- Page content here --> */
-}
-{
-  /* <MapContainer center={position} zoom={13} scrollWheelZoom={false}>
-          <TileLayer
-            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-          />
-          <Marker position={position}>
-            <Popup>
-              A pretty CSS3 popup. <br /> Easily customizable.
-            </Popup>
-          </Marker>
-        </MapContainer> */
-}

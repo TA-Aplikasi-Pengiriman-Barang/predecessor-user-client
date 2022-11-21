@@ -55,7 +55,16 @@ p {
   position: absolute;
   width: 100%;
   
-  
+}
+#frontt {
+  z-index: 5 !important;
+  position: absolute;
+  width: 100%;
+}
+#fronttt {
+  z-index: 7 !important;
+  position: absolute;
+  width: 100%;
 }
 #front2 {
   z-index: 30 !important;
