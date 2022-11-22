@@ -35,6 +35,10 @@ p {
   color: white;
 }
 
+.leaflet-touch .leaflet-bar {
+  display: none;
+}
+
 .draggable {
   /* Indicate the element draggable */
   cursor: move;
@@ -71,6 +75,21 @@ p {
   position: absolute;
   width: 100%;
   ;
+}
+
+.leaflet-tooltip {
+  position: absolute;
+  padding: 6px;
+  /* background-color: #fff; */
+  /* border: 1px solid #fff; */
+  border-radius: 3px;
+  color: #222;
+  white-space: nowrap;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+  pointer-events: none;
+  /* box-shadow: 0 1px 3px rgb(0 0 0 / 40%); */
 }
 
 

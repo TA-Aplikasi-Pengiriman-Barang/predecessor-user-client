@@ -1,0 +1,26 @@
+.leaflet-popup-tip-container {
+    display: none;
+} 
+
+.leaflet{
+    position: absolute;
+    /* padding: 6px; */
+    /* background-color: #fff; */
+    /* border: 1px solid #fff; */
+    background-color: transparent;
+    border: none;
+    border-radius: 3px;
+    color: #222;
+    font-weight: 700;;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+    pointer-events: none;
+    box-shadow: none;
+  }
+
+  
+  .leaflet-control-container .leaflet-routing-container-hide {
+    display: none;
+}
+
