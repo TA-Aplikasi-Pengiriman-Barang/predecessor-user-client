@@ -1,7 +1,7 @@
 import L from 'leaflet';
 import halte from "../static/icon/halte.png"
 
-const iconPerson = new L.Icon({
+const iconRed = new L.Icon({
     iconUrl: '../static/icon/halte.svg',
     shadowUrl: null,
     shadowSize: null,
@@ -11,7 +11,7 @@ const iconPerson = new L.Icon({
     
 });
 
-export { iconPerson };
+export { iconRed };
 
 // require('../static/icon/halte.png')
 // new L.Point(0, 0)

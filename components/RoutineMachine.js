@@ -1,45 +1,3 @@
-// import { MapLayer } from "react-leaflet";
-// import L from "leaflet";
-// import "leaflet-routing-machine";
-// import { withLeaflet } from "react-leaflet";
-
-// // import L from 'leaflet';
-
-// // const iconPerson = new L.Icon({
-// //     iconUrl: '../static/icon/halte.svg',
-// //     shadowUrl: null,
-// //     shadowSize: null,
-// //     shadowAnchor: null,
-// //     iconSize: new L.Point(50, 50),
-// //     html: "Null Island",
-
-// // });
-
-// L.Routing.control({
-//     waypoints: [
-//       L.latLng(57.74, 11.94),
-//       L.latLng(57.6792, 11.949)
-//     ]
-//   }).addTo(map);
-
-// // export { iconPerson };
-// // class Routing extends MapLayer {
-// //   createLeafletElement() {
-// //     const { map } = this.props;
-// //     let leafletElement = L.Routing.control({
-// //       waypoints: [L.latLng(27.67, 85.316), L.latLng(27.68, 85.321)]
-// //     }).addTo(map.leafletElement);
-// //     return leafletElement.getPlan();
-// //   }
-// // }
-// // export default withLeaflet(Routing);
-
-// // L.Routing.control({
-// //     waypoints: [
-// //       L.latLng(57.74, 11.94),
-// //       L.latLng(57.6792, 11.949)
-// //     ]
-// //   }).addTo(map);\\
 
 import L from "leaflet";
 import { createControlComponent } from "@react-leaflet/core";
@@ -48,10 +6,6 @@ import "leaflet-routing-machine";
 const createRoutineMachineLayer = (props) => {
   const instance = L.Routing.control({
     waypoints: [
-      // L.latLng(-6.348373127525387, 106.8297679527903),
-      // L.latLng(-6.362172631787366, 106.83083040668357),
-      // L.latLng(-6.362172631787366, 106.83083040668357),
-      // -6.348373127525387, 106.8297679527903
       L.latLng(-6.348373127525387, 106.8297679527903),
       L.latLng(-6.353465386293707, 106.83182325822173),
       L.latLng(-6.361046716889507, 106.8317240044786),
@@ -71,7 +25,7 @@ const createRoutineMachineLayer = (props) => {
       L.latLng(-6.348373127525387, 106.8297679527903),
     ],
     lineOptions: {
-      styles: [{ color: "red", weight: 4 }],
+      styles: [{ color: "#FC5555", weight: 4 }],
     },
     show: false,
     addWaypoints: false,
