@@ -1,18 +1,87 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400&display=swap");
+
 html,
 body {
   padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  /* font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif; */
+  font-family: "Inter", sans-serif;
+  
+  
 }
 
-a {
+/* a {
   color: inherit;
   text-decoration: none;
+} */
+p {
+  color:#453B2A ;
 }
 
 * {
   box-sizing: border-box;
+}
+
+.nav-bikunku {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 22px;
+  line-height: 26px;
+  font-family: "Inter", sans-serif;
+  color: white;
+}
+
+.draggable {
+  /* Indicate the element draggable */
+  cursor: move;
+
+  /* It will be positioned absolutely */
+  position: absolute;
+
+  /* Doesn't allow to select the content inside */
+  user-select: none;
+}
+
+#map {
+  z-index: 0 !important;
+  position: absolute;
+}
+#front {
+  z-index: 10 !important;
+  position: absolute;
+  width: 100%;
+  
+}
+#frontt {
+  z-index: 5 !important;
+  position: absolute;
+  width: 100%;
+}
+#fronttt {
+  z-index: 7 !important;
+  position: absolute;
+  width: 100%;
+}
+#front2 {
+  z-index: 30 !important;
+  position: absolute;
+  width: 100%;
+  ;
+}
+
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* For IE, Edge and Firefox */
+.no-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
 }
 
 @media (prefers-color-scheme: dark) {
