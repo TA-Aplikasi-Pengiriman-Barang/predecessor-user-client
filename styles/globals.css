@@ -10,7 +10,9 @@ body {
   /* font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif; */
   font-family: "Inter", sans-serif;
-  
+  /* display: flex;
+  justify-content: center;
+  max-width: 450px; */
   
 }
 
@@ -25,6 +27,39 @@ p {
 * {
   box-sizing: border-box;
 }
+
+@media (max-width: 2560px) {
+  #onb {
+    background-image:url("../static/image/onB.svg");
+    background-repeat: no-repeat;
+    
+  }
+}
+
+@media (max-width: 600px) {
+  #onb {
+    background-image:url("../static/image/onB2.svg");
+    background-repeat: no-repeat;
+    
+  }
+}
+
+@media (max-width: 450px) {
+  #onb {
+    background-image:url("../static/image/bgLanding.svg");
+    background-repeat: no-repeat;
+  }
+}
+
+
+/* #onb {
+  background-image:url("../static/image/bgLanding.svg"),url("../static/image/onBoarding/onBoardingBawah2.svg");
+  background-repeat: no-repeat,no-repeat;
+  background-position: top center, bottom 60px center;
+  z-index: 0,100 !important;
+
+} */
+
 
 .nav-bikunku {
   font-style: normal;
@@ -110,5 +145,6 @@ p {
   body {
     color: white;
     background: black;
+    /* width: 450px; */
   }
 }

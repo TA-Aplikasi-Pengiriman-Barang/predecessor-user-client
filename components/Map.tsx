@@ -24,8 +24,10 @@ import RoutineMachine from "./RoutineMachine";
 import RoutineMachine2 from "./RoutineMachine2";
 import RoutineMachine3 from "./RoutineMachine3";
 import { useRouter } from "next/router";
-import bus from "../static/icon/bus/bus.svg";
-import Draggable from "react-draggable";
+import { getCookies, hasCookie } from "cookies-next";
+import userLoc from "../static/icon/userLoc.svg";
+import ruteMap from "../static/icon/ruteMap.svg";
+import Image from "next/image";
 
 interface MapProps {
   children: ReactNode;
@@ -35,10 +37,12 @@ export default function Map(props: MapProps) {
   const { children } = props;
   const [activePark, setActivePark] = useState(null);
   const { asPath, pathname } = useRouter();
+  const router = useRouter();
   const [a, setA] = useState(-6.348373127525387);
   const [b, setB] = useState(106.83182325822173);
   const [lat, setLat] = useState(-6.361046716889507);
   const [lng, setLng] = useState(106.8317240044786);
+  const [bus, setBus] = useState([]);
 
   const pos = [
     [-6.348373127525387, 106.8297679527903],
@@ -60,33 +64,41 @@ export default function Map(props: MapProps) {
     [-6.348373127525387, 106.8297679527903],
   ];
 
-  const ws = new WebSocket("ws://3.215.182.82/bus/stream?type=client");
-
+  const ws = new WebSocket("wss://api.bikunku.com/bus/stream?type=client");
   useEffect(() => {
+    if (getCookies().isOnboarding) {
+    } else {
+      router.push({
+        pathname: "/onBoarding",
+      });
+    }
     ws.onopen = () => {
       console.log("connected");
     };
-
-    // setTimeout(1000, )
     ws.onmessage = (evt) => {
       const message = JSON.parse(evt.data);
-      // setTimeout(() => {console.log(message[0].lat)}, 3000);
-      // setTimeout(() => {  console.log("tes") }, 3000);
-      // console.log(message[0].lat);
-      // console.log(message[0].long);
+      console.log(message);
+      console.log(message[0].lat);
+      console.log(message[0].long);
+      console.log(message[0].heading);
+      console.log(message[0].speed);
       setA(message[0].lat);
       setB(message[0].long);
-    };
+      // message.forEach(val => {
 
+      // });
+      // console.log(message)
+      // setBus(message);
+      // console.log(bus)
+    };
+  }, []);
+
+  const getPosition = () => {
     window.navigator.geolocation.getCurrentPosition((position) => {
-      // setStatus(null)
-      console.log(position);
-      // setLat(position.coords.latitude)
-      // setLng(position.coords.longitude)
       setLat(position.coords.latitude);
       setLng(position.coords.longitude);
     });
-  }, []);
+  };
 
   const RecenterAutomatically = ({ lat: x, lng: y }) => {
     const map = useMap();
@@ -103,7 +115,6 @@ export default function Map(props: MapProps) {
           {" "}
           <div className="h-[100%] w-full" id="map">
             <MapContainer
-              // center={[-6.361046716889507, 106.8317240044786]}
               center={[lat, lng]}
               zoom={17}
               // scrollWheelZoom={false}
@@ -208,9 +219,6 @@ export default function Map(props: MapProps) {
                     park.geometry.coordinates[0],
                     park.geometry.coordinates[1],
                   ]}
-                  // onClick={() => {
-                  //   setActivePark(park);
-                  // }}
                   eventHandlers={{
                     click: (e) => {
                       setActivePark(park);
@@ -253,11 +261,39 @@ export default function Map(props: MapProps) {
                 // ></Marker>
               ))}
 
+              {/* {bus.map((val) => (
+                <Marker
+                  
+                  position={[
+                    val?.lat,
+                    val?.long,
+                  ]}
+                  // eventHandlers={{
+                  //   click: (e) => {
+                  //     setActivePark(park);
+                  //   },
+                  // }}
+                  icon={iconMix}
+                >
+                  <Tooltip
+                    direction="top"
+                    offset={[0, 0]}
+                    className={styles.leaflet}
+                    opacity={1}
+                    permanent
+                  >
+                    {park.properties.NAME}
+                  </Tooltip>
+]
+                </Marker>
+
+              ))} */}
+
               <Marker position={[a, b]} icon={iconBus}></Marker>
               <Marker position={[lat, lng]}></Marker>
               {/* <Polyline positions={pos}  className={styles.tes} color="red" /> */}
 
-              {/* <RecenterAutomatically lat={lat} lng={lng} /> */}
+              <RecenterAutomatically lat={lat} lng={lng} />
               {/* {activePark && (
                 <Popup
                   position={[
@@ -272,6 +308,28 @@ export default function Map(props: MapProps) {
                 </Popup>
               )} */}
             </MapContainer>
+          </div>
+          <div className="flex justify-end">
+            <button
+              id="front2"
+              className={styles.currentPos}
+              onClick={() => {
+                getPosition();
+              }}
+            >
+              <Image alt="" src={userLoc} />
+            </button>
+          </div>
+          <div className="flex justify-end">
+            <button
+              id="front2"
+              className={styles.rute}
+              onClick={() => {
+                getPosition();
+              }}
+            >
+              <Image alt="" src={ruteMap} />
+            </button>
           </div>
           <div className="bg-blue-200">{children}</div>
         </>
@@ -459,4 +517,3 @@ export default function Map(props: MapProps) {
     </div>
   );
 }
-// center={[-6.366375, 106.829468]}

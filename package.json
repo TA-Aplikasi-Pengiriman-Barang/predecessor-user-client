@@ -12,6 +12,7 @@
     "@types/node": "18.11.9",
     "@types/react": "18.0.24",
     "@types/react-dom": "18.0.8",
+    "cookies-next": "^2.1.1",
     "daisyui": "^2.38.1",
     "leaflet": "^1.9.2",
     "leaflet-defaulticon-compatibility": "^0.1.1",

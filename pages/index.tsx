@@ -1,9 +1,10 @@
 import Image from "next/image";
 import Layout from "../components/Layout";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import location from "../static/icon/location.svg";
 import position from "../static/icon/position.svg";
 import Draggable from "react-draggable";
+
 
 export default function Home() {
   const [isHalte, setIsHalte] = useState(false);
@@ -12,7 +13,7 @@ export default function Home() {
     setIsHalte(true);
   };
 
-  
+
 
   return (
     <>
