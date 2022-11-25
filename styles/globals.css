@@ -111,6 +111,12 @@ p {
   width: 100%;
   ;
 }
+#front3 {
+  z-index: 32 !important;
+  position: absolute;
+  width: 100%;
+  ;
+}
 
 .leaflet-tooltip {
   position: absolute;

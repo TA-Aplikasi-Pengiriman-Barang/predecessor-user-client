@@ -49,3 +49,7 @@
   border-radius: 0.5rem;
   /* position: top 0px, right 100px !important; */
 }
+
+.donts {
+  width: 50px !important;
+}
