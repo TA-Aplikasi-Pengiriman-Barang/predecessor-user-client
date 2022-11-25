@@ -1,8 +1,8 @@
 import L from "leaflet";
 import { createControlComponent } from "@react-leaflet/core";
 import "leaflet-routing-machine";
-import gambar from "../static/icon/halte.svg"
 
+// Alur rute Biru - part 2 lingkar luar
 const createRoutineMachineLayer = (props) => {
   const instance = L.Routing.control({
     waypoints: [
@@ -23,29 +23,6 @@ const createRoutineMachineLayer = (props) => {
     createMarker: function () {
       return null;
     },
-    // routeLine: function(route) {
-
-    //   line = L.multiOptionsPolyline([[-6.362850786328479, 106.83116675399012],[-6.365574974922631, 106.83203831176702]], {
-
-    //     weight: 5,
-    //     lineCap: 'butt',
-    //     opacity: 0.75,
-    //     smoothFactor: 1
-    //   });
-  
-    //   line.on('mouseover', function() {
-    //     this.setText('  ►  ', {
-    //       repeat: true,
-    //       attributes: {
-    //         fill: 'red'
-    //       }
-    //     });
-    //   });
-    //   line.on('mouseout', function() {
-    //     this.setText(null);
-    //   });
-    //   return line;
-    // },
   });
 
   return instance;

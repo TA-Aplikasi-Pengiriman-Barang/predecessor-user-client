@@ -1,8 +1,8 @@
-
 import L from "leaflet";
 import { createControlComponent } from "@react-leaflet/core";
 import "leaflet-routing-machine";
 
+// Alur rute Merah
 const createRoutineMachineLayer = (props) => {
   const instance = L.Routing.control({
     waypoints: [
@@ -33,7 +33,9 @@ const createRoutineMachineLayer = (props) => {
     draggableWaypoints: false,
     fitSelectedRoutes: false,
     showAlternatives: false,
-    createMarker: function() { return null; }
+    createMarker: function () {
+      return null;
+    },
   });
 
   return instance;

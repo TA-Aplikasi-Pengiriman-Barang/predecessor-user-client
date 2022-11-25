@@ -3,10 +3,6 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { ReactNode } from "react";
 import arrow_back from "../../static/icon/arrow_back.svg";
-import location from "../../static/icon/location.svg";
-import calendar from "../../static/icon/calendar.svg";
-import Map from "../Map";
-import { MapContainer, TileLayer, useMap, Marker, Popup } from "react-leaflet";
 import dynamic from "next/dynamic";
 import bikunku from "../../static/icon/bikunku.svg";
 import ctaBerita from "../../static/icon/ctaBerita.svg";
@@ -21,10 +17,6 @@ import navRuteActive from "../../static/icon/navbar/navRuteActive.svg";
 import navJadwalActive from "../../static/icon/navbar/navJadwalActive.svg";
 import navBantuanActive from "../../static/icon/navbar/navBantuanActive.svg";
 
-if (typeof window !== "undefined") {
-  // browser code
-}
-
 interface LayoutProps {
   children: ReactNode;
 }
@@ -36,17 +28,14 @@ export default function Layout(props: LayoutProps) {
 
   const isSlash = asPath.split("/").length - 1;
 
-  const position: [number, number] = [51.505, -0.09];
-
   const MyAwesomeMap = dynamic(() => import("../Map"), { ssr: false });
 
   return (
     <div className="flex justify-center">
       <div className="drawer h-screen w-[450px]">
         <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
-
         <div className="relative drawer-content flex flex-col h-screen">
-          {/* <!-- Navbar --> */}
+          {/* <!-- Sticky Navbar Title --> */}
           <div className="w-full h-[8%] navbar bg-blue-primary text-white sticky top-0">
             <div className="flex-none">
               <label htmlFor="my-drawer-3" className="btn btn-square btn-ghost">
@@ -134,23 +123,15 @@ export default function Layout(props: LayoutProps) {
                 </Link>
               </div>
             )}
-
-            <div className="flex-none hidden lg:block px-2">
-              {/* <ul className="menu menu-horizontal space-x-2">
-                <Link href="/">Beranda</Link>
-                <Link href="/berita">Berita Bikun</Link>
-                <Link href="/rute-bikun">Rute Bikun</Link>
-                <Link href="/jadwal-bikun">Jadwal Bikun</Link>
-                <Link href="/bantuan">Bantuan</Link>
-              </ul> */}
-            </div>
           </div>
 
-          {/* Konten Navbar */}
+          {/* Component & Pages */}
           <div id="frontt" className="h-[92%] overflow-y-hidden top-[8%]">
             <MyAwesomeMap>{children}</MyAwesomeMap>
           </div>
         </div>
+
+        {/* Sidebar drawer */}
         <div className="drawer-side">
           <label htmlFor="my-drawer-3" className="drawer-overlay"></label>
           <ul className="menu p-6 w-64 bg-base-100 space-y-4">

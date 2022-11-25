@@ -7,7 +7,6 @@ const iconBus = new L.Icon({
     shadowAnchor: null,
     iconSize: new L.Point(50, 50),
     html: "Null Island",
-    
 });
 
 export { iconBus };

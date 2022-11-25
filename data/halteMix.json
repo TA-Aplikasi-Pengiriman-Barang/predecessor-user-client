@@ -8,7 +8,7 @@
       {
         "type": "Feature",
         "properties": {
-          "PARK_ID": 960,
+          "PARK_ID": 1,
           "FACILITYID": 28014,
           "NAME": "Asrama UI",
           "NAME_FR": "Asrama UI",
@@ -38,7 +38,7 @@
       {
         "type": "Feature",
         "properties": {
-          "PARK_ID": 960,
+          "PARK_ID": 19,
           "FACILITYID": 28014,
           "NAME": "Stasiun UI",
           "NAME_FR": "Stasiun UI",
@@ -68,7 +68,7 @@
       {
         "type": "Feature",
         "properties": {
-          "PARK_ID": 960,
+          "PARK_ID": 3,
           "FACILITYID": 28014,
           "NAME": "Stasiun UI",
           "NAME_FR": "Stasiun UI",
@@ -98,7 +98,7 @@
       {
         "type": "Feature",
         "properties": {
-          "PARK_ID": 960,
+          "PARK_ID": 18,
           "FACILITYID": 28014,
           "NAME": "Menwa",
           "NAME_FR": "Menwa",
@@ -127,7 +127,7 @@
       },      {
         "type": "Feature",
         "properties": {
-          "PARK_ID": 960,
+          "PARK_ID": 2,
           "FACILITYID": 28014,
           "NAME": "Menwa",
           "NAME_FR": "Menwa",

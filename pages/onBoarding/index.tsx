@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import LayoutOnBoarding from "../../components/Layout/LayoutOnBoarding";
 import bgLanding from "../../static/image/bgLanding.svg";
 import onB from "../../static/image/onB.svg";
 import onB3 from "../../static/image/onB3.svg";
