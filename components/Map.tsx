@@ -605,8 +605,9 @@ export default function Map(props: MapProps) {
                                 <div className="flex space-x-2">
                                   <Image src={halte} alt="" />
                                   <p className="text-lg">{detailHalte.name}</p>
-                                  <p className="bg-blue-primary my-auto px-3 py-[3px] rounded-sm text-white text-[8px] font-semibold">
-                                    Rute Belok
+                                  
+                                  <p className={detailHalte.route === "RED" ? "bg-red-primary my-auto px-3 py-[3px] rounded-sm text-white text-[8px] font-semibold" : "bg-blue-primary my-auto px-3 py-[3px] rounded-sm text-white text-[8px] font-semibold"}>
+                                    {detailHalte.route === "RED" ? <>Rute Lurus</> : <>Rute Belok</>}
                                   </p>
                                 </div>
                                 <hr className="w-2/3 border-[1px] rounded-full" />
