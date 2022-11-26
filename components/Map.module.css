@@ -71,6 +71,20 @@
   border-radius: 0.5rem;
 }
 
+.banner {
+  background-color: white;
+  width: 90vw !important;
+  height: 40px !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  filter: drop-shadow(0px 2px 5px rgba(167, 167, 167, 0.5));
+  border-radius: 0.5rem;
+  bottom: 20px;
+  display: flex;
+  
+}
+
 .donts {
   width: 50px !important;
 }

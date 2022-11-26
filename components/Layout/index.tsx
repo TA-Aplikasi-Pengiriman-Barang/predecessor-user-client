@@ -37,13 +37,13 @@ export default function Layout(props: LayoutProps) {
   const MyAwesomeMap = dynamic(() => import("../Map"), { ssr: false });
 
   return (
-    <div className="drawer h-screen">
+    <div className="drawer h-screen" >
       <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
 
       <div className="relative drawer-content flex flex-col h-screen">
         {/* <!-- Navbar --> */}
         <div className="w-full h-[8%] navbar bg-blue-primary text-white sticky top-0">
-          <div className="flex-none lg:hidden">
+          <div className="flex-none">
             <label htmlFor="my-drawer-3" className="btn btn-square btn-ghost">
               {isSlash > 1 ? (
                 <>
@@ -130,7 +130,7 @@ export default function Layout(props: LayoutProps) {
             </div>
           )}
 
-          <div className="flex-none hidden lg:block px-2">
+          {/* <div className="flex-none hidden lg:block px-2">
             <ul className="menu menu-horizontal space-x-2">
               <Link href="/">Beranda</Link>
               <Link href="/berita">Berita Bikun</Link>
@@ -138,7 +138,7 @@ export default function Layout(props: LayoutProps) {
               <Link href="/jadwal-bikun">Jadwal Bikun</Link>
               <Link href="/bantuan">Bantuan</Link>
             </ul>
-          </div>
+          </div> */}
         </div>
 
         {/* Konten Navbar */}

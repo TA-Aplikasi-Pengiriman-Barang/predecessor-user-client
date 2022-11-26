@@ -58,6 +58,7 @@ export default function Map(props: MapProps) {
   const [bus, setBus] = useState([]);
   const [activeTabIndex, setActiveTabIndex] = useState(0);
   const [isCentered, setIscenterd] = useState(false);
+  const [isBanner, setIsBanner] = useState(true);
   const [i, setI] = useState(0);
   const [detailHalte, setDetailHalte] = useState<any>();
   const [allHalte, setAllHalte] = useState<any>();
@@ -66,6 +67,7 @@ export default function Map(props: MapProps) {
   };
   const array = ["Info Bikun", "Info Halte"];
   const arrayRute = ["Semua", "Rute Lurus", "Rute Kanan"];
+
 
   // Messaing Websocket
   ws.onopen = () => {
@@ -399,6 +401,22 @@ export default function Map(props: MapProps) {
             )}
           </div>
 
+          {/* banner icon */}
+          <div className={isBanner === false ? "hidden" : "flex justify-center"}>
+            <div id="front2" className={styles.banner}>
+              <Image alt="" src={error} className="lg:ml-3" />
+              <p className="text-[11.5px] font-semibold px-1 lg:px-4 flex-grow">Pilih halte atau klik ikon halte langsung pada map</p>
+              <button
+              className="bg-base-100 pr-2 py-1 lg:px-3"
+                onClick={() => {
+                  setIsBanner(false)
+                }}
+              >
+                <p>X</p>
+              </button>
+            </div>
+          </div>
+
           {/* handle detail halte */}
           {activePark === null ? (
             <></>
@@ -417,7 +435,7 @@ export default function Map(props: MapProps) {
                       <div className="py-2">
                         <div className="h-1.5 bg-[#d9d9d9] mx-24 rounded-full flex justify-center"></div>
                         <div
-                          className="absolute top-[4px] right-[30px] bg-base-200 py-1 px-2.5 rounded-lg"
+                          className="absolute top-[4px] right-[30px] bg-base-200 py-1 px-2.5 rounded-lg not-draggable"
                           onClick={() => {
                             setActivePark(null);
                             console.log("a");
@@ -669,9 +687,10 @@ export default function Map(props: MapProps) {
                                     </p>
                                   </div>
                                 </div>
-                                {detailHalte.relatedPlace.map((val: any) => (
+                                {detailHalte?.relatedPlace?.map((val: any) => (
                                   <>
-                                    <li className="text-sm pl-1.5">{val}</li>
+                                  {val !== "" ? <><li className="text-sm text-black-primary pl-1.5">{val}</li></>: <></>}
+                                    
                                   </>
                                 ))}
                               </div>
