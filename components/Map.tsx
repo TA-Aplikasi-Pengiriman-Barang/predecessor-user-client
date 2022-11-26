@@ -480,9 +480,11 @@ export default function Map(props: MapProps) {
                                     : "not-draggable w-1/2 text-center text-[#d9d9d9] h-8 border-b-4 border-[#d9d9d9]"
                                 }
                               >
-                                <div onClick={() => addActive(index)}>
+                                <div onClick={() => addActive(index)} className="relative">
                                   {val}
+                                  <svg className={val === "Info Bikun" ? "bg-red-primary h-2 w-2 rounded-full absolute top-0 right-0 animate-pulse" : "" }></svg>
                                 </div>
+                                
                               </a>
                             </>
                           ))}
@@ -648,11 +650,13 @@ export default function Map(props: MapProps) {
                               </div>
 
                               <Link
-                  href="/jadwal-bikun"
-                  className="px-6 h-10 rounded-full flex items-center justify-center bg-blue-primary "
-                >
-                  <p className="text-white font-semibold">Lihat jadwal rutin</p>
-                </Link>
+                                href="/jadwal-bikun"
+                                className="px-6 h-10 rounded-full flex items-center justify-center bg-blue-primary "
+                              >
+                                <p className="text-white font-semibold">
+                                  Lihat jadwal rutin
+                                </p>
+                              </Link>
                             </div>
                           ) : activeTabIndex === 1 ? (
                             <div className="flex flex-col justify-center space-y-4">
