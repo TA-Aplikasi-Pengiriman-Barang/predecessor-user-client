@@ -3,10 +3,6 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { ReactNode } from "react";
 import arrow_back from "../../static/icon/arrow_back.svg";
-import location from "../../static/icon/location.svg";
-import calendar from "../../static/icon/calendar.svg";
-import Map from "../Map";
-import { MapContainer, TileLayer, useMap, Marker, Popup } from "react-leaflet";
 import dynamic from "next/dynamic";
 import bikunku from "../../static/icon/bikunku.svg";
 import ctaBerita from "../../static/icon/ctaBerita.svg";
@@ -284,4 +280,3 @@ export default function Layout(props: LayoutProps) {
     </div>
   );
 }
-
