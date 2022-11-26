@@ -1,7 +1,7 @@
 import L from "leaflet";
 
 const iconMix = new L.Icon({
-  iconUrl: "../public/assets/icon/halte/halteMix.svg",
+  iconUrl: "/assets/icon/halte/halteMix.svg",
   shadowUrl: null,
   shadowSize: null,
   shadowAnchor: null,
@@ -9,4 +9,4 @@ const iconMix = new L.Icon({
   html: "Null Island",
 });
 
-export { iconMix };
+export default iconMix;

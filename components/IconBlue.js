@@ -1,7 +1,7 @@
 import L from "leaflet";
 
 const iconBlue = new L.Icon({
-  iconUrl: "../public/assets/icon/halte/halteBlue.svg",
+  iconUrl: "/assets/icon/halte/halteBlue.svg",
   shadowUrl: null,
   shadowSize: null,
   shadowAnchor: null,
@@ -9,4 +9,4 @@ const iconBlue = new L.Icon({
   html: "Null Island",
 });
 
-export { iconBlue };
+export default iconBlue;

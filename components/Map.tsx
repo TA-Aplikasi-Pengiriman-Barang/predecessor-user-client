@@ -2,22 +2,20 @@ import {
   MapContainer,
   TileLayer,
   Marker,
-  Popup,
   Tooltip,
-  Polyline,
   useMap,
 } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css";
 import "leaflet-defaulticon-compatibility";
 import { ReactNode, useEffect, useState } from "react";
-import * as halteRed from "../data/halteRed.json";
-import * as halteBlue from "../data/halteBlue.json";
-import * as halteMix from "../data/halteMix.json";
-import { iconRed } from "./IconRed";
-import { iconBlue } from "./IconBlue";
-import { iconMix } from "./IconMix";
-import { iconBus } from "./IconBus";
+import halteRed from "../data/halteRed.json";
+import halteBlue from "../data/halteBlue.json";
+import halteMix from "../data/halteMix.json";
+import iconRed from "./IconRed";
+import iconBlue from "./IconBlue";
+import iconMix from "./IconMix";
+import iconBus from "./IconBus";
 import styles from "./Map.module.css";
 import RoutineMachine from "./RoutineMachine";
 import RoutineMachine2 from "./RoutineMachine2";
@@ -42,6 +40,7 @@ import ruteAll from "../public/assets/image/ruteAll.svg";
 import ruteBiru from "../public/assets/image/ruteBiru.svg";
 import ruteMerah from "../public/assets/image/ruteMerah.svg";
 import error from "../public/assets/icon/error.svg";
+import L from "leaflet";
 
 interface MapProps {
   children: ReactNode;

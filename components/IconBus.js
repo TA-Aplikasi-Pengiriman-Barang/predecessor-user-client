@@ -1,7 +1,7 @@
-import L from "leaflet";
+import { Icon } from "leaflet";
 
-const iconBus = new L.Icon({
-  iconUrl: "../public/assets/icon/bus/bus.svg",
+const iconBus = new Icon({
+  iconUrl: "/assets/icon/bus/bus.svg",
   shadowUrl: null,
   shadowSize: null,
   shadowAnchor: null,
@@ -9,4 +9,4 @@ const iconBus = new L.Icon({
   html: "Null Island",
 });
 
-export { iconBus };
+export default iconBus;
