@@ -1,11 +1,11 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import onBoarding1 from "../../assets/image/onBoarding/onBoarding1.svg";
-import onBoarding2 from "../../assets/image/onBoarding/onBoarding2.svg";
-import onBoarding3 from "../../assets/image/onBoarding/onBoarding3.svg";
-import onBoarding4 from "../../assets/image/onBoarding/onBoarding4.svg";
-import onBoarding5 from "../../assets/image/onBoarding/onBoarding5.svg";
-import bikunku from "../../assets/icon/bikunku.svg";
+import onBoarding1 from "../../public/assets/image/onBoarding/onBoarding1.svg";
+import onBoarding2 from "../../public/assets/image/onBoarding/onBoarding2.svg";
+import onBoarding3 from "../../public/assets/image/onBoarding/onBoarding3.svg";
+import onBoarding4 from "../../public/assets/image/onBoarding/onBoarding4.svg";
+import onBoarding5 from "../../public/assets/image/onBoarding/onBoarding5.svg";
+import bikunku from "../../public/assets/icon/bikunku.svg";
 import Image from "next/image";
 import { setCookie } from "cookies-next";
 import { useRouter } from "next/router";

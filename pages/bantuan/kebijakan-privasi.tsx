@@ -1,5 +1,5 @@
 import Layout from "../../components/Layout";
-import beritaBG from "../../assets/image/beritaBG.svg";
+import beritaBG from "../../public/assets/image/beritaBG.svg";
 
 export default function kebijakanprivasi() {
   return (

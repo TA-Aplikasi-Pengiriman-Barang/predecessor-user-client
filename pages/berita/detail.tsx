@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Layout from "../../components/Layout";
-import schedule from "../../assets/icon/schedule.svg";
-import beritaBG from "../../assets/image/beritaBG.svg";
+import schedule from "../../public/assets/icon/schedule.svg";
+import beritaBG from "../../public/assets/image/beritaBG.svg";
 
 export default function detail() {
   return (

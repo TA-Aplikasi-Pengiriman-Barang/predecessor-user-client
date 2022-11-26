@@ -2,20 +2,20 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { ReactNode } from "react";
-import arrow_back from "../../assets/icon/arrow_back.svg";
+import arrow_back from "../../public/assets/icon/arrow_back.svg";
 import dynamic from "next/dynamic";
-import bikunku from "../../assets/icon/bikunku.svg";
-import ctaBerita from "../../assets/icon/ctaBerita.svg";
-import navBeranda from "../../assets/icon/navbar/navBeranda.svg";
-import navBerita from "../../assets/icon/navbar/navBerita.svg";
-import navRute from "../../assets/icon/navbar/navRute.svg";
-import navJadwal from "../../assets/icon/navbar/navJadwal.svg";
-import navBantuan from "../../assets/icon/navbar/navBantuan.svg";
-import navBerandaActive from "../../assets/icon/navbar/navBerandaActive.svg";
-import navBeritaActive from "../../assets/icon/navbar/navBeritaActive.svg";
-import navRuteActive from "../../assets/icon/navbar/navRuteActive.svg";
-import navJadwalActive from "../../assets/icon/navbar/navJadwalActive.svg";
-import navBantuanActive from "../../assets/icon/navbar/navBantuanActive.svg";
+import bikunku from "../../public/assets/icon/bikunku.svg";
+import ctaBerita from "../../public/assets/icon/ctaBerita.svg";
+import navBeranda from "../../public/assets/icon/navbar/navBeranda.svg";
+import navBerita from "../../public/assets/icon/navbar/navBerita.svg";
+import navRute from "../../public/assets/icon/navbar/navRute.svg";
+import navJadwal from "../../public/assets/icon/navbar/navJadwal.svg";
+import navBantuan from "../../public/assets/icon/navbar/navBantuan.svg";
+import navBerandaActive from "../../public/assets/icon/navbar/navBerandaActive.svg";
+import navBeritaActive from "../../public/assets/icon/navbar/navBeritaActive.svg";
+import navRuteActive from "../../public/assets/icon/navbar/navRuteActive.svg";
+import navJadwalActive from "../../public/assets/icon/navbar/navJadwalActive.svg";
+import navBantuanActive from "../../public/assets/icon/navbar/navBantuanActive.svg";
 
 if (typeof window !== "undefined") {
   // browser code

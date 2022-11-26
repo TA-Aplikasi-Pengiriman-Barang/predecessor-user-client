@@ -1,10 +1,10 @@
 import Image from "next/image";
 import Layout from "../../components/Layout";
-import beritaIcon from "../../assets/icon/berita.svg";
-import schedule from "../../assets/icon/schedule.svg";
-import chevron_right from "../../assets/icon/chevron_right.svg";
+import beritaIcon from "../../public/assets/icon/berita.svg";
+import schedule from "../../public/assets/icon/schedule.svg";
+import chevron_right from "../../public/assets/icon/chevron_right.svg";
 import Link from "next/link";
-import beritaNotFoundBG from "../../assets/image/beritaNotFoundBG.svg";
+import beritaNotFoundBG from "../../public/assets/image/beritaNotFoundBG.svg";
 
 export default function berita() {
   const isExist = true;

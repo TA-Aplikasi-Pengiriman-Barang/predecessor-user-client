@@ -1,9 +1,9 @@
 import Image from "next/image";
 import Layout from "../../components/Layout";
-import chevron_right from "../../assets/icon/chevron_right.svg";
-import tentang_bikunku from "../../assets/icon/tentang_bikunku.svg";
-import faq from "../../assets/icon/faq.svg";
-import kebijakan_privasi from "../../assets/icon/kebijakan_privasi.svg";
+import chevron_right from "../../public/assets/icon/chevron_right.svg";
+import tentang_bikunku from "../../public/assets/icon/tentang_bikunku.svg";
+import faq from "../../public/assets/icon/faq.svg";
+import kebijakan_privasi from "../../public/assets/icon/kebijakan_privasi.svg";
 import Link from "next/link";
 
 export default function index() {

@@ -22,7 +22,7 @@ p {
 /* 
 @media (max-width: 2560px) {
   #onb {
-    background-image:url("../assets/image/onB.svg");
+    background-image:url("../public/assets/image/onB.svg");
     background-repeat: no-repeat;
     
   }
@@ -30,7 +30,7 @@ p {
 
 @media (max-width: 600px) {
   #onb {
-    background-image:url("../assets/image/onB2.svg");
+    background-image:url("../public/assets/image/onB2.svg");
     background-repeat: no-repeat;
     
   }
@@ -38,7 +38,7 @@ p {
 
 @media (max-width: 450px) {
   #onb {
-    background-image: url("../assets/image/bgLanding.svg");
+    background-image: url("../public/assets/image/bgLanding.svg");
     background-repeat: no-repeat;
   }
 }
