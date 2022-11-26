@@ -41,6 +41,7 @@ import ruteBiru from "../public/assets/image/ruteBiru.svg";
 import ruteMerah from "../public/assets/image/ruteMerah.svg";
 import error from "../public/assets/icon/error.svg";
 import L from "leaflet";
+import Link from "next/link";
 
 interface MapProps {
   children: ReactNode;
@@ -67,7 +68,6 @@ export default function Map(props: MapProps) {
   };
   const array = ["Info Bikun", "Info Halte"];
   const arrayRute = ["Semua", "Rute Lurus", "Rute Kanan"];
-
 
   // Messaing Websocket
   ws.onopen = () => {
@@ -402,17 +402,41 @@ export default function Map(props: MapProps) {
           </div>
 
           {/* banner icon */}
-          <div className={isBanner === false ? "hidden" : "flex justify-center"}>
+          <div
+            className={isBanner === false ? "hidden" : "flex justify-center"}
+          >
             <div id="front2" className={styles.banner}>
               <Image alt="" src={error} className="lg:ml-3" />
-              <p className="text-[11.5px] font-semibold px-1 lg:px-4 flex-grow">Pilih halte atau klik ikon halte langsung pada map</p>
+              <p className="text-[11.5px] font-semibold px-1 lg:px-4 flex-grow">
+                Pilih halte atau klik ikon halte langsung pada map
+              </p>
               <button
-              className="bg-base-100 pr-2 py-1 lg:px-3"
+                className="pr-2 py-1 lg:px-3"
                 onClick={() => {
-                  setIsBanner(false)
+                  setIsBanner(false);
                 }}
               >
-                <p>X</p>
+                <p className="bg-white text-black-primary">X</p>
+              </button>
+            </div>
+          </div>
+
+          {/* donts */}
+          <div
+            className={isBanner === false ? "hidden" : "flex justify-center"}
+          >
+            <div id="front2" className={styles.banner}>
+              <Image alt="" src={error} className="lg:ml-3" />
+              <p className="text-[11.5px] font-semibold px-1 lg:px-4 flex-grow">
+                Pilih halte atau klik ikon halte langsung pada map
+              </p>
+              <button
+                className="pr-2 py-1 lg:px-3"
+                onClick={() => {
+                  setIsBanner(false);
+                }}
+              >
+                <p className="bg-white text-black-primary">X</p>
               </button>
             </div>
           </div>
@@ -622,6 +646,13 @@ export default function Map(props: MapProps) {
                                   <p className="text-xs">menit</p>
                                 </div>
                               </div>
+
+                              <Link
+                  href="/jadwal-bikun"
+                  className="px-6 h-10 rounded-full flex items-center justify-center bg-blue-primary "
+                >
+                  <p className="text-white font-semibold">Lihat jadwal rutin</p>
+                </Link>
                             </div>
                           ) : activeTabIndex === 1 ? (
                             <div className="flex flex-col justify-center space-y-4">
@@ -689,8 +720,15 @@ export default function Map(props: MapProps) {
                                 </div>
                                 {detailHalte?.relatedPlace?.map((val: any) => (
                                   <>
-                                  {val !== "" ? <><li className="text-sm text-black-primary pl-1.5">{val}</li></>: <></>}
-                                    
+                                    {val !== "" ? (
+                                      <>
+                                        <li className="text-sm text-black-primary pl-1.5">
+                                          {val}
+                                        </li>
+                                      </>
+                                    ) : (
+                                      <></>
+                                    )}
                                   </>
                                 ))}
                               </div>
