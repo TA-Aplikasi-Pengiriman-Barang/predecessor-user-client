@@ -112,7 +112,7 @@ export default function Map(props: MapProps) {
   };
 
   // recenter map with user position
-  const RecenterAutomatically = ({ lat: x, lng: y }) => {
+  const RecenterAutomatically = ({ lat: x, lng: y }: any) => {
     const map = useMap();
     useEffect(() => {
       map.setView([x, y]);
