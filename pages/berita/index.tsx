@@ -82,22 +82,48 @@ export default function berita(data: Data) {
         {/* filter */}
         <div className="flex justify-center space-x-3">
           <div
-            className="border-[1px] rounded-full border-[#EAEAEA] px-6 bg-blue-primary text-white"
+            className={`border-[1px] rounded-full border-[#EAEAEA] px-6  text-white ${
+              filter == FilterType.ALL ? "bg-blue-primary" : "bg-[#FBFBFB]"
+            }`}
             onClick={() => setFilter(FilterType.ALL)}
           >
-            <p className="text-white">All</p>
+            <p
+              className={`${
+                filter == FilterType.ALL ? "text-white" : "text-black"
+              }`}
+            >
+              All
+            </p>
           </div>
           <div
-            className="border-[1px] rounded-full bg-[#FBFBFB] border-[#EAEAEA] px-6"
+            className={`border-[1px] rounded-full  border-[#EAEAEA] px-6 ${
+              filter == FilterType.TODAY ? "bg-blue-primary" : "bg-[#FBFBFB]"
+            }`}
             onClick={() => setFilter(FilterType.TODAY)}
           >
-            <p>Today</p>
+            <p
+              className={`${
+                filter == FilterType.TODAY ? "text-white" : "text-black"
+              }`}
+            >
+              Today
+            </p>
           </div>
           <div
-            className="border-[1px] rounded-full bg-[#FBFBFB] border-[#EAEAEA] px-6"
+            className={`border-[1px] rounded-full  border-[#EAEAEA] px-6 ${
+              filter == FilterType.LAST_7_DAY
+                ? "bg-blue-primary"
+                : "bg-[#FBFBFB]"
+            }`}
             onClick={() => setFilter(FilterType.LAST_7_DAY)}
           >
-            <p>Last 7 days</p>
+            <p
+              className={`${
+                filter == FilterType.LAST_7_DAY ? "text-white" : "text-black"
+              }`}
+            >
+              Last 7 days
+            </p>
           </div>
         </div>
 
