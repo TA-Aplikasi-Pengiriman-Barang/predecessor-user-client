@@ -17,7 +17,7 @@ export default function rutebikun() {
   return (
     <>
       <Layout>
-        <div className="absolute bottom-[40%] w-full">
+        {/* <div className="absolute bottom-[40%] w-full">
           <div id="fronttt" className="h-screen">
             <Draggable
               axis="y"
@@ -98,7 +98,7 @@ export default function rutebikun() {
               </div>
             </Draggable>
           </div>
-        </div>
+        </div> */}
       </Layout>
     </>
   );

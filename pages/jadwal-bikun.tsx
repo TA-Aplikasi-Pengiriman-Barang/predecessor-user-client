@@ -69,7 +69,7 @@ export default function jadwalbikun() {
                       </p>
                     </div>
                     <p className="bg-blue-primary my-auto px-3 py-[3px] rounded-sm text-white text-[8px] font-semibold">
-                      Rute Belok
+                      Rute Kanan
                     </p>
                   </div>
                   <p className="text-xs">Senin, 31 Oktober 2022</p>
@@ -105,7 +105,7 @@ export default function jadwalbikun() {
                       </p>
                     </div>
                     <p className="bg-blue-primary my-auto px-3 py-[3px] rounded-sm text-white text-[8px] font-semibold">
-                      Rute Belok
+                      Rute Kanan
                     </p>
                   </div>
                   <p className="text-xs">Senin, 31 Oktober 2022</p>
@@ -152,7 +152,7 @@ export default function jadwalbikun() {
                       </p>
                     </div>
                     <p className="bg-blue-primary my-auto px-3 py-[3px] rounded-sm text-white text-[8px] font-semibold">
-                      Rute Belok
+                      Rute Kanan
                     </p>
                   </div>
                   <p className="text-xs">Senin, 31 Oktober 2022</p>
@@ -188,7 +188,7 @@ export default function jadwalbikun() {
                       </p>
                     </div>
                     <p className="bg-blue-primary my-auto px-3 py-[3px] rounded-sm text-white text-[8px] font-semibold">
-                      Rute Belok
+                      Rute Kanan
                     </p>
                   </div>
                   <p className="text-xs">Senin, 31 Oktober 2022</p>
