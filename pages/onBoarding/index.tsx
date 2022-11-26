@@ -43,7 +43,7 @@ export default function index() {
     <div className="flex justify-center">
       <div className="h-screen w-[450px] overflow-y-hidden md:hidden">
         {activeTabIndex === 0 ? (
-          <div className="flex h-5/6 bg-no-repeat bg-[center_top]" style={{ backgroundImage: `url(${onBoarding1.src})` }}>
+          <div className="flex h-5/6 bg-no-repeat bg-[center_top_-2rem]" style={{ backgroundImage: `url(${onBoarding1.src})` }}>
             <div className="flex flex-col w-full mx-8">
               <div className="flex absolute inset-x-24 justify-center pt-0.5 nav-bikunku">
                 <Image src={bikunku} alt="" />
@@ -60,7 +60,7 @@ export default function index() {
             </div>
           </div>
         ) : activeTabIndex === 1 ? (
-<div className="flex h-5/6 bg-no-repeat bg-[center_top]" style={{ backgroundImage: `url(${onBoarding2.src})` }}>
+<div className="flex h-5/6 bg-no-repeat bg-[center_top_-2rem]" style={{ backgroundImage: `url(${onBoarding2.src})` }}>
             <div className="flex flex-col w-full">
               <div className="flex absolute inset-x-24 justify-center pt-0.5 nav-bikunku">
                 <Image src={bikunku} alt="" />
@@ -77,7 +77,7 @@ export default function index() {
             </div>
           </div>
         ) : activeTabIndex === 2 ? (
-          <div className="flex h-5/6 bg-no-repeat bg-[center_top]" style={{ backgroundImage: `url(${onBoarding3.src})` }}>
+          <div className="flex h-5/6 bg-no-repeat bg-[center_top_-2rem]" style={{ backgroundImage: `url(${onBoarding3.src})` }}>
             <div className="flex flex-col w-full mx-8">
               <div className="flex absolute inset-x-24 justify-center pt-0.5 nav-bikunku">
                 <Image src={bikunku} alt="" />
@@ -97,7 +97,7 @@ export default function index() {
             </div>
           </div>
         ) : activeTabIndex === 3 ? (
-          <div className="flex h-5/6 bg-no-repeat bg-[center_top]" style={{ backgroundImage: `url(${onBoarding4.src})` }}>
+          <div className="flex h-5/6 bg-no-repeat bg-[center_top_-2rem]" style={{ backgroundImage: `url(${onBoarding4.src})` }}>
             <div className="flex flex-col w-full mx-8">
               <div className="flex absolute inset-x-24 justify-center pt-0.5 nav-bikunku">
                 <Image src={bikunku} alt="" />
@@ -117,7 +117,7 @@ export default function index() {
             </div>
           </div>
         ) : activeTabIndex === 4 ? (
-          <div className="flex h-5/6 bg-no-repeat bg-[center_top]" style={{ backgroundImage: `url(${onBoarding5.src})` }}>
+          <div className="flex h-5/6 bg-no-repeat bg-[center_top_-2rem]" style={{ backgroundImage: `url(${onBoarding5.src})` }}>
             <div className="flex flex-col w-full mx-8">
               <div className="flex absolute inset-x-24 justify-center pt-0.5 nav-bikunku">
                 <Image src={bikunku} alt="" />
