@@ -86,6 +86,11 @@ p {
   position: absolute;
   width: 100%;
 }
+#front1 {
+  z-index: 28 !important;
+  position: absolute;
+  width: 100%;
+}
 #front2 {
   z-index: 30 !important;
   position: absolute;

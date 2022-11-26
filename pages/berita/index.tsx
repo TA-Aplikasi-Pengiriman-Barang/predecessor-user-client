@@ -77,7 +77,7 @@ export default function berita(data: Data) {
     <Layout>
       <div
         id="front"
-        className="bg-white h-screen overflow-y-scroll space-y-6 pt-6 pb-36"
+        className="bg-white h-screen overflow-y-scroll no-scrollbar space-y-6 pt-6 pb-36"
       >
         {/* filter */}
         <div className="flex justify-center space-x-3">

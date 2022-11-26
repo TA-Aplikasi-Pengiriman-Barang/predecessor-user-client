@@ -7,7 +7,7 @@ import calendar from "../public/assets/icon/calendar.svg";
 export default function jadwalbikun() {
   return (
     <Layout>
-      <div id="front" className="h-screen overflow-y-scroll bg-white">
+      <div id="front" className="h-screen overflow-y-scroll no-scrollbar bg-white">
         {/* Komponen Cari & Filter Jadwal  */}
         <div className="bg-blue-primary h-16 rounded-[0_0_1rem_1rem] flex justify-center">
           <div className="h-28 w-5/6 rounded-lg bg-white flex flex-col justify-center mt-2 px-4 space-y-3 drop-shadow-xl">

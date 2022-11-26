@@ -1,0 +1,936 @@
+{
+    "type": "FeatureCollection",
+    "crs": {
+      "type": "name",
+      "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" }
+    },
+    "features": [
+      {
+        "type": "Feature",
+        "properties": {
+          "PARK_ID": 1,
+          "FACILITYID": 28014,
+          "NAME": "Asrama UI",
+          "NAME_FR": "Asrama UI",
+          "DESCRIPTIO":"Wisma Makara,Hall Sabha Widya",
+          "ADDRESS": "8720 Russell Road",
+          "ADDRESS_FR": "8720, chemin Russell",
+          "FACILITY_T": "flat",
+          "FACILITY_1": "plat",
+          "ACCESSCTRL": "no/non",
+          "ACCESSIBLE": "no/non",
+          "OPEN": null,
+          "NOTES": "Outdoor",
+          "MODIFIED_D": "2018/01/18",
+          "CREATED_DA": null,
+          "FACILITY": "Neighbourhood : smaller size facility to service population of 10,000 or less",
+          "FACILITY_F": "De voisinage : petite installation assurant des services à 10 000 résidents ou moins.",
+          "DESCRIPT_1": "Surface d'asphalte plane, 5 modules",
+          "PICTURE_LI": null,
+          "PICTURE_DE": null,
+          "PICTURE__1": null
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [-6.348373127525387, 106.8297679527903]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "PARK_ID": 19,
+          "FACILITYID": 28014,
+          "NAME": "Stasiun UI",
+          "NAME_FR": "Stasiun UI",
+          "DESCRIPTIO":"Wisma Makara,Hall Sabha Widya",
+          "ADDRESS": "8720 Russell Road",
+          "ADDRESS_FR": "8720, chemin Russell",
+          "FACILITY_T": "flat",
+          "FACILITY_1": "plat",
+          "ACCESSCTRL": "no/non",
+          "ACCESSIBLE": "no/non",
+          "OPEN": null,
+          "NOTES": "Outdoor",
+          "MODIFIED_D": "2018/01/18",
+          "CREATED_DA": null,
+          "FACILITY": "Neighbourhood : smaller size facility to service population of 10,000 or less",
+          "FACILITY_F": "De voisinage : petite installation assurant des services à 10 000 résidents ou moins.",
+          "DESCRIPT_1": "Surface d'asphalte plane, 5 modules",
+          "PICTURE_LI": null,
+          "PICTURE_DE": null,
+          "PICTURE__1": null
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [-6.36086929545325, 106.83146112622818]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "PARK_ID": 3,
+          "FACILITYID": 28014,
+          "NAME": "Stasiun UI",
+          "NAME_FR": "Stasiun UI",
+          "DESCRIPTIO":"Wisma Makara,Hall Sabha Widya",
+          "ADDRESS": "8720 Russell Road",
+          "ADDRESS_FR": "8720, chemin Russell",
+          "FACILITY_T": "flat",
+          "FACILITY_1": "plat",
+          "ACCESSCTRL": "no/non",
+          "ACCESSIBLE": "no/non",
+          "OPEN": null,
+          "NOTES": "Outdoor",
+          "MODIFIED_D": "2018/01/18",
+          "CREATED_DA": null,
+          "FACILITY": "Neighbourhood : smaller size facility to service population of 10,000 or less",
+          "FACILITY_F": "De voisinage : petite installation assurant des services à 10 000 résidents ou moins.",
+          "DESCRIPT_1": "Surface d'asphalte plane, 5 modules",
+          "PICTURE_LI": null,
+          "PICTURE_DE": null,
+          "PICTURE__1": null
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [-6.361046716889507, 106.8317240044786]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "PARK_ID": 18,
+          "FACILITYID": 28014,
+          "NAME": "Menwa",
+          "NAME_FR": "Menwa",
+          "DESCRIPTIO":"Wisma Makara,Hall Sabha Widya",
+          "ADDRESS": "8720 Russell Road",
+          "ADDRESS_FR": "8720, chemin Russell",
+          "FACILITY_T": "flat",
+          "FACILITY_1": "plat",
+          "ACCESSCTRL": "no/non",
+          "ACCESSIBLE": "no/non",
+          "OPEN": null,
+          "NOTES": "Outdoor",
+          "MODIFIED_D": "2018/01/18",
+          "CREATED_DA": null,
+          "FACILITY": "Neighbourhood : smaller size facility to service population of 10,000 or less",
+          "FACILITY_F": "De voisinage : petite installation assurant des services à 10 000 résidents ou moins.",
+          "DESCRIPT_1": "Surface d'asphalte plane, 5 modules",
+          "PICTURE_LI": null,
+          "PICTURE_DE": null,
+          "PICTURE__1": null
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [-6.353465386293707, 106.83182325822173]
+        }
+      },      {
+        "type": "Feature",
+        "properties": {
+          "PARK_ID": 2,
+          "FACILITYID": 28014,
+          "NAME": "Menwa",
+          "NAME_FR": "Menwa",
+          "DESCRIPTIO":"Wisma Makara,Hall Sabha Widya",
+          "ADDRESS": "8720 Russell Road",
+          "ADDRESS_FR": "8720, chemin Russell",
+          "FACILITY_T": "flat",
+          "FACILITY_1": "plat",
+          "ACCESSCTRL": "no/non",
+          "ACCESSIBLE": "no/non",
+          "OPEN": null,
+          "NOTES": "Outdoor",
+          "MODIFIED_D": "2018/01/18",
+          "CREATED_DA": null,
+          "FACILITY": "Neighbourhood : smaller size facility to service population of 10,000 or less",
+          "FACILITY_F": "De voisinage : petite installation assurant des services à 10 000 résidents ou moins.",
+          "DESCRIPT_1": "Surface d'asphalte plane, 5 modules",
+          "PICTURE_LI": null,
+          "PICTURE_DE": null,
+          "PICTURE__1": null
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [-6.3534610177474, 106.83162029695444]
+        }
+      },{
+        "type": "Feature",
+        "properties": {
+          "PARK_ID": 20,
+          "FACILITYID": 28006,
+          "NAME": "F.Psi",
+          "NAME_FR": "F.Psi",
+          "DESCRIPTIO":"Pintu Belakang Rel (Barel), Masjid UI,Perpustakaan UI,Balai Sebaguna Purnowo Prawiro UI,Fasilkom (Gedung Lama)",
+          "ADDRESS": "2785 8th Line Road",
+          "ADDRESS_FR": "2785, chemin 8th Line",
+          "FACILITY_T": "other",
+          "FACILITY_1": "autre",
+          "ACCESSCTRL": "no/non",
+          "ACCESSIBLE": "no/non",
+          "OPEN": null,
+          "NOTES": "Outdoor - Mobile",
+          "MODIFIED_D": "2018/01/18",
+          "CREATED_DA": null,
+          "FACILITY": "Metcalfe Community Centre - Roving Skateboard Park Location",
+          "FACILITY_F": "Centre communautaire de Metcalfe - Lieu de planchodrome itinérant",
+          "DESCRIPT_1": "Surface plane, 5 modules",
+          "PICTURE_LI": null,
+          "PICTURE_DE": null,
+          "PICTURE__1": null
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [-6.362850786328479, 106.83116675399012]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "PARK_ID": 21,
+          "FACILITYID": 28007,
+          "NAME": "FISIP",
+          "NAME_FR": "FISIP",
+          "DESCRIPTIO":"Fasilkom (Gedung Lama)",
+          "ADDRESS": "10 Warner Colpitts Lane",
+          "ADDRESS_FR": "10, ruelle Warner Colpitts",
+          "FACILITY_T": "flat",
+          "FACILITY_1": "plat",
+          "ACCESSCTRL": "yes/oui",
+          "ACCESSIBLE": "no/non",
+          "OPEN": null,
+          "NOTES": "Indoor - Summer",
+          "MODIFIED_D": "2018/03/07",
+          "CREATED_DA": null,
+          "FACILITY": "Johnny Leroux Stittsville Community Arena - Roving Skateboard Park Location",
+          "FACILITY_F": "Aréna communautaire de Stittsville Johnny-Leroux - Lieu de planchodrome itinérant",
+          "DESCRIPT_1": "Surface plane, 5 modules",
+          "PICTURE_LI": null,
+          "PICTURE_DE": null,
+          "PICTURE__1": null
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [-6.361835631548166, 106.83016512726645]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "PARK_ID": 22,
+          "FACILITYID": 28016,
+          "NAME": "FIB",
+          "NAME_FR": "FIB",
+          "DESCRIPTIO":"FKM",
+          "ADDRESS": "101 Centrepointe Drive",
+          "ADDRESS_FR": "101, promenade Centrepointe",
+          "FACILITY_T": "bowl",
+          "FACILITY_1": "bol",
+          "ACCESSCTRL": "no/non",
+          "ACCESSIBLE": "no/non",
+          "OPEN": null,
+          "NOTES": "Outdoor",
+          "MODIFIED_D": "2018/01/18",
+          "CREATED_DA": null,
+          "FACILITY": "District: larger facility to service population of 100,000 plus",
+          "FACILITY_F": "De district : grande installation assurant des services à 100 000 résidents ou plus.",
+          "DESCRIPT_1": "Grand bol de béton, modules de rue et modules verticaux, 17 000 pi2",
+          "PICTURE_LI": null,
+          "PICTURE_DE": null,
+          "PICTURE__1": null
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [-6.361143942325545, 106.82947600448857]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "PARK_ID": 23,
+          "FACILITYID": 28016,
+          "NAME": "FEB",
+          "NAME_FR": "FEB",
+          "DESCRIPTIO":"",
+          "ADDRESS": "101 Centrepointe Drive",
+          "ADDRESS_FR": "101, promenade Centrepointe",
+          "FACILITY_T": "bowl",
+          "FACILITY_1": "bol",
+          "ACCESSCTRL": "no/non",
+          "ACCESSIBLE": "no/non",
+          "OPEN": null,
+          "NOTES": "Outdoor",
+          "MODIFIED_D": "2018/01/18",
+          "CREATED_DA": null,
+          "FACILITY": "District: larger facility to service population of 100,000 plus",
+          "FACILITY_F": "De district : grande installation assurant des services à 100 000 résidents ou plus.",
+          "DESCRIPT_1": "Grand bol de béton, modules de rue et modules verticaux, 17 000 pi2",
+          "PICTURE_LI": null,
+          "PICTURE_DE": null,
+          "PICTURE__1": null
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [-6.359626440076783, 106.82572631991094]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "PARK_ID": 24,
+          "FACILITYID": 28016,
+          "NAME": "FT",
+          "NAME_FR": "FT",
+          "DESCRIPTIO":"Pintu Kukusan-Teknik (Kutek)",
+          "ADDRESS": "101 Centrepointe Drive",
+          "ADDRESS_FR": "101, promenade Centrepointe",
+          "FACILITY_T": "bowl",
+          "FACILITY_1": "bol",
+          "ACCESSCTRL": "no/non",
+          "ACCESSIBLE": "no/non",
+          "OPEN": null,
+          "NOTES": "Outdoor",
+          "MODIFIED_D": "2018/01/18",
+          "CREATED_DA": null,
+          "FACILITY": "District: larger facility to service population of 100,000 plus",
+          "FACILITY_F": "De district : grande installation assurant des services à 100 000 résidents ou plus.",
+          "DESCRIPT_1": "Grand bol de béton, modules de rue et modules verticaux, 17 000 pi2",
+          "PICTURE_LI": null,
+          "PICTURE_DE": null,
+          "PICTURE__1": null
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [-6.361277803365007, 106.82333110948572]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "PARK_ID": 25,
+          "FACILITYID": 28016,
+          "NAME": "Vokasi",
+          "NAME_FR": "Vokasi",
+          "DESCRIPTIO":"Pusat Kegiatan Mahasiswa (Pusgiwa),Stadion, Career Development UI",
+          "ADDRESS": "101 Centrepointe Drive",
+          "ADDRESS_FR": "101, promenade Centrepointe",
+          "FACILITY_T": "bowl",
+          "FACILITY_1": "bol",
+          "ACCESSCTRL": "no/non",
+          "ACCESSIBLE": "no/non",
+          "OPEN": null,
+          "NOTES": "Outdoor",
+          "MODIFIED_D": "2018/01/18",
+          "CREATED_DA": null,
+          "FACILITY": "District: larger facility to service population of 100,000 plus",
+          "FACILITY_F": "De district : grande installation assurant des services à 100 000 résidents ou plus.",
+          "DESCRIPT_1": "Grand bol de béton, modules de rue et modules verticaux, 17 000 pi2",
+          "PICTURE_LI": null,
+          "PICTURE_DE": null,
+          "PICTURE__1": null
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [-6.3659382798442765, 106.82177091590128]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "PARK_ID": 26,
+          "FACILITYID": 28016,
+          "NAME": "SOR",
+          "NAME_FR": "SOR",
+          "DESCRIPTIO":"Politeknik Teknik Jakarta (PNJ),Gymnasium",
+          "ADDRESS": "101 Centrepointe Drive",
+          "ADDRESS_FR": "101, promenade Centrepointe",
+          "FACILITY_T": "bowl",
+          "FACILITY_1": "bol",
+          "ACCESSCTRL": "no/non",
+          "ACCESSIBLE": "no/non",
+          "OPEN": null,
+          "NOTES": "Outdoor",
+          "MODIFIED_D": "2018/01/18",
+          "CREATED_DA": null,
+          "FACILITY": "District: larger facility to service population of 100,000 plus",
+          "FACILITY_F": "De district : grande installation assurant des services à 100 000 résidents ou plus.",
+          "DESCRIPT_1": "Grand bol de béton, modules de rue et modules verticaux, 17 000 pi2",
+          "PICTURE_LI": null,
+          "PICTURE_DE": null,
+          "PICTURE__1": null
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [-6.366780044175628, 106.82385382123188]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "PARK_ID": 27,
+          "FACILITYID": 28016,
+          "NAME": "FMIPA",
+          "NAME_FR": "FMIPA",
+          "DESCRIPTIO":"",
+          "ADDRESS": "101 Centrepointe Drive",
+          "ADDRESS_FR": "101, promenade Centrepointe",
+          "FACILITY_T": "bowl",
+          "FACILITY_1": "bol",
+          "ACCESSCTRL": "no/non",
+          "ACCESSIBLE": "no/non",
+          "OPEN": null,
+          "NOTES": "Outdoor",
+          "MODIFIED_D": "2018/01/18",
+          "CREATED_DA": null,
+          "FACILITY": "District: larger facility to service population of 100,000 plus",
+          "FACILITY_F": "De district : grande installation assurant des services à 100 000 résidents ou plus.",
+          "DESCRIPT_1": "Grand bol de béton, modules de rue et modules verticaux, 17 000 pi2",
+          "PICTURE_LI": null,
+          "PICTURE_DE": null,
+          "PICTURE__1": null
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [-6.369756748019911, 106.8259792966702]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "PARK_ID": 28,
+          "FACILITYID": 28016,
+          "NAME": "FIK",
+          "NAME_FR": "FIK",
+          "DESCRIPTIO":"Fasilkom (Gedung Baru)",
+          "ADDRESS": "101 Centrepointe Drive",
+          "ADDRESS_FR": "101, promenade Centrepointe",
+          "FACILITY_T": "bowl",
+          "FACILITY_1": "bol",
+          "ACCESSCTRL": "no/non",
+          "ACCESSIBLE": "no/non",
+          "OPEN": null,
+          "NOTES": "Outdoor",
+          "MODIFIED_D": "2018/01/18",
+          "CREATED_DA": null,
+          "FACILITY": "District: larger facility to service population of 100,000 plus",
+          "FACILITY_F": "De district : grande installation assurant des services à 100 000 résidents ou plus.",
+          "DESCRIPT_1": "Grand bol de béton, modules de rue et modules verticaux, 17 000 pi2",
+          "PICTURE_LI": null,
+          "PICTURE_DE": null,
+          "PICTURE__1": null
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [-6.371061340660264, 106.82719280923317]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "PARK_ID": 29,
+          "FACILITYID": 28016,
+          "NAME": "FKM",
+          "NAME_FR": "FKM",
+          "DESCRIPTIO":"RSUI",
+          "ADDRESS": "101 Centrepointe Drive",
+          "ADDRESS_FR": "101, promenade Centrepointe",
+          "FACILITY_T": "bowl",
+          "FACILITY_1": "bol",
+          "ACCESSCTRL": "no/non",
+          "ACCESSIBLE": "no/non",
+          "OPEN": null,
+          "NOTES": "Outdoor",
+          "MODIFIED_D": "2018/01/18",
+          "CREATED_DA": null,
+          "FACILITY": "District: larger facility to service population of 100,000 plus",
+          "FACILITY_F": "De district : grande installation assurant des services à 100 000 résidents ou plus.",
+          "DESCRIPT_1": "Grand bol de béton, modules de rue et modules verticaux, 17 000 pi2",
+          "PICTURE_LI": null,
+          "PICTURE_DE": null,
+          "PICTURE__1": null
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [-6.3714849070313475, 106.82925853982198]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "PARK_ID": 30,
+          "FACILITYID": 28016,
+          "NAME": "RIK",
+          "NAME_FR": "RIK",
+          "DESCRIPTIO":"",
+          "ADDRESS": "101 Centrepointe Drive",
+          "ADDRESS_FR": "101, promenade Centrepointe",
+          "FACILITY_T": "bowl",
+          "FACILITY_1": "bol",
+          "ACCESSCTRL": "no/non",
+          "ACCESSIBLE": "no/non",
+          "OPEN": null,
+          "NOTES": "Outdoor",
+          "MODIFIED_D": "2018/01/18",
+          "CREATED_DA": null,
+          "FACILITY": "District: larger facility to service population of 100,000 plus",
+          "FACILITY_F": "De district : grande installation assurant des services à 100 000 résidents ou plus.",
+          "DESCRIPT_1": "Grand bol de béton, modules de rue et modules verticaux, 17 000 pi2",
+          "PICTURE_LI": null,
+          "PICTURE_DE": null,
+          "PICTURE__1": null
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [-6.370075618390656, 106.8308615746626]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "PARK_ID": 31,
+          "FACILITYID": 28016,
+          "NAME": "Balairung",
+          "NAME_FR": "Balairung",
+          "DESCRIPTIO":"Stasiun Pondok Cina,Makara Art Center,",
+          "ADDRESS": "101 Centrepointe Drive",
+          "ADDRESS_FR": "101, promenade Centrepointe",
+          "FACILITY_T": "bowl",
+          "FACILITY_1": "bol",
+          "ACCESSCTRL": "no/non",
+          "ACCESSIBLE": "no/non",
+          "OPEN": null,
+          "NOTES": "Outdoor",
+          "MODIFIED_D": "2018/01/18",
+          "CREATED_DA": null,
+          "FACILITY": "District: larger facility to service population of 100,000 plus",
+          "FACILITY_F": "De district : grande installation assurant des services à 100 000 résidents ou plus.",
+          "DESCRIPT_1": "Grand bol de béton, modules de rue et modules verticaux, 17 000 pi2",
+          "PICTURE_LI": null,
+          "PICTURE_DE": null,
+          "PICTURE__1": null
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [-6.36809398005471, 106.83161722995663]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "PARK_ID": 32,
+          "FACILITYID": 28016,
+          "NAME": "Masjid UI",
+          "NAME_FR": "Masjid UI",
+          "DESCRIPTIO":"Pintu Belakang Rel (Barel), Masjid UI,Perpustakaan UI,Balai Sebaguna Purnowo Prawiro UI,Fasilkom (Gedung Lama)",
+          "ADDRESS": "101 Centrepointe Drive",
+          "ADDRESS_FR": "101, promenade Centrepointe",
+          "FACILITY_T": "bowl",
+          "FACILITY_1": "bol",
+          "ACCESSCTRL": "no/non",
+          "ACCESSIBLE": "no/non",
+          "OPEN": null,
+          "NOTES": "Outdoor",
+          "MODIFIED_D": "2018/01/18",
+          "CREATED_DA": null,
+          "FACILITY": "District: larger facility to service population of 100,000 plus",
+          "FACILITY_F": "De district : grande installation assurant des services à 100 000 résidents ou plus.",
+          "DESCRIPT_1": "Grand bol de béton, modules de rue et modules verticaux, 17 000 pi2",
+          "PICTURE_LI": null,
+          "PICTURE_DE": null,
+          "PICTURE__1": null
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [-6.365574974922631, 106.83203831176702]
+        }
+      },{
+        "type": "Feature",
+        "properties": {
+          "PARK_ID": 4,
+          "FACILITYID": 28006,
+          "NAME": "FH",
+          "NAME_FR": "FH",
+          "DESCRIPTIO":"Pintu Belakang Rel (Barel), Masjid UI,Perpustakaan UI,Balai Sebaguna Purnowo Prawiro UI,Fasilkom (Gedung Lama)",
+          "ADDRESS": "2785 8th Line Road",
+          "ADDRESS_FR": "2785, chemin 8th Line",
+          "FACILITY_T": "other",
+          "FACILITY_1": "autre",
+          "ACCESSCTRL": "no/non",
+          "ACCESSIBLE": "no/non",
+          "OPEN": null,
+          "NOTES": "Outdoor - Mobile",
+          "MODIFIED_D": "2018/01/18",
+          "CREATED_DA": null,
+          "FACILITY": "Metcalfe Community Centre - Roving Skateboard Park Location",
+          "FACILITY_F": "Centre communautaire de Metcalfe - Lieu de planchodrome itinérant",
+          "DESCRIPT_1": "Surface plane, 5 modules",
+          "PICTURE_LI": null,
+          "PICTURE_DE": null,
+          "PICTURE__1": null
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [-6.364864762651361, 106.83223079221105]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "PARK_ID": 5,
+          "FACILITYID": 28007,
+          "NAME": "Balairung",
+          "NAME_FR": "Balairung",
+          "DESCRIPTIO":"Stasiun Pondok Cina,Makara Art Center,",
+          "ADDRESS": "10 Warner Colpitts Lane",
+          "ADDRESS_FR": "10, ruelle Warner Colpitts",
+          "FACILITY_T": "flat",
+          "FACILITY_1": "plat",
+          "ACCESSCTRL": "yes/oui",
+          "ACCESSIBLE": "no/non",
+          "OPEN": null,
+          "NOTES": "Indoor - Summer",
+          "MODIFIED_D": "2018/03/07",
+          "CREATED_DA": null,
+          "FACILITY": "Johnny Leroux Stittsville Community Arena - Roving Skateboard Park Location",
+          "FACILITY_F": "Aréna communautaire de Stittsville Johnny-Leroux - Lieu de planchodrome itinérant",
+          "DESCRIPT_1": "Surface plane, 5 modules",
+          "PICTURE_LI": null,
+          "PICTURE_DE": null,
+          "PICTURE__1": null
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [-6.368205271318413, 106.83184387661237]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "PARK_ID": 6,
+          "FACILITYID": 28016,
+          "NAME": "RIK",
+          "NAME_FR": "RIK",
+          "DESCRIPTIO":"FKM",
+          "ADDRESS": "101 Centrepointe Drive",
+          "ADDRESS_FR": "101, promenade Centrepointe",
+          "FACILITY_T": "bowl",
+          "FACILITY_1": "bol",
+          "ACCESSCTRL": "no/non",
+          "ACCESSIBLE": "no/non",
+          "OPEN": null,
+          "NOTES": "Outdoor",
+          "MODIFIED_D": "2018/01/18",
+          "CREATED_DA": null,
+          "FACILITY": "District: larger facility to service population of 100,000 plus",
+          "FACILITY_F": "De district : grande installation assurant des services à 100 000 résidents ou plus.",
+          "DESCRIPT_1": "Grand bol de béton, modules de rue et modules verticaux, 17 000 pi2",
+          "PICTURE_LI": null,
+          "PICTURE_DE": null,
+          "PICTURE__1": null
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [-6.370190241285223, 106.83109626794518]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "PARK_ID": 7,
+          "FACILITYID": 28016,
+          "NAME": "RSUI",
+          "NAME_FR": "RSUI",
+          "DESCRIPTIO":"FKM",
+          "ADDRESS": "101 Centrepointe Drive",
+          "ADDRESS_FR": "101, promenade Centrepointe",
+          "FACILITY_T": "bowl",
+          "FACILITY_1": "bol",
+          "ACCESSCTRL": "no/non",
+          "ACCESSIBLE": "no/non",
+          "OPEN": null,
+          "NOTES": "Outdoor",
+          "MODIFIED_D": "2018/01/18",
+          "CREATED_DA": null,
+          "FACILITY": "District: larger facility to service population of 100,000 plus",
+          "FACILITY_F": "De district : grande installation assurant des services à 100 000 résidents ou plus.",
+          "DESCRIPT_1": "Grand bol de béton, modules de rue et modules verticaux, 17 000 pi2",
+          "PICTURE_LI": null,
+          "PICTURE_DE": null,
+          "PICTURE__1": null
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [-6.371697905932189, 106.8293758480366]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "PARK_ID": 8,
+          "FACILITYID": 28016,
+          "NAME": "FIK",
+          "NAME_FR": "FIK",
+          "DESCRIPTIO":"Fasilkom (Gedung Baru)",
+          "ADDRESS": "101 Centrepointe Drive",
+          "ADDRESS_FR": "101, promenade Centrepointe",
+          "FACILITY_T": "bowl",
+          "FACILITY_1": "bol",
+          "ACCESSCTRL": "no/non",
+          "ACCESSIBLE": "no/non",
+          "OPEN": null,
+          "NOTES": "Outdoor",
+          "MODIFIED_D": "2018/01/18",
+          "CREATED_DA": null,
+          "FACILITY": "District: larger facility to service population of 100,000 plus",
+          "FACILITY_F": "De district : grande installation assurant des services à 100 000 résidents ou plus.",
+          "DESCRIPT_1": "Grand bol de béton, modules de rue et modules verticaux, 17 000 pi2",
+          "PICTURE_LI": null,
+          "PICTURE_DE": null,
+          "PICTURE__1": null
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [-6.371101272862191, 106.82696734342873]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "PARK_ID": 9,
+          "FACILITYID": 28016,
+          "NAME": "FMIPA",
+          "NAME_FR": "FMIPA",
+          "DESCRIPTIO":"",
+          "ADDRESS": "101 Centrepointe Drive",
+          "ADDRESS_FR": "101, promenade Centrepointe",
+          "FACILITY_T": "bowl",
+          "FACILITY_1": "bol",
+          "ACCESSCTRL": "no/non",
+          "ACCESSIBLE": "no/non",
+          "OPEN": null,
+          "NOTES": "Outdoor",
+          "MODIFIED_D": "2018/01/18",
+          "CREATED_DA": null,
+          "FACILITY": "District: larger facility to service population of 100,000 plus",
+          "FACILITY_F": "De district : grande installation assurant des services à 100 000 résidents ou plus.",
+          "DESCRIPT_1": "Grand bol de béton, modules de rue et modules verticaux, 17 000 pi2",
+          "PICTURE_LI": null,
+          "PICTURE_DE": null,
+          "PICTURE__1": null
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [-6.369838377677364, 106.82575903066468]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "PARK_ID": 10,
+          "FACILITYID": 28016,
+          "NAME": "SOR",
+          "NAME_FR": "SOR",
+          "DESCRIPTIO":"Politeknik Teknik Jakarta (PNJ),Gymnasium",
+          "ADDRESS": "101 Centrepointe Drive",
+          "ADDRESS_FR": "101, promenade Centrepointe",
+          "FACILITY_T": "bowl",
+          "FACILITY_1": "bol",
+          "ACCESSCTRL": "no/non",
+          "ACCESSIBLE": "no/non",
+          "OPEN": null,
+          "NOTES": "Outdoor",
+          "MODIFIED_D": "2018/01/18",
+          "CREATED_DA": null,
+          "FACILITY": "District: larger facility to service population of 100,000 plus",
+          "FACILITY_F": "De district : grande installation assurant des services à 100 000 résidents ou plus.",
+          "DESCRIPT_1": "Grand bol de béton, modules de rue et modules verticaux, 17 000 pi2",
+          "PICTURE_LI": null,
+          "PICTURE_DE": null,
+          "PICTURE__1": null
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [-6.366945420992039, 106.8244908046722]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "PARK_ID": 11,
+          "FACILITYID": 28016,
+          "NAME": "Vokasi",
+          "NAME_FR": "Vokasi",
+          "DESCRIPTIO":"Pusat Kegiatan Mahasiswa (Pusgiwa),Stadion, Career Development UI",
+          "ADDRESS": "101 Centrepointe Drive",
+          "ADDRESS_FR": "101, promenade Centrepointe",
+          "FACILITY_T": "bowl",
+          "FACILITY_1": "bol",
+          "ACCESSCTRL": "no/non",
+          "ACCESSIBLE": "no/non",
+          "OPEN": null,
+          "NOTES": "Outdoor",
+          "MODIFIED_D": "2018/01/18",
+          "CREATED_DA": null,
+          "FACILITY": "District: larger facility to service population of 100,000 plus",
+          "FACILITY_F": "De district : grande installation assurant des services à 100 000 résidents ou plus.",
+          "DESCRIPT_1": "Grand bol de béton, modules de rue et modules verticaux, 17 000 pi2",
+          "PICTURE_LI": null,
+          "PICTURE_DE": null,
+          "PICTURE__1": null
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [-6.366114158411598, 106.82167086626085]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "PARK_ID": 12,
+          "FACILITYID": 28016,
+          "NAME": "FT",
+          "NAME_FR": "FT",
+          "DESCRIPTIO":"Pintu Kukusan-Teknik (Kutek)",
+          "ADDRESS": "101 Centrepointe Drive",
+          "ADDRESS_FR": "101, promenade Centrepointe",
+          "FACILITY_T": "bowl",
+          "FACILITY_1": "bol",
+          "ACCESSCTRL": "no/non",
+          "ACCESSIBLE": "no/non",
+          "OPEN": null,
+          "NOTES": "Outdoor",
+          "MODIFIED_D": "2018/01/18",
+          "CREATED_DA": null,
+          "FACILITY": "District: larger facility to service population of 100,000 plus",
+          "FACILITY_F": "De district : grande installation assurant des services à 100 000 résidents ou plus.",
+          "DESCRIPT_1": "Grand bol de béton, modules de rue et modules verticaux, 17 000 pi2",
+          "PICTURE_LI": null,
+          "PICTURE_DE": null,
+          "PICTURE__1": null
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [-6.361069834121701, 106.82321257394592]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "PARK_ID": 13,
+          "FACILITYID": 28016,
+          "NAME": "FEB",
+          "NAME_FR": "FEB",
+          "DESCRIPTIO":"",
+          "ADDRESS": "101 Centrepointe Drive",
+          "ADDRESS_FR": "101, promenade Centrepointe",
+          "FACILITY_T": "bowl",
+          "FACILITY_1": "bol",
+          "ACCESSCTRL": "no/non",
+          "ACCESSIBLE": "no/non",
+          "OPEN": null,
+          "NOTES": "Outdoor",
+          "MODIFIED_D": "2018/01/18",
+          "CREATED_DA": null,
+          "FACILITY": "District: larger facility to service population of 100,000 plus",
+          "FACILITY_F": "De district : grande installation assurant des services à 100 000 résidents ou plus.",
+          "DESCRIPT_1": "Grand bol de béton, modules de rue et modules verticaux, 17 000 pi2",
+          "PICTURE_LI": null,
+          "PICTURE_DE": null,
+          "PICTURE__1": null
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [-6.359443306471211, 106.82575218376806]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "PARK_ID": 14,
+          "FACILITYID": 28016,
+          "NAME": "FIB",
+          "NAME_FR": "FIB",
+          "DESCRIPTIO":"",
+          "ADDRESS": "101 Centrepointe Drive",
+          "ADDRESS_FR": "101, promenade Centrepointe",
+          "FACILITY_T": "bowl",
+          "FACILITY_1": "bol",
+          "ACCESSCTRL": "no/non",
+          "ACCESSIBLE": "no/non",
+          "OPEN": null,
+          "NOTES": "Outdoor",
+          "MODIFIED_D": "2018/01/18",
+          "CREATED_DA": null,
+          "FACILITY": "District: larger facility to service population of 100,000 plus",
+          "FACILITY_F": "De district : grande installation assurant des services à 100 000 résidents ou plus.",
+          "DESCRIPT_1": "Grand bol de béton, modules de rue et modules verticaux, 17 000 pi2",
+          "PICTURE_LI": null,
+          "PICTURE_DE": null,
+          "PICTURE__1": null
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [-6.361133065901284, 106.82970210098532]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "PARK_ID": 15,
+          "FACILITYID": 28016,
+          "NAME": "FISIP",
+          "NAME_FR": "FISIP",
+          "DESCRIPTIO":"Fasilkom (Gedung Lama)",
+          "ADDRESS": "101 Centrepointe Drive",
+          "ADDRESS_FR": "101, promenade Centrepointe",
+          "FACILITY_T": "bowl",
+          "FACILITY_1": "bol",
+          "ACCESSCTRL": "no/non",
+          "ACCESSIBLE": "no/non",
+          "OPEN": null,
+          "NOTES": "Outdoor",
+          "MODIFIED_D": "2018/01/18",
+          "CREATED_DA": null,
+          "FACILITY": "District: larger facility to service population of 100,000 plus",
+          "FACILITY_F": "De district : grande installation assurant des services à 100 000 résidents ou plus.",
+          "DESCRIPT_1": "Grand bol de béton, modules de rue et modules verticaux, 17 000 pi2",
+          "PICTURE_LI": null,
+          "PICTURE_DE": null,
+          "PICTURE__1": null
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [-6.361723672481245, 106.83030996654941]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "PARK_ID": 16,
+          "FACILITYID": 28016,
+          "NAME": "F.Psi",
+          "NAME_FR": "F.Psi",
+          "DESCRIPTIO":"",
+          "ADDRESS": "101 Centrepointe Drive",
+          "ADDRESS_FR": "101, promenade Centrepointe",
+          "FACILITY_T": "bowl",
+          "FACILITY_1": "bol",
+          "ACCESSCTRL": "no/non",
+          "ACCESSIBLE": "no/non",
+          "OPEN": null,
+          "NOTES": "Outdoor",
+          "MODIFIED_D": "2018/01/18",
+          "CREATED_DA": null,
+          "FACILITY": "District: larger facility to service population of 100,000 plus",
+          "FACILITY_F": "De district : grande installation assurant des services à 100 000 résidents ou plus.",
+          "DESCRIPT_1": "Grand bol de béton, modules de rue et modules verticaux, 17 000 pi2",
+          "PICTURE_LI": null,
+          "PICTURE_DE": null,
+          "PICTURE__1": null
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [-6.362172631787366, 106.83083040668357]
+        }
+      }
+    ]
+  }

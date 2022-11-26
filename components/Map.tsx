@@ -12,6 +12,7 @@ import { ReactNode, useEffect, useState } from "react";
 import halteRed from "../data/halteRed.json";
 import halteBlue from "../data/halteBlue.json";
 import halteMix from "../data/halteMix.json";
+import halteAll from "../data/halteAll.json";
 import iconRed from "./IconRed";
 import iconBlue from "./IconBlue";
 import iconMix from "./IconMix";
@@ -40,6 +41,13 @@ import ruteAll from "../public/assets/image/ruteAll.svg";
 import ruteBiru from "../public/assets/image/ruteBiru.svg";
 import ruteMerah from "../public/assets/image/ruteMerah.svg";
 import error from "../public/assets/icon/error.svg";
+import position from "../public/assets/icon/position.svg";
+import gambar1 from "../public/assets/image/donts/1.svg";
+import gambar2 from "../public/assets/image/donts/2.svg";
+import gambar3 from "../public/assets/image/donts/3.svg";
+import gambar4 from "../public/assets/image/donts/4.svg";
+import gambar5 from "../public/assets/image/donts/5.svg";
+import gambar6 from "../public/assets/image/donts/6.svg";
 import L from "leaflet";
 import Link from "next/link";
 
@@ -59,10 +67,14 @@ export default function Map(props: MapProps) {
   const [bus, setBus] = useState([]);
   const [activeTabIndex, setActiveTabIndex] = useState(0);
   const [isCentered, setIscenterd] = useState(false);
+  const [isHalteClicked, setIsHalteClicked] = useState(false);
   const [isBanner, setIsBanner] = useState(true);
+  const [isDonts, setIsDonts] = useState(true);
+  const [isHalte, setIsHalte] = useState(false);
+  const [isFilter, setIsFilter] = useState("ALL");
   const [i, setI] = useState(0);
   const [detailHalte, setDetailHalte] = useState<any>();
-  const [allHalte, setAllHalte] = useState<any>();
+  const [allHalte, setAllHalte] = useState<any>([]);
   const addActive = (props: number) => {
     setActiveTabIndex(props);
   };
@@ -75,6 +87,7 @@ export default function Map(props: MapProps) {
   };
   ws.onmessage = (evt) => {
     setIscenterd(false);
+    setIsHalteClicked(false);
     const message = JSON.parse(evt.data);
     setBus(message);
   };
@@ -87,7 +100,7 @@ export default function Map(props: MapProps) {
         pathname: "/onBoarding",
       });
     }
-    // fetchAllHalte()
+    fetchAllHalte();
   }, []);
 
   // switch rute on maps
@@ -96,6 +109,19 @@ export default function Map(props: MapProps) {
     if (i === 3) {
       setI(0);
     }
+  };
+
+  const getHalteClicked = (park: any) => {
+    setLat(park.geometry.coordinates[0]);
+    setLng(park.geometry.coordinates[1]);
+  };
+
+  const getHalteClickedById = (val: any) => {
+    const HalteClickedById = halteAll.features.filter(
+      (e: any) => e.properties.PARK_ID === val
+    );
+    setLat(HalteClickedById[0].geometry.coordinates[0]);
+    setLng(HalteClickedById[0].geometry.coordinates[1]);
   };
 
   // get user position
@@ -115,6 +141,7 @@ export default function Map(props: MapProps) {
     return null;
   };
 
+  // fetch data one halte
   const fetchData = async (park: any) => {
     const req = await fetch(
       "https://api.bikunku.com/terminal/" + park.properties.PARK_ID
@@ -123,15 +150,37 @@ export default function Map(props: MapProps) {
     return setDetailHalte(newData.data);
   };
 
-  const fetchAllHalte = async (park: any) => {
-    const req = await fetch("https://api.bikunku.com/terminal/allTerminal");
+  const fetchDataByID = async (park: number) => {
+    const req = await fetch("https://api.bikunku.com/terminal/" + park);
     const newData = await req.json();
-    // console.log(newData);
-    return setAllHalte(newData.data);
+    return setDetailHalte(newData.data);
+  };
+
+  // fetch all halte
+  const fetchAllHalte = async () => {
+    const payload = {
+      lat: -6.361046716889507,
+      long: 106.8317240044786,
+    };
+    const req = fetch("https://api.bikunku.com/terminal/allTerminal", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setAllHalte(data.data.terminal);
+      });
   };
 
   const DetailHalte = (park: any) => {
     fetchData(park);
+  };
+
+  const DetailHalteByID = (park: any) => {
+    fetchDataByID(park);
   };
 
   return (
@@ -164,6 +213,8 @@ export default function Map(props: MapProps) {
                         click: (e) => {
                           setActivePark(park);
                           DetailHalte(park);
+                          setIsHalteClicked(true);
+                          getHalteClicked(park);
                         },
                       }}
                       icon={iconRed}
@@ -190,6 +241,8 @@ export default function Map(props: MapProps) {
                         click: (e) => {
                           setActivePark(park);
                           DetailHalte(park);
+                          setIsHalteClicked(true);
+                          getHalteClicked(park);
                         },
                       }}
                       icon={iconBlue}
@@ -216,6 +269,8 @@ export default function Map(props: MapProps) {
                         click: (e) => {
                           setActivePark(park);
                           DetailHalte(park);
+                          setIsHalteClicked(true);
+                          getHalteClicked(park);
                         },
                       }}
                       icon={iconMix}
@@ -249,6 +304,8 @@ export default function Map(props: MapProps) {
                         click: (e) => {
                           setActivePark(park);
                           DetailHalte(park);
+                          setIsHalteClicked(true);
+                          getHalteClicked(park);
                         },
                       }}
                       icon={iconBlue}
@@ -279,6 +336,8 @@ export default function Map(props: MapProps) {
                         click: (e) => {
                           setActivePark(park);
                           DetailHalte(park);
+                          setIsHalteClicked(true);
+                          getHalteClicked(park);
                         },
                       }}
                       icon={iconRed}
@@ -309,12 +368,13 @@ export default function Map(props: MapProps) {
               ))}
               <Marker position={[lat, lng]}></Marker>
               {isCentered && <RecenterAutomatically lat={lat} lng={lng} />}
+              {isHalteClicked && <RecenterAutomatically lat={lat} lng={lng} />}
             </MapContainer>
           </div>
 
           {/* cari halte */}
           <div className="flex justify-center">
-            <div id="front2" className="bg-blue-primary h-12 cariHalte">
+            <div id="front3" className="bg-blue-primary h-12 cariHalte">
               <div className="bg-white h-20 flex justify-center items-center rounded-lg mx-8 mt-4">
                 <div className="flex  w-full mx-4 space-x-2 rounded-full border-[1px] border-[#EAEAEA] bg-[#FAFAFA] px-4 py-2 text-sm">
                   <Image src={location} alt="" />
@@ -322,7 +382,384 @@ export default function Map(props: MapProps) {
                     type="text"
                     className="w-full  bg-[#FAFAFA] focus:outline-none"
                     placeholder="Cari halte"
+                    onFocus={() => {
+                      setIsHalte(true);
+                    }}
+                    // onBlur={() => {
+                    //   setIsHalte(false);
+                    // }}
                   />
+                </div>
+              </div>
+            </div>
+
+            <div
+              className={
+                isHalte
+                  ? "bg-white h-full show overflow-y-scroll no-scrollbar"
+                  : "hidden"
+              }
+              id="front2"
+            >
+              <div className=" pt-24 h-full">
+                <div className="p-4 h-full space-y-4">
+                  {/* filter */}
+                  <div className="flex justify-center space-x-3">
+                    <div
+                      className={
+                        isFilter === "ALL"
+                          ? "border-[1px] rounded-full border-[#EAEAEA] px-6 bg-blue-primary text-white"
+                          : "border-[1px] rounded-full bg-[#FBFBFB] border-[#EAEAEA] px-6"
+                      }
+                      onClick={() => {
+                        setIsFilter("ALL");
+                      }}
+                    >
+                      <p
+                        className={
+                          isFilter === "ALL"
+                            ? "text-xs text-white"
+                            : "text-xs text-black-primary"
+                        }
+                      >
+                        All
+                      </p>
+                    </div>
+                    <div
+                      className={
+                        isFilter === "RED"
+                          ? "border-[1px] rounded-full border-[#EAEAEA] px-6 bg-blue-primary text-white"
+                          : "border-[1px] rounded-full bg-[#FBFBFB] border-[#EAEAEA] px-6"
+                      }
+                      onClick={() => {
+                        setIsFilter("RED");
+                      }}
+                    >
+                      <p
+                        className={
+                          isFilter === "RED"
+                            ? "text-xs text-white"
+                            : "text-xs text-black-primary"
+                        }
+                      >
+                        Rute Lurus
+                      </p>
+                    </div>
+                    <div
+                      className={
+                        isFilter === "BLUE"
+                          ? "border-[1px] rounded-full border-[#EAEAEA] px-6 bg-blue-primary text-white"
+                          : "border-[1px] rounded-full bg-[#FBFBFB] border-[#EAEAEA] px-6"
+                      }
+                      onClick={() => {
+                        setIsFilter("BLUE");
+                      }}
+                    >
+                      <p
+                        className={
+                          isFilter === "BLUE"
+                            ? "text-xs text-white"
+                            : "text-xs text-black-primary"
+                        }
+                      >
+                        Rute Kanan
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* konten */}
+                  {isFilter === "ALL" ? (
+                    <>
+                      {allHalte.map((val: any, index: any) => (
+                        <div
+                          className="flex flex-row space-x-3 my-auto border-[1px] py-2 px-3 rounded-xl h-16"
+                          onClick={() => {
+                            DetailHalteByID(val.id);
+                            setIsHalte(false);
+                            setActivePark(val.id);
+                            setIsHalteClicked(true);
+                            getHalteClickedById(val.id);
+                          }}
+                        >
+                          <div className="my-auto w-1/12 overflow-y-hidden flex flex-col space-y-1">
+                            <Image src={position} alt="" className="mx-auto" />
+                            <p className="text-[8px]">{val.distance} km</p>
+                          </div>
+                          <div className="flex-col flex-grow">
+                            <p className="text-base">{val.name}</p>
+                            <div className="flex space-x-2">
+                              {" "}
+                              <p className="text-xs text-[#959595]">
+                                Halte Berikutnya
+                              </p>
+                              <p className="text-xs text-[#959595]">{">"}</p>
+                              <p className="text-xs text-[#959595]">
+                                {val.next}
+                              </p>
+                            </div>
+                          </div>
+                          <div className="my-auto w-[70px]">
+                            <p
+                              className={
+                                val.route === "RED"
+                                  ? "bg-red-primary my-auto px-3 py-[3px] rounded-sm text-white text-[8px] font-semibold"
+                                  : "bg-blue-primary my-auto px-3 py-[3px] rounded-sm text-white text-[8px] font-semibold"
+                              }
+                            >
+                              {val.route === "RED" ? (
+                                <>Rute Lurus</>
+                              ) : val.route === "BLUE" ? (
+                                <>Rute Kanan</>
+                              ) : (
+                                <></>
+                              )}
+                            </p>
+                          </div>
+                        </div>
+                      ))}
+                    </>
+                  ) : (
+                    <>
+                      {" "}
+                      {allHalte
+                        .filter((e: any) => e.route === isFilter)
+                        .map((val: any, index: any) => (
+                          <div
+                            className="flex flex-row space-x-3 my-auto border-[1px] py-2 px-3 rounded-xl h-16"
+                            onClick={() => {
+                              DetailHalteByID(val.id);
+                              setIsHalte(false);
+                              setActivePark(val.id);
+                              setIsHalteClicked(true);
+                              getHalteClickedById(val.id);
+                            }}
+                          >
+                            <div className="my-auto w-1/12 overflow-y-hidden flex flex-col space-y-1">
+                              <Image
+                                src={position}
+                                alt=""
+                                className="mx-auto"
+                              />
+                              <p className="text-[8px]">{val.distance} km</p>
+                            </div>
+                            <div className="flex-col flex-grow">
+                              <p className="text-base">{val.name}</p>
+                              <div className="flex space-x-2">
+                                {" "}
+                                <p className="text-xs text-[#959595]">
+                                  Halte Berikutnya
+                                </p>
+                                <p className="text-xs text-[#959595]">{">"}</p>
+                                <p className="text-xs text-[#959595]">
+                                  {val.next}
+                                </p>
+                              </div>
+                            </div>
+                            <div className="my-auto w-[70px]">
+                              <p
+                                className={
+                                  val.route === "RED"
+                                    ? "bg-red-primary my-auto px-3 py-[3px] rounded-sm text-white text-[8px] font-semibold"
+                                    : "bg-blue-primary my-auto px-3 py-[3px] rounded-sm text-white text-[8px] font-semibold"
+                                }
+                              >
+                                {val.route === "RED" ? (
+                                  <>Rute Lurus</>
+                                ) : val.route === "BLUE" ? (
+                                  <>Rute Kanan</>
+                                ) : (
+                                  <></>
+                                )}
+                              </p>
+                            </div>
+                          </div>
+                        ))}
+                    </>
+                  )}
+
+                  {/* <div className="flex flex-row space-x-2 my-auto border-[1px] py-2 px-3 rounded-xl h-16">
+                    <div className="my-auto flex flex-col space-y-1">
+                      <Image src={position} alt="" className="mx-auto" />
+                      <p className="text-[8px]">0.1 km</p>
+                    </div>
+                    <div className="flex-col flex-grow">
+                      <p className="text-md">Asrama</p>
+                      <div className="flex space-x-2">
+                        {" "}
+                        <p className="text-xs text-[#959595]">
+                          Halte Berikutnya
+                        </p>
+                        <p className="text-xs text-[#959595]">{">"}</p>
+                        <p className="text-xs text-[#959595]">Stasiun UI</p>
+                      </div>
+                    </div>
+                    <div className="my-auto">
+                      <p className="bg-red-primary my-auto px-3 py-[3px] rounded-sm text-white text-[8px] font-semibold">
+                        Rute Lurus
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex flex-row space-x-2 my-auto border-[1px] py-2 px-3 rounded-xl h-16">
+                    <div className="my-auto flex flex-col space-y-1">
+                      <Image src={position} alt="" className="mx-auto" />
+                      <p className="text-[8px]">0.1 km</p>
+                    </div>
+                    <div className="flex-col flex-grow">
+                      <p className="text-md">Asrama</p>
+                      <div className="flex space-x-2">
+                        {" "}
+                        <p className="text-xs text-[#959595]">
+                          Halte Berikutnya
+                        </p>
+                        <p className="text-xs text-[#959595]">{">"}</p>
+                        <p className="text-xs text-[#959595]">Stasiun UI</p>
+                      </div>
+                    </div>
+                    <div className="my-auto">
+                      <p className="bg-blue-primary my-auto px-3 py-[3px] rounded-sm text-white text-[8px] font-semibold">
+                        Rute Kanan
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex flex-row space-x-2 my-auto border-[1px] py-2 px-3 rounded-xl h-16">
+                    <div className="my-auto flex flex-col space-y-1">
+                      <Image src={position} alt="" className="mx-auto" />
+                      <p className="text-[8px]">0.1 km</p>
+                    </div>
+                    <div className="flex-col flex-grow">
+                      <p className="text-md">Asrama</p>
+                      <div className="flex space-x-2">
+                        {" "}
+                        <p className="text-xs text-[#959595]">
+                          Halte Berikutnya
+                        </p>
+                        <p className="text-xs text-[#959595]">{">"}</p>
+                        <p className="text-xs text-[#959595]">Stasiun UI</p>
+                      </div>
+                    </div>
+                    <div className="my-auto">
+                      <p className="bg-red-primary my-auto px-3 py-[3px] rounded-sm text-white text-[8px] font-semibold">
+                        Rute Lurus
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex flex-row space-x-2 my-auto border-[1px] py-2 px-3 rounded-xl h-16">
+                    <div className="my-auto flex flex-col space-y-1">
+                      <Image src={position} alt="" className="mx-auto" />
+                      <p className="text-[8px]">0.1 km</p>
+                    </div>
+                    <div className="flex-col flex-grow">
+                      <p className="text-md">Asrama</p>
+                      <div className="flex space-x-2">
+                        {" "}
+                        <p className="text-xs text-[#959595]">
+                          Halte Berikutnya
+                        </p>
+                        <p className="text-xs text-[#959595]">{">"}</p>
+                        <p className="text-xs text-[#959595]">Stasiun UI</p>
+                      </div>
+                    </div>
+                    <div className="my-auto">
+                      <p className="bg-red-primary my-auto px-3 py-[3px] rounded-sm text-white text-[8px] font-semibold">
+                        Rute Lurus
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex flex-row space-x-2 my-auto border-[1px] py-2 px-3 rounded-xl h-16">
+                    <div className="my-auto flex flex-col space-y-1">
+                      <Image src={position} alt="" className="mx-auto" />
+                      <p className="text-[8px]">0.1 km</p>
+                    </div>
+                    <div className="flex-col flex-grow">
+                      <p className="text-md">Asrama</p>
+                      <div className="flex space-x-2">
+                        {" "}
+                        <p className="text-xs text-[#959595]">
+                          Halte Berikutnya
+                        </p>
+                        <p className="text-xs text-[#959595]">{">"}</p>
+                        <p className="text-xs text-[#959595]">Stasiun UI</p>
+                      </div>
+                    </div>
+                    <div className="my-auto">
+                      <p className="bg-red-primary my-auto px-3 py-[3px] rounded-sm text-white text-[8px] font-semibold">
+                        Rute Lurus
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex flex-row space-x-2 my-auto border-[1px] py-2 px-3 rounded-xl h-16">
+                    <div className="my-auto flex flex-col space-y-1">
+                      <Image src={position} alt="" className="mx-auto" />
+                      <p className="text-[8px]">0.1 km</p>
+                    </div>
+                    <div className="flex-col flex-grow">
+                      <p className="text-md">Asrama</p>
+                      <div className="flex space-x-2">
+                        {" "}
+                        <p className="text-xs text-[#959595]">
+                          Halte Berikutnya
+                        </p>
+                        <p className="text-xs text-[#959595]">{">"}</p>
+                        <p className="text-xs text-[#959595]">Stasiun UI</p>
+                      </div>
+                    </div>
+                    <div className="my-auto">
+                      <p className="bg-red-primary my-auto px-3 py-[3px] rounded-sm text-white text-[8px] font-semibold">
+                        Rute Lurus
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex flex-row space-x-2 my-auto border-[1px] py-2 px-3 rounded-xl h-16">
+                    <div className="my-auto flex flex-col space-y-1">
+                      <Image src={position} alt="" className="mx-auto" />
+                      <p className="text-[8px]">0.1 km</p>
+                    </div>
+                    <div className="flex-col flex-grow">
+                      <p className="text-md">Asrama</p>
+                      <div className="flex space-x-2">
+                        {" "}
+                        <p className="text-xs text-[#959595]">
+                          Halte Berikutnya
+                        </p>
+                        <p className="text-xs text-[#959595]">{">"}</p>
+                        <p className="text-xs text-[#959595]">Stasiun UI</p>
+                      </div>
+                    </div>
+                    <div className="my-auto">
+                      <p className="bg-blue-primary my-auto px-3 py-[3px] rounded-sm text-white text-[8px] font-semibold">
+                        Rute Kanan
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex flex-row space-x-2 my-auto border-[1px] py-2 px-3 rounded-xl h-16">
+                    <div className="my-auto flex flex-col space-y-1">
+                      <Image src={position} alt="" className="mx-auto" />
+                      <p className="text-[8px]">0.1 km</p>
+                    </div>
+                    <div className="flex-col flex-grow">
+                      <p className="text-md">Asrama</p>
+                      <div className="flex space-x-2">
+                        {" "}
+                        <p className="text-xs text-[#959595]">
+                          Halte Berikutnya
+                        </p>
+                        <p className="text-xs text-[#959595]">{">"}</p>
+                        <p className="text-xs text-[#959595]">Stasiun UI</p>
+                      </div>
+                    </div>
+                    <div className="my-auto">
+                      <p className="bg-blue-primary my-auto px-3 py-[3px] rounded-sm text-white text-[8px] font-semibold">
+                        Rute Kanan
+                      </p>
+                    </div>
+                  </div> */}
                 </div>
               </div>
             </div>
@@ -331,7 +768,7 @@ export default function Map(props: MapProps) {
           {/* get position icon */}
           <div className="flex justify-end">
             <button
-              id="front2"
+              id="front1"
               className={styles.currentPos}
               onClick={() => {
                 getPosition();
@@ -348,7 +785,7 @@ export default function Map(props: MapProps) {
               <>
                 {" "}
                 <button
-                  id="front2"
+                  id="front1"
                   className={styles.rute}
                   onClick={() => {
                     handleRute();
@@ -361,7 +798,7 @@ export default function Map(props: MapProps) {
               <>
                 {" "}
                 <button
-                  id="front2"
+                  id="front1"
                   className={styles.rute}
                   onClick={() => {
                     handleRute();
@@ -374,7 +811,7 @@ export default function Map(props: MapProps) {
               <>
                 {" "}
                 <button
-                  id="front2"
+                  id="front1"
                   className={styles.rute}
                   onClick={() => {
                     handleRute();
@@ -387,7 +824,7 @@ export default function Map(props: MapProps) {
               <>
                 {" "}
                 <button
-                  id="front2"
+                  id="front1"
                   className={styles.rute}
                   onClick={() => {
                     handleRute();
@@ -405,7 +842,7 @@ export default function Map(props: MapProps) {
           <div
             className={isBanner === false ? "hidden" : "flex justify-center"}
           >
-            <div id="front2" className={styles.banner}>
+            <div id="front1" className={styles.banner}>
               <Image alt="" src={error} className="lg:ml-3" />
               <p className="text-[11.5px] font-semibold px-1 lg:px-4 flex-grow">
                 Pilih halte atau klik ikon halte langsung pada map
@@ -423,22 +860,100 @@ export default function Map(props: MapProps) {
 
           {/* donts */}
           <div
-            className={isBanner === false ? "hidden" : "flex justify-center"}
+            className={
+              isDonts === false ? "hidden" : "flex h-screen justify-center"
+            }
           >
-            <div id="front2" className={styles.banner}>
-              <Image alt="" src={error} className="lg:ml-3" />
-              <p className="text-[11.5px] font-semibold px-1 lg:px-4 flex-grow">
-                Pilih halte atau klik ikon halte langsung pada map
-              </p>
-              <button
-                className="pr-2 py-1 lg:px-3"
-                onClick={() => {
-                  setIsBanner(false);
-                }}
-              >
-                <p className="bg-white text-black-primary">X</p>
-              </button>
+            <div id="front3" className={styles.donts}>
+              <div className="flex flex-col h-[100%] items-center justify-center ">
+                <button
+                  className="pr-3 py-3 absolute top-0 right-0 lg:px-3"
+                  onClick={() => {
+                    setIsDonts(false);
+                  }}
+                >
+                  <p className="bg-white text-xl text-black-primary">X</p>
+                </button>
+                <div className="flex flex-col text-center pb-2">
+                  <p className="text-lg font-bold">Dos and Dont’s Bikun</p>
+                </div>
+                <div className="flex flex-row space-x-2 w-full px-6 py-4 h-20">
+                  <div className="w-1/5 mx-auto flex justify-center items-center">
+                    <Image src={gambar1} alt="" />
+                  </div>
+                  <p className="w-4/5 my-auto">
+                    Tertib dan dahulukan penumpang turun, please!
+                  </p>
+                </div>
+                <hr className="h-[1px] border-[1px] border-[#d4d4d4]" />
+                <div className="flex flex-row space-x-2 w-full px-6 py-4 h-20">
+                  <div className="w-1/5 mx-auto flex justify-center items-center">
+                    <Image src={gambar2} alt="" />
+                  </div>
+                  <p className="w-4/5 my-auto">
+                    Tetap gunakan masker dan jaga protokol kesehatan, ya!
+                  </p>
+                </div>
+                <hr className="h-[1px] border-[1px] border-[#d4d4d4]" />
+                <div className="flex flex-row space-x-2 w-full px-6 py-4 h-20">
+                  <div className="w-1/5 mx-auto flex justify-center items-center">
+                    <Image src={gambar3} alt="" />
+                  </div>
+                  <p className="w-4/5 my-auto">
+                    Ucapkan terima kasih kepada supir sebelum turun guys!
+                  </p>
+                </div>
+                <hr className="h-[1px] border-[1px] border-[#d4d4d4]" />
+                <div className="flex flex-row space-x-2 w-full px-6 py-4 h-20">
+                  <div className="w-1/5 mx-auto flex justify-center items-center">
+                    <Image src={gambar4} alt="" />
+                  </div>
+                  <p className="w-4/5 my-auto">
+                    Jangan berkerumun pada bagian tengah bikun ya {":("}
+                  </p>
+                </div>
+                <hr className="h-[1px] border-[1px] border-[#d4d4d4]" />
+                <div className="flex flex-row space-x-2 w-full px-6 py-4 h-20">
+                  <div className="w-1/5 mx-auto flex justify-center items-center">
+                    <Image src={gambar5} alt="" />
+                  </div>
+                  <p className="w-4/5 my-auto">
+                    Jangan buang sampah sembarangan!
+                  </p>
+                </div>
+                <hr className="h-[1px] border-[1px] border-[#d4d4d4]" />
+                <div className="flex flex-row space-x-2 w-full px-6 py-4 h-20">
+                  <div className="w-1/5 mx-auto flex justify-center items-center">
+                    <Image src={gambar6} alt="" />
+                  </div>
+                  <p className="w-4/5 my-auto">
+                    Waspada dan cegah pelecehan seksual serta pencurian!
+                  </p>
+                </div>
+                <hr className="pb-4" />
+
+                <button className="rounded-full bg-blue-primary">
+                  <p
+                    className="flex items-center justify-center font-semibold text-base text-white h-10 px-16"
+                    onClick={() => {
+                      setIsDonts(false);
+                    }}
+                  >
+                    Baik, saya mengerti
+                  </p>
+                </button>
+              </div>
             </div>
+            {/* <button
+              id="front2"
+              className={styles.donts}
+              onClick={() => {
+                getPosition();
+                setIscenterd(true);
+              }}
+            >
+              <Image alt="" src={userLoc} />
+            </button> */}
           </div>
 
           {/* handle detail halte */}
@@ -448,7 +963,7 @@ export default function Map(props: MapProps) {
             <>
               {" "}
               <div className="absolute bottom-[40%] w-full">
-                <div id="front2" className="h-screen">
+                <div id="front1" className="h-screen">
                   <Draggable
                     axis="y"
                     bounds={{ left: 0, top: -300, right: 0, bottom: 50 }}
@@ -462,7 +977,6 @@ export default function Map(props: MapProps) {
                           className="absolute top-[4px] right-[30px] bg-base-200 py-1 px-2.5 rounded-lg not-draggable"
                           onClick={() => {
                             setActivePark(null);
-                            console.log("a");
                           }}
                         >
                           X
@@ -480,16 +994,24 @@ export default function Map(props: MapProps) {
                                     : "not-draggable w-1/2 text-center text-[#d9d9d9] h-8 border-b-4 border-[#d9d9d9]"
                                 }
                               >
-                                <div onClick={() => addActive(index)} className="relative">
+                                <div
+                                  onClick={() => addActive(index)}
+                                  className="relative"
+                                >
                                   {val}
-                                  <svg className={val === "Info Bikun" ? "bg-red-primary h-2 w-2 rounded-full absolute top-0 right-0 animate-pulse" : "" }></svg>
+                                  <svg
+                                    className={
+                                      val === "Info Bikun"
+                                        ? "bg-red-primary h-2 w-2 rounded-full absolute top-0 right-0 animate-pulse"
+                                        : ""
+                                    }
+                                  ></svg>
                                 </div>
-                                
                               </a>
                             </>
                           ))}
                         </div>
-                        <div className="overflow-y-scroll h-[440px] not-draggable space-y-2">
+                        <div className="overflow-y-scroll no-scrollbar h-[440px] not-draggable space-y-2">
                           {activeTabIndex === 0 ? (
                             <div className="flex flex-col justify-center space-y-2">
                               <div className="h-[65px] border-[1px] rounded-xl p-3 flex justify-between">
@@ -1032,6 +1554,7 @@ export default function Map(props: MapProps) {
             </button>
           </div>
 
+          {/* bottom drawer */}
           <div className="absolute bottom-[40%] w-full">
             <div id="fronttt" className="h-screen">
               <Draggable
@@ -1061,15 +1584,17 @@ export default function Map(props: MapProps) {
                         </>
                       ))}
                     </div>
-                    <div className="overflow-y-scroll h-[440px] not-draggable p-6">
+                    <div className="overflow-y-scroll no-scrollbar h-[440px] not-draggable p-6 justify-center">
                       {activeTabIndex === 0 ? (
                         <div className="flex flex-col justify-center">
-                          <Image src={ruteAll} alt="" />
+                          <div className="flex mx-auto">
+                            <Image src={ruteAll} alt="" />
+                          </div>
                           <div className="flex flex-row space-x-1 py-4">
-                            <div className="w-1/6">
+                            <div className="w-1/6 lg:w-12 ">
                               <Image src={error} alt="" />
                             </div>
-                            <p className="text-xs font-semibold">
+                            <p className="text-xs font-semibold my-auto">
                               Terdapat perubahan pada hari kerja pukul
                               06.00-09.00 WIB . Bikun rute lurus (merah) tidak
                               akan melewati FEB sampai dengan Stasiun UI. Pada
@@ -1080,12 +1605,14 @@ export default function Map(props: MapProps) {
                         </div>
                       ) : activeTabIndex === 1 ? (
                         <div className="flex flex-col justify-center">
-                          <Image src={ruteMerah} alt="" />
+                          <div className="flex mx-auto">
+                            <Image src={ruteMerah} alt="" />
+                          </div>
                           <div className="flex flex-row space-x-1 py-4">
-                            <div className="w-1/6">
+                            <div className="w-1/6 lg:w-12 ">
                               <Image src={error} alt="" />
                             </div>
-                            <p className="text-xs font-semibold">
+                            <p className="text-xs font-semibold my-auto">
                               Terdapat perubahan rute pada hari kerja pukul
                               06.00-09.00 WIB. Bikun rute lurus (merah) tidak
                               akan melewati FEB sampai dengan Stasiun UI.{" "}
@@ -1094,12 +1621,14 @@ export default function Map(props: MapProps) {
                         </div>
                       ) : activeTabIndex === 2 ? (
                         <div className="flex flex-col justify-center">
-                          <Image src={ruteBiru} alt="" />
+                          <div className="flex mx-auto">
+                            <Image src={ruteBiru} alt="" />
+                          </div>
                           <div className="flex flex-row space-x-1 py-4">
-                            <div className="w-12">
+                            <div className="w-1/6 lg:w-12 ">
                               <Image src={error} alt="" />
                             </div>
-                            <p className="text-xs font-semibold">
+                            <p className="text-xs font-semibold my-auto">
                               Terdapat perubahan rute pada hari kerja pukul
                               06.00-09.00 WIB . Bikun rute kanan (biru), tidak
                               melewati Stasiun UI sampai Menwa.
