@@ -5,7 +5,7 @@ export default function kebijakanprivasi() {
   return (
     <Layout>
       <div
-      id="front"
+        id="front"
         className="h-full bg-white space-y-6 pt-6 px-6 bg-no-repeat bg-[right_top_-3rem]"
         style={{ backgroundImage: `url(${beritaBG.src})` }}
       >
@@ -17,14 +17,14 @@ export default function kebijakanprivasi() {
           <div className="space-y-1.5">
             <p className="text-xs">Permintaan Izin Perangkat Seluler</p>
             <p className="text-[10px]">
-              Aplikasi bikunku membutuhkan izin sebelum mengakses data pribadi
+              Aplikasi bikunku membutuhkan izin sebelum mengakses data lokasi
               pengguna. Adapun tidak diberikannya izin oleh pengguna akan
               berpengaruh dalam kegunaan atau fungsi aplikasi. Jika pengguna
-              telah memberikan izin, maka perangkat lunak/aplikasi Angkut dapat
+              telah memberikan izin, maka perangkat lunak/aplikasi Bikunku dapat
               memproses data pengguna dalam batas wajar untuk keperluan
               penggunaan aplikasi. Aplikasi Bikunku memerlukan data lokasi
               terkini pengguna (hanya terbatas) untuk menentukan halte terdekat
-              dan memunculkan posisi pengguna pada tampilan map.{" "}
+              dan memunculkan posisi pengguna pada tampilan map.
             </p>
           </div>
 

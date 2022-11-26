@@ -11,19 +11,117 @@ body {
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif; */
   font-family: "Inter", sans-serif;
   
-  
 }
 
-/* a {
-  color: inherit;
-  text-decoration: none;
-} */
+
 p {
   color:#453B2A ;
 }
 
 * {
   box-sizing: border-box;
+}
+/* 
+@media (max-width: 2560px) {
+  #onb {
+    background-image:url("../static/image/onB.svg");
+    background-repeat: no-repeat;
+    
+  }
+}
+
+@media (max-width: 600px) {
+  #onb {
+    background-image:url("../static/image/onB2.svg");
+    background-repeat: no-repeat;
+    
+  }
+} */
+
+@media (max-width: 450px) {
+  #onb {
+    background-image:url("../static/image/bgLanding.svg");
+    background-repeat: no-repeat;
+  }
+}
+
+.nav-bikunku {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 22px;
+  line-height: 26px;
+  font-family: "Inter", sans-serif;
+  color: white;
+}
+
+.leaflet-touch .leaflet-bar {
+  display: none;
+}
+
+.draggable {
+  /* Indicate the element draggable */
+  cursor: move;
+
+  /* It will be positioned absolutely */
+  position: absolute;
+
+  /* Doesn't allow to select the content inside */
+  user-select: none;
+}
+
+#map {
+  z-index: 0 !important;
+  position: absolute;
+}
+#front {
+  z-index: 10 !important;
+  position: absolute;
+  width: 100%;
+  
+}
+#frontt {
+  z-index: 5 !important;
+  position: absolute;
+  width: 100%;
+}
+#fronttt {
+  z-index: 7 !important;
+  position: absolute;
+  width: 100%;
+}
+#front2 {
+  z-index: 30 !important;
+  position: absolute;
+  width: 100%;
+  ;
+}
+#front3 {
+  z-index: 32 !important;
+  position: absolute;
+  width: 100%;
+  ;
+}
+
+.leaflet-tooltip {
+  position: absolute;
+  padding: 6px;
+  border-radius: 3px;
+  color: #222;
+  white-space: nowrap;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+  pointer-events: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* For IE, Edge and Firefox */
+.no-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
 }
 
 .nav-bikunku {
@@ -92,4 +190,9 @@ p {
     color: white;
     background: black;
   }
+}
+
+.cariHalte {
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
+  border-radius: 0px 0px 10px 10px;
 }

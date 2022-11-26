@@ -1,0 +1,22 @@
+{
+    "data" : [
+        {
+            "idBus" : 1,
+            "waktu": "07:26",
+            "rute" : "Kanan",
+            "tanggal":"Sabtu, 26 November 2022"
+        },
+        {
+            "idBus" : 3,
+            "waktu": "07:36",
+            "rute" : "Kanan",
+            "tanggal":"Sabtu, 26 November 2022"
+        },
+        {
+            "idBus" : 4,
+            "waktu": "07:26",
+            "rute" : "lurus",
+            "tanggal":"Sabtu, 26 November 2022"
+        }
+    ]
+}

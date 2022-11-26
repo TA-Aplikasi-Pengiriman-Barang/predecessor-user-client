@@ -5,7 +5,7 @@ export default function tentangbikunku() {
   return (
     <Layout>
       <div
-      id="front"
+        id="front"
         className="h-full bg-white space-y-6 pt-6 px-6 bg-no-repeat bg-[right_top_-3rem]"
         style={{ backgroundImage: `url(${beritaBG.src})` }}
       >
@@ -23,6 +23,13 @@ export default function tentangbikunku() {
             Pengguna dapat mengetahui informasi estimasi waktu kedatangan,
             lokasi bus pada suatu halte. Selain itu, pengguna juga dapat
             mengetahui detail rute, jadwal, serta berita terbaru terkait bikun.{" "}
+          </p>
+          <p className="text-xs">
+            Untuk informasi lebih lanjut, anda dapat menghubungi pengembang pada
+            surel dibawah ini:
+            <li>hafiz.bhadrika@ui.ac.id</li>
+            <li>nofaldi.fikrul@ui.acid</li>
+            <li>rezaldy.ahmad@ui.ac.id</li>
           </p>
         </div>
       </div>

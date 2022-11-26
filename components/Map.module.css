@@ -1,0 +1,76 @@
+.leaflet-popup-tip-container {
+  display: none;
+}
+
+.leaflet {
+  position: absolute;
+  background-color: transparent;
+  border: none;
+  border-radius: 3px;
+  color: #222;
+  font-weight: 700;
+  padding-bottom: 15px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+  pointer-events: none;
+  box-shadow: none;
+}
+
+.leaflet-control-container .leaflet-routing-container-hide {
+  display: none;
+}
+
+.currentPos {
+  background-color: white;
+  width: 50px !important;
+  height: 50px !important;
+  margin-top: 115px;
+  margin-right: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  filter: drop-shadow(0px 2px 5px rgba(167, 167, 167, 0.5));
+  border-radius: 0.5rem;
+}
+.rute {
+  background-color: white;
+  width: 50px !important;
+  height: 50px !important;
+  margin-top:185px;
+  margin-right: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  filter: drop-shadow(0px 2px 5px rgba(167, 167, 167, 0.5));
+  border-radius: 0.5rem;
+}
+
+.currentPos2 {
+  background-color: white;
+  width: 50px !important;
+  height: 50px !important;
+  margin-top: 5px;
+  margin-right: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  filter: drop-shadow(0px 2px 5px rgba(167, 167, 167, 0.5));
+  border-radius: 0.5rem;
+}
+.rute2 {
+  background-color: white;
+  width: 50px !important;
+  height: 50px !important;
+  margin-top:65px;
+  margin-right: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  filter: drop-shadow(0px 2px 5px rgba(167, 167, 167, 0.5));
+  border-radius: 0.5rem;
+}
+
+.donts {
+  width: 50px !important;
+}
