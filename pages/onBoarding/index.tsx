@@ -1,15 +1,11 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
-// import bgLanding from "../../static/image/bgLanding.svg";
-// import onB from "../../static/image/onB.svg";
-// import onB3 from "../../static/image/onB3.svg";
-// import onBoardingBawah2 from "../../static/image/onBoarding/onBoardingBawah2.svg";
-import onBoarding1 from "../../static/image/onBoarding/onBoarding1.svg";
-import onBoarding2 from "../../static/image/onBoarding/onBoarding2.svg";
-import onBoarding3 from "../../static/image/onBoarding/onBoarding3.svg";
-import onBoarding4 from "../../static/image/onBoarding/onBoarding4.svg";
-import onBoarding5 from "../../static/image/onBoarding/onBoarding5.svg";
-import bikunku from "../../static/icon/bikunku.svg";
+import onBoarding1 from "../../assets/image/onBoarding/onBoarding1.svg";
+import onBoarding2 from "../../assets/image/onBoarding/onBoarding2.svg";
+import onBoarding3 from "../../assets/image/onBoarding/onBoarding3.svg";
+import onBoarding4 from "../../assets/image/onBoarding/onBoarding4.svg";
+import onBoarding5 from "../../assets/image/onBoarding/onBoarding5.svg";
+import bikunku from "../../assets/icon/bikunku.svg";
 import Image from "next/image";
 import { setCookie } from "cookies-next";
 import { useRouter } from "next/router";
@@ -43,7 +39,10 @@ export default function index() {
     <div className="flex justify-center">
       <div className="h-screen w-[450px] overflow-y-hidden md:hidden">
         {activeTabIndex === 0 ? (
-          <div className="flex h-5/6 bg-no-repeat bg-[center_top_-2rem]" style={{ backgroundImage: `url(${onBoarding1.src})` }}>
+          <div
+            className="flex h-5/6 bg-no-repeat bg-[center_top_-2rem]"
+            style={{ backgroundImage: `url(${onBoarding1.src})` }}
+          >
             <div className="flex flex-col w-full mx-8">
               <div className="flex absolute inset-x-24 justify-center pt-0.5 nav-bikunku">
                 <Image src={bikunku} alt="" />
@@ -60,7 +59,10 @@ export default function index() {
             </div>
           </div>
         ) : activeTabIndex === 1 ? (
-<div className="flex h-5/6 bg-no-repeat bg-[center_top_-2rem]" style={{ backgroundImage: `url(${onBoarding2.src})` }}>
+          <div
+            className="flex h-5/6 bg-no-repeat bg-[center_top_-2rem]"
+            style={{ backgroundImage: `url(${onBoarding2.src})` }}
+          >
             <div className="flex flex-col w-full">
               <div className="flex absolute inset-x-24 justify-center pt-0.5 nav-bikunku">
                 <Image src={bikunku} alt="" />
@@ -77,7 +79,10 @@ export default function index() {
             </div>
           </div>
         ) : activeTabIndex === 2 ? (
-          <div className="flex h-5/6 bg-no-repeat bg-[center_top_-2rem]" style={{ backgroundImage: `url(${onBoarding3.src})` }}>
+          <div
+            className="flex h-5/6 bg-no-repeat bg-[center_top_-2rem]"
+            style={{ backgroundImage: `url(${onBoarding3.src})` }}
+          >
             <div className="flex flex-col w-full mx-8">
               <div className="flex absolute inset-x-24 justify-center pt-0.5 nav-bikunku">
                 <Image src={bikunku} alt="" />
@@ -97,7 +102,10 @@ export default function index() {
             </div>
           </div>
         ) : activeTabIndex === 3 ? (
-          <div className="flex h-5/6 bg-no-repeat bg-[center_top_-2rem]" style={{ backgroundImage: `url(${onBoarding4.src})` }}>
+          <div
+            className="flex h-5/6 bg-no-repeat bg-[center_top_-2rem]"
+            style={{ backgroundImage: `url(${onBoarding4.src})` }}
+          >
             <div className="flex flex-col w-full mx-8">
               <div className="flex absolute inset-x-24 justify-center pt-0.5 nav-bikunku">
                 <Image src={bikunku} alt="" />
@@ -117,7 +125,10 @@ export default function index() {
             </div>
           </div>
         ) : activeTabIndex === 4 ? (
-          <div className="flex h-5/6 bg-no-repeat bg-[center_top_-2rem]" style={{ backgroundImage: `url(${onBoarding5.src})` }}>
+          <div
+            className="flex h-5/6 bg-no-repeat bg-[center_top_-2rem]"
+            style={{ backgroundImage: `url(${onBoarding5.src})` }}
+          >
             <div className="flex flex-col w-full mx-8">
               <div className="flex absolute inset-x-24 justify-center pt-0.5 nav-bikunku">
                 <Image src={bikunku} alt="" />
@@ -140,10 +151,16 @@ export default function index() {
           <>
             <div className="flex w-full justify-center h-full mt-[-1.5rem]">
               <div className="space-y-6 text-center">
-                <Link href="/" className="px-6 h-12 rounded-full flex items-center justify-center bg-blue-primary text-white">
+                <Link
+                  href="/"
+                  className="px-6 h-12 rounded-full flex items-center justify-center bg-blue-primary text-white"
+                >
                   Mulai sekarang
                 </Link>
-                <Link href="/bantuan/faq" className="px-6 h-12 rounded-full flex items-center justify-center border-2 border-black-primary">
+                <Link
+                  href="/bantuan/faq"
+                  className="px-6 h-12 rounded-full flex items-center justify-center border-2 border-black-primary"
+                >
                   Pertama kali menggunakan bikun?
                 </Link>
               </div>

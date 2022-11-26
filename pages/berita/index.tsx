@@ -1,10 +1,10 @@
 import Image from "next/image";
 import Layout from "../../components/Layout";
-import beritaIcon from "../../static/icon/berita.svg";
-import schedule from "../../static/icon/schedule.svg";
-import chevron_right from "../../static/icon/chevron_right.svg";
+import beritaIcon from "../../assets/icon/berita.svg";
+import schedule from "../../assets/icon/schedule.svg";
+import chevron_right from "../../assets/icon/chevron_right.svg";
 import Link from "next/link";
-import beritaNotFoundBG from "../../static/image/beritaNotFoundBG.svg";
+import beritaNotFoundBG from "../../assets/image/beritaNotFoundBG.svg";
 
 export default function berita() {
   const isExist = true;
@@ -12,7 +12,10 @@ export default function berita() {
   return (
     <Layout>
       {" "}
-      <div id="front" className="bg-white h-screen overflow-y-scroll space-y-6 pt-6 pb-36">
+      <div
+        id="front"
+        className="bg-white h-screen overflow-y-scroll space-y-6 pt-6 pb-36"
+      >
         {/* filter */}
         <div className="flex justify-center space-x-3">
           <div className="border-[1px] rounded-full border-[#EAEAEA] px-6 bg-blue-primary text-white">
@@ -219,7 +222,6 @@ export default function berita() {
                   </div>
                 </div>
               </div>
-
             </div>
           </>
         ) : (

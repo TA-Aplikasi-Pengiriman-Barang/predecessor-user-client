@@ -1,14 +1,20 @@
 import Image from "next/image";
 import Layout from "../../components/Layout";
-import schedule from "../../static/icon/schedule.svg";
-import beritaBG from "../../static/image/beritaBG.svg"
+import schedule from "../../assets/icon/schedule.svg";
+import beritaBG from "../../assets/image/beritaBG.svg";
 
 export default function detail() {
   return (
     <Layout>
-      <div id="front" className="h-full bg-white space-y-6 pt-6 px-6 bg-no-repeat bg-[right_top_-3rem]" style={{backgroundImage:`url(${beritaBG.src})`}}>
+      <div
+        id="front"
+        className="h-full bg-white space-y-6 pt-6 px-6 bg-no-repeat bg-[right_top_-3rem]"
+        style={{ backgroundImage: `url(${beritaBG.src})` }}
+      >
         <div className="space-y-1.5">
-          <p className="text-base font-semibold">Bikun tidak beroperasi Senin, 31 Oktober 2022</p>
+          <p className="text-base font-semibold">
+            Bikun tidak beroperasi Senin, 31 Oktober 2022
+          </p>
           <div className="flex space-x-1">
             <Image
               src={schedule}
@@ -29,7 +35,9 @@ export default function detail() {
             beroperasi. Untuk penumpang bikun dapat menggunakan jasa ojek
             pangkalan (opang) atau alternatif lainnya. Terima kasih.
           </p>
-          <p className="text-xs">- Manajemen Bus Kuning Universitas Indonesia</p>
+          <p className="text-xs">
+            - Manajemen Bus Kuning Universitas Indonesia
+          </p>
         </div>
       </div>
     </Layout>

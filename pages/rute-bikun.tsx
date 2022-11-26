@@ -1,11 +1,5 @@
-import Image from "next/image";
 import Layout from "../components/Layout";
-import Draggable from "react-draggable";
 import { useState } from "react";
-import ruteAll from "../static/image/ruteAll.svg";
-import ruteBiru from "../static/image/ruteBiru.svg";
-import ruteMerah from "../static/image/ruteMerah.svg";
-import error from "../static/icon/error.svg";
 
 export default function rutebikun() {
   const [activeTabIndex, setActiveTabIndex] = useState(0);

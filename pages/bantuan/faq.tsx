@@ -1,6 +1,6 @@
 import Layout from "../../components/Layout";
 import Image from "next/image";
-import ruteAll from "../../static/image/ruteAll.svg";
+import ruteAll from "../../assets/image/ruteAll.svg";
 
 export default function faq() {
   return (

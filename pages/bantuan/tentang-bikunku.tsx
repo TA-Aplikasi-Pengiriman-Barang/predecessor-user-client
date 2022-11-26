@@ -1,5 +1,5 @@
 import Layout from "../../components/Layout";
-import beritaBG from "../../static/image/beritaBG.svg";
+import beritaBG from "../../assets/image/beritaBG.svg";
 
 export default function tentangbikunku() {
   return (

@@ -1,8 +1,8 @@
 import Image from "next/image";
 import Layout from "../components/Layout";
-import bus from "../static/icon/bus/busJadwal.svg";
-import location from "../static/icon/location.svg";
-import calendar from "../static/icon/calendar.svg";
+import bus from "../assets/icon/bus/busJadwal.svg";
+import location from "../assets/icon/location.svg";
+import calendar from "../assets/icon/calendar.svg";
 
 export default function jadwalbikun() {
   return (
