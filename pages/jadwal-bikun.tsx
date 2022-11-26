@@ -15,7 +15,7 @@ export default function jadwalbikun() {
               <Image src={location} alt="" />
               <input
                 type="text"
-                className="w-full  bg-[#FAFAFA] focus:outline-none"
+                className="w-full  bg-[#FAFAFA] focus:outline-none text-black"
                 placeholder="Cari halte"
               />
             </div>
@@ -23,7 +23,7 @@ export default function jadwalbikun() {
               <Image src={calendar} alt="" />
               <input
                 type="date"
-                className="w-full  bg-[#FAFAFA] focus:outline-none"
+                className="w-full  bg-[#FAFAFA] focus:outline-none text-black"
                 placeholder="Filter By Time"
               />
             </div>

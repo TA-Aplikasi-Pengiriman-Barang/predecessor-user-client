@@ -1,30 +1,102 @@
-import Image from "next/image";
 import Layout from "../../components/Layout";
-import beritaIcon from "../../public/assets/icon/berita.svg";
-import schedule from "../../public/assets/icon/schedule.svg";
-import chevron_right from "../../public/assets/icon/chevron_right.svg";
-import Link from "next/link";
 import beritaNotFoundBG from "../../public/assets/image/beritaNotFoundBG.svg";
+import News from "../../components/News";
+import { useState } from "react";
 
-export default function berita() {
-  const isExist = true;
+interface NewsData {
+  id: number;
+  detail: string;
+  title: string;
+  createdAt: string;
+}
+
+interface Data {
+  data: NewsData[];
+}
+
+enum FilterType {
+  ALL,
+  TODAY,
+  LAST_7_DAY,
+}
+
+export default function berita(data: Data) {
+  const isExist = data.data.length > 0;
+
+  const [filter, setFilter] = useState<FilterType>(FilterType.ALL);
+
+  const AllMapper = (dt: NewsData[]) => {
+    return dt.map((d: NewsData) => (
+      <News
+        key={d.id}
+        title={d.title}
+        detail={d.detail}
+        createdAt={d.createdAt}
+        id={d.id}
+      />
+    ));
+  };
+
+  const TodayMapper = (dt: NewsData[]) => {
+    dt = dt.filter(
+      (d: NewsData) =>
+        new Date(d.createdAt).toDateString() == new Date().toDateString()
+    );
+    return dt.map((d: NewsData) => (
+      <News
+        key={d.id}
+        title={d.title}
+        detail={d.detail}
+        createdAt={d.createdAt}
+        id={d.id}
+      />
+    ));
+  };
+
+  const Last7DayMapper = (dt: NewsData[]) => {
+    dt = dt.filter((d: NewsData) => {
+      const then = new Date(d.createdAt);
+      const now = new Date();
+      const msBetweenDates = Math.abs(then.getTime() - now.getTime());
+      const daysBetweenDates = msBetweenDates / (24 * 60 * 60 * 1000);
+      return daysBetweenDates < 7;
+    });
+
+    return dt.map((d: NewsData) => (
+      <News
+        key={d.id}
+        title={d.title}
+        detail={d.detail}
+        createdAt={d.createdAt}
+        id={d.id}
+      />
+    ));
+  };
 
   return (
     <Layout>
-      {" "}
       <div
         id="front"
         className="bg-white h-screen overflow-y-scroll space-y-6 pt-6 pb-36"
       >
         {/* filter */}
         <div className="flex justify-center space-x-3">
-          <div className="border-[1px] rounded-full border-[#EAEAEA] px-6 bg-blue-primary text-white">
+          <div
+            className="border-[1px] rounded-full border-[#EAEAEA] px-6 bg-blue-primary text-white"
+            onClick={() => setFilter(FilterType.ALL)}
+          >
             <p className="text-white">All</p>
           </div>
-          <div className="border-[1px] rounded-full bg-[#FBFBFB] border-[#EAEAEA] px-6">
+          <div
+            className="border-[1px] rounded-full bg-[#FBFBFB] border-[#EAEAEA] px-6"
+            onClick={() => setFilter(FilterType.TODAY)}
+          >
             <p>Today</p>
           </div>
-          <div className="border-[1px] rounded-full bg-[#FBFBFB] border-[#EAEAEA] px-6">
+          <div
+            className="border-[1px] rounded-full bg-[#FBFBFB] border-[#EAEAEA] px-6"
+            onClick={() => setFilter(FilterType.LAST_7_DAY)}
+          >
             <p>Last 7 days</p>
           </div>
         </div>
@@ -34,194 +106,11 @@ export default function berita() {
             {/* konten */}
             <div className="flex flex-col space-y-4 px-4 bg-white">
               {/* loop */}
-              <Link href="/berita/detail" className="border-[1px] rounded-xl">
-                <div className="flex justify-between py-4 px-3">
-                  <div className="my-auto justify-center">
-                    <Image src={beritaIcon} alt="" height={20} width={20} />
-                  </div>
-
-                  <div className="w-5/6 lg:w-11/12">
-                    <div className="flex flex-col space-y-[0.8] px-1 lg:px-2">
-                      <p className="truncate text-base text-black-primary">
-                        Bikun tidak beroperasi, 31 Oktober...
-                      </p>
-                      <p className="truncate text-xs text-[#959595]">
-                        Terdapat tanggal merah hari Sumpah Pemuda bikun...
-                      </p>
-                      <div className="flex text-[8px] text-[#959595] space-x-1 pt-0.5">
-                        <Image src={schedule} alt="" />
-                        <p>31 Oktober 2022 pukul 07.32</p>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="my-auto">
-                    <Image src={chevron_right} alt="" height={20} width={20} />
-                  </div>
-                </div>
-              </Link>
-
-              <div className="border-[1px] rounded-xl">
-                <div className="flex justify-between py-4 px-3">
-                  <div className="my-auto justify-center">
-                    <Image src={beritaIcon} alt="" height={20} width={20} />
-                  </div>
-
-                  <div className="w-5/6 lg:w-11/12">
-                    <div className="flex flex-col space-y-[0.8] px-1 lg:px-2">
-                      <p className="truncate text-base">
-                        Bikun tidak beroperasi, 31 Oktober...
-                      </p>
-                      <p className="truncate text-xs text-[#959595]">
-                        Terdapat tanggal merah hari Sumpah Pemuda bikun...
-                      </p>
-                      <div className="flex text-[8px] text-[#959595] space-x-1 pt-0.5">
-                        <Image src={schedule} alt="" />
-                        <p>31 Oktober 2022 pukul 07.32</p>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="my-auto">
-                    <Image src={chevron_right} alt="" height={20} width={20} />
-                  </div>
-                </div>
-              </div>
-
-              <div className="border-[1px] rounded-xl">
-                <div className="flex justify-between py-4 px-3">
-                  <div className="my-auto justify-center">
-                    <Image src={beritaIcon} alt="" height={20} width={20} />
-                  </div>
-
-                  <div className="w-5/6 lg:w-11/12">
-                    <div className="flex flex-col space-y-[0.8] px-1 lg:px-2">
-                      <p className="truncate text-base">
-                        Bikun tidak beroperasi, 31 Oktober...
-                      </p>
-                      <p className="truncate text-xs text-[#959595]">
-                        Terdapat tanggal merah hari Sumpah Pemuda bikun...
-                      </p>
-                      <div className="flex text-[8px] text-[#959595] space-x-1 pt-0.5">
-                        <Image src={schedule} alt="" />
-                        <p>31 Oktober 2022 pukul 07.32</p>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="my-auto">
-                    <Image src={chevron_right} alt="" height={20} width={20} />
-                  </div>
-                </div>
-              </div>
-
-              <div className="border-[1px] rounded-xl">
-                <div className="flex justify-between py-4 px-3">
-                  <div className="my-auto justify-center">
-                    <Image src={beritaIcon} alt="" height={20} width={20} />
-                  </div>
-
-                  <div className="w-5/6 lg:w-11/12">
-                    <div className="flex flex-col space-y-[0.8] px-1 lg:px-2">
-                      <p className="truncate text-base">
-                        Bikun tidak beroperasi, 31 Oktober...
-                      </p>
-                      <p className="truncate text-xs text-[#959595]">
-                        Terdapat tanggal merah hari Sumpah Pemuda bikun...
-                      </p>
-                      <div className="flex text-[8px] text-[#959595] space-x-1 pt-0.5">
-                        <Image src={schedule} alt="" />
-                        <p>31 Oktober 2022 pukul 07.32</p>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="my-auto">
-                    <Image src={chevron_right} alt="" height={20} width={20} />
-                  </div>
-                </div>
-              </div>
-
-              <div className="border-[1px] rounded-xl">
-                <div className="flex justify-between py-4 px-3">
-                  <div className="my-auto justify-center">
-                    <Image src={beritaIcon} alt="" height={20} width={20} />
-                  </div>
-
-                  <div className="w-5/6 lg:w-11/12">
-                    <div className="flex flex-col space-y-[0.8] px-1 lg:px-2">
-                      <p className="truncate text-base">
-                        Bikun tidak beroperasi, 31 Oktober...
-                      </p>
-                      <p className="truncate text-xs text-[#959595]">
-                        Terdapat tanggal merah hari Sumpah Pemuda bikun...
-                      </p>
-                      <div className="flex text-[8px] text-[#959595] space-x-1 pt-0.5">
-                        <Image src={schedule} alt="" />
-                        <p>31 Oktober 2022 pukul 07.32</p>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="my-auto">
-                    <Image src={chevron_right} alt="" height={20} width={20} />
-                  </div>
-                </div>
-              </div>
-
-              <div className="border-[1px] rounded-xl">
-                <div className="flex justify-between py-4 px-3">
-                  <div className="my-auto justify-center">
-                    <Image src={beritaIcon} alt="" height={20} width={20} />
-                  </div>
-
-                  <div className="w-5/6 lg:w-11/12">
-                    <div className="flex flex-col space-y-[0.8] px-1 lg:px-2">
-                      <p className="truncate text-base">
-                        Bikun tidak beroperasi, 31 Oktober...
-                      </p>
-                      <p className="truncate text-xs text-[#959595]">
-                        Terdapat tanggal merah hari Sumpah Pemuda bikun...
-                      </p>
-                      <div className="flex text-[8px] text-[#959595] space-x-1 pt-0.5">
-                        <Image src={schedule} alt="" />
-                        <p>31 Oktober 2022 pukul 07.32</p>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="my-auto">
-                    <Image src={chevron_right} alt="" height={20} width={20} />
-                  </div>
-                </div>
-              </div>
-
-              <div className="border-[1px] rounded-xl">
-                <div className="flex justify-between py-4 px-3">
-                  <div className="my-auto justify-center">
-                    <Image src={beritaIcon} alt="" height={20} width={20} />
-                  </div>
-
-                  <div className="w-5/6 lg:w-11/12">
-                    <div className="flex flex-col space-y-[0.8] px-1 lg:px-2">
-                      <p className="truncate text-base">
-                        Bikun tidak beroperasi, 31 Oktober...
-                      </p>
-                      <p className="truncate text-xs text-[#959595]">
-                        Terdapat tanggal merah hari Sumpah Pemuda bikun...
-                      </p>
-                      <div className="flex text-[8px] text-[#959595] space-x-1 pt-0.5">
-                        <Image src={schedule} alt="" />
-                        <p>31 Oktober 2022 pukul 07.32</p>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="my-auto">
-                    <Image src={chevron_right} alt="" height={20} width={20} />
-                  </div>
-                </div>
-              </div>
+              {filter == FilterType.ALL
+                ? AllMapper(data.data)
+                : filter == FilterType.TODAY
+                ? TodayMapper(data.data)
+                : Last7DayMapper(data.data)}
             </div>
           </>
         ) : (
@@ -235,4 +124,11 @@ export default function berita() {
       </div>
     </Layout>
   );
+}
+
+export async function getServerSideProps() {
+  const res = await fetch(`https://api.bikunku.com/news/`, { method: "GET" });
+  const data = await res.json();
+
+  return { props: { data: data.data.news } };
 }

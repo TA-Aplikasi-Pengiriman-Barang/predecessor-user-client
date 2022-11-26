@@ -3,7 +3,19 @@ import Layout from "../../components/Layout";
 import schedule from "../../public/assets/icon/schedule.svg";
 import beritaBG from "../../public/assets/image/beritaBG.svg";
 
-export default function detail() {
+interface NewsData {
+  id: number;
+  detail: string;
+  title: string;
+  createdAt: string;
+}
+
+interface Data {
+  data: NewsData;
+}
+
+export default function detail({ data }: Data) {
+  console.log(data);
   return (
     <Layout>
       <div
@@ -12,9 +24,7 @@ export default function detail() {
         style={{ backgroundImage: `url(${beritaBG.src})` }}
       >
         <div className="space-y-1.5">
-          <p className="text-base font-semibold">
-            Bikun tidak beroperasi Senin, 31 Oktober 2022
-          </p>
+          <p className="text-base font-semibold">{data.title}</p>
           <div className="flex space-x-1">
             <Image
               src={schedule}
@@ -24,22 +34,24 @@ export default function detail() {
               width={14}
             />
             <p className="text-sm text-[#868686]">
-              31 Oktober 2022 pukul 07.32
+              {new Date(data.createdAt).toDateString()}
             </p>
           </div>
           <div className="w-3/4 h-[1.5px] bg-[#D9D9D9]"></div>
         </div>
         <div className="space-y-4 text-justify text-black-primary">
-          <p className="text-xs">
-            Terdapat tanggal merah hari Sumpah Pemuda sehingga bikun tidak
-            beroperasi. Untuk penumpang bikun dapat menggunakan jasa ojek
-            pangkalan (opang) atau alternatif lainnya. Terima kasih.
-          </p>
-          <p className="text-xs">
-            - Manajemen Bus Kuning Universitas Indonesia
-          </p>
+          <p className="text-xs">{data.detail}</p>
         </div>
       </div>
     </Layout>
   );
+}
+
+export async function getServerSideProps({ params }: any) {
+  const res = await fetch(`https://api.bikunku.com/news/${params.id}`, {
+    method: "GET",
+  });
+  const data = await res.json();
+
+  return { props: { data: data.data } };
 }
