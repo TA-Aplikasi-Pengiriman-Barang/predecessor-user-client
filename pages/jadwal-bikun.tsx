@@ -3,78 +3,60 @@ import Layout from "../components/Layout";
 import bus from "../public/assets/icon/bus/busJadwal.svg";
 import location from "../public/assets/icon/location.svg";
 import calendar from "../public/assets/icon/calendar.svg";
+import jadwalNotFound from "../public/assets/image/jadwalNotFound.svg";
 import fixJadwal from "../data/fixJadwal.json";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Draggable from "react-draggable";
+import { days } from "../components/constant/days";
 
 export default function jadwalbikun() {
   const [isFilter, setIsFilter] = useState(false);
-  const [searchWord, setSearchWord] = useState("");
-  // const [dataSenin, setDataSenin] = useState([])
-  // const [dataSelasa, setDataSelasa] = useState([])
-  // const [dataRabu, setDataRabu] = useState([])
-  // const [dataKamis, setDataKamis] = useState([])
-  // const [dataJumat, setDataJumat] = useState([])
-  // const [dataSabtu, setDataSabtu] = useState([])
-  // const [dataMinggu, setDataMinggu] = useState([])
+  const [searchWord, setSearchWord] = useState<any>(null);
+  const [startDate, setStartDate] = useState<number>(0);
+  const [endDate, setEndDate] = useState<any>(null);
+  const [filterTime, setFilterTime] = useState("all");
+  const [dataJadwal, setDataJadwal] = useState(fixJadwal.data);
 
-  // useEffect(() => {
-  //   const dataSenin = fixJadwal.data.filter((e: any) =>
-  //     e.tanggal.includes("Senin")
-  //   );
-  //   const dataSelasa = fixJadwal.data.filter((e: any) =>
-  //     e.tanggal.includes("Selasa")
-  //   );
-  //   const dataRabu = fixJadwal.data.filter((e: any) =>
-  //     e.tanggal.includes("Rabu")
-  //   );
-  //   const dataKamis = fixJadwal.data.filter((e: any) =>
-  //     e.tanggal.includes("Kamis")
-  //   );
-  //   const dataJumat = fixJadwal.data.filter((e: any) =>
-  //     e.tanggal.includes("Jumat")
-  //   );
-  //   const dataSabtu = fixJadwal.data.filter((e: any) =>
-  //     e.tanggal.includes("Sabtu")
-  //   );
-  //   const dataMinggu = fixJadwal.data.filter((e: any) =>
-  //     e.tanggal.includes("Minggu")
-  //   );
+  const loopDay = [0, 1, 2, 3, 4, 5, 6];
 
-  // }, [1]);
-  const dataSenin = fixJadwal.data.filter((e: any) =>
-    e.tanggal.includes("Senin")
-  );
-  const dataSelasa = fixJadwal.data.filter((e: any) =>
-    e.tanggal.includes("Selasa")
-  );
-  const dataRabu = fixJadwal.data.filter((e: any) =>
-    e.tanggal.includes("Rabu")
-  );
-  const dataKamis = fixJadwal.data.filter((e: any) =>
-    e.tanggal.includes("Kamis")
-  );
-  const dataJumat = fixJadwal.data.filter((e: any) =>
-    e.tanggal.includes("Jumat")
-  );
-  const dataSabtu = fixJadwal.data.filter((e: any) =>
-    e.tanggal.includes("Sabtu")
-  );
-  const dataMinggu = fixJadwal.data.filter((e: any) =>
-    e.tanggal.includes("Minggu")
-  );
-
-  const handleSearch = async (e: any) => {
-    const searchHalte = e.target.value;
-    setSearchWord(searchHalte);
+  const handleSearch = (keyword: String) => {
+    const filteredSearchData = fixJadwal.data.filter((e: any) =>
+      e.halte.toLowerCase().includes(keyword.toLowerCase())
+    );
+    setSearchWord(keyword);
+    setDataJadwal(filteredSearchData);
   };
 
-  //   console.log(fixJadwal.data.filter((e: any) =>
-  //   e.waktu.includes("06:") ||
-  //   e.waktu.includes("07:") ||
-  //   e.waktu.includes("08:") ||
-  //   e.waktu.includes("09:00")
-  // ))
+  const clearKeyword = () => {
+    setSearchWord(null);
+    setDataJadwal(fixJadwal.data);
+  };
+
+  const clickApplyFilter = () => {
+    if (endDate !== null) {
+      let tempData = fixJadwal.data;
+      let loopDay = []
+      let conditions: any = [];
+      for (let i = startDate; i <= endDate; i++) {
+        loopDay.push(i)
+        conditions.push(days[i])
+      }
+
+      // @ts-ignore
+      let filteredData = tempData.filter((val: any) => conditions.some(el => val.tanggal.includes(el)))
+
+      let newData
+      if (filterTime === "6-9") {
+        newData = filteredData.filter((val: any) => ["06:", "07:", "08:", "09:00"].some(el => val.waktu.includes(el)))
+      } else if (filterTime === "9-12") {
+        newData = filteredData.filter((val: any) => ["09:", "10:", "11:", "12:00"].some(el => val.waktu.includes(el)))
+      } else {
+        newData = filteredData
+      }
+
+      setDataJadwal(newData)
+    }
+  }
 
   return (
     <Layout>
@@ -87,22 +69,29 @@ export default function jadwalbikun() {
               <input
                 type="text"
                 className="w-full  bg-[#FAFAFA] focus:outline-none text-black"
-                placeholder="Cari halte"
-                // onChange={() => {
-                //   handleSearch(event);
-                // }}
+                placeholder={searchWord ? searchWord : "Cari halte"}
+                disabled={searchWord ? true : false}
+                onKeyDown={(event) => {
+                  if (event.key === "Enter") {
+                    // @ts-ignore
+                    if (event.target.value !== "") {
+                      // @ts-ignore
+                      handleSearch(event.target.value);
+                    }
+                  }
+                }}
               />
+              {searchWord && (
+                <div className="text-blue-primary" onClick={clearKeyword}>
+                  Reset
+                </div>
+              )}
             </div>
             <div
               className="flex space-x-1 rounded-full border-[1px] border-[#EAEAEA] bg-[#FAFAFA] mx-20 px-2 py-1 text-xs"
               onClick={() => setIsFilter(true)}
             >
               <Image src={calendar} alt="" />
-              {/* <input
-                type="date"
-                className="w-full  bg-[#FAFAFA] focus:outline-none text-black"
-                placeholder="Filter By Time"
-              /> */}
               <p className="font-semibold text-xs ">Filter by time</p>
             </div>
           </div>
@@ -110,315 +99,64 @@ export default function jadwalbikun() {
 
         {/* Data Jadwal Bikun  */}
         <div className="h-screen overflow-y-scroll bg-white pt-20 px-4 space-y-4">
-          {/* looping hari senin */}
-          <div>
-            <div className="flex space-x-2 w-full pb-2">
-              <p className="text-[10px] w-1/2">Senin, 21 November 2022</p>
-              <div className="h-[1px] bg-[#D9D9D9] w-full my-auto"></div>
-            </div>
+          {/* Looping Hari */}
+          {loopDay.map((angka) => (
+            <div key={angka}>
+              <div className="flex space-x-2 w-full pb-2">
+                <p className="text-[10px] w-1/2">
+                  {days[angka]}, 2{angka + 1} November 2022
+                </p>
+                <div className="h-[1px] bg-[#D9D9D9] w-full my-auto"></div>
+              </div>
 
-            <div className="space-y-2">
-              {/* looping jadwal berdasarkan hari */}
-              {dataSenin
-                .filter((e: any) => e.halte.includes(searchWord))
-                .map((val: any) => (
-                  <div className="h-[65px] border-[1px] rounded-xl p-3 flex justify-between">
-                    <div className="flex flex-col justify-center space-y-1">
-                      <div className="flex flex-row space-x-3">
-                        <div className="flex space-x-1">
-                          <Image src={bus} alt="" />
-                          <p className="bg-black-primary my-auto px-2.5 py-[3px] rounded-sm text-white text-[8px] font-semibold">
-                            {val.idBus}
-                          </p>
+              <div className="space-y-2">
+                {/* looping jadwal berdasarkan hari */}
+                {dataJadwal.filter((e) => e.tanggal.includes(days[angka]))
+                  .length === 0 ? (
+                  <div className="flex flex-col justify-center items-center mb-4">
+                    <Image src={jadwalNotFound} alt="" />
+                    <p className="text-[#9B9B9B]">
+                      Tidak terdapat jadwal bikun
+                    </p>
+                  </div>
+                ) : (
+                  dataJadwal
+                    .filter((e) => e.tanggal.includes(days[angka]))
+                    .map((val, index) => (
+                      <div className="h-[65px] border-[1px] rounded-xl p-3 flex justify-between" key={index}>
+                        <div className="flex flex-col justify-center space-y-1">
+                          <div className="flex flex-row space-x-3">
+                            <div className="flex space-x-1">
+                              <Image src={bus} alt="" />
+                              <p className="bg-black-primary my-auto px-2.5 py-[3px] rounded-sm text-white text-[8px] font-semibold">
+                                {val.idBus}
+                              </p>
+                            </div>
+                            <p
+                              className={
+                                val.rute === "lurus"
+                                  ? "bg-red-primary my-auto px-3 py-[3px] rounded-sm text-white text-[8px] font-semibold"
+                                  : "bg-blue-primary my-auto px-3 py-[3px] rounded-sm text-white text-[8px] font-semibold"
+                              }
+                            >
+                              {val.rute === "lurus" ? (
+                                <>Rute Lurus</>
+                              ) : val.rute === "belok" ? (
+                                <>Rute Kanan</>
+                              ) : (
+                                <></>
+                              )}
+                            </p>
+                          </div>
+                          <p className="text-xs">{val.tanggal}</p>
                         </div>
-                        <p
-                          className={
-                            val.rute === "lurus"
-                              ? "bg-red-primary my-auto px-3 py-[3px] rounded-sm text-white text-[8px] font-semibold"
-                              : "bg-blue-primary my-auto px-3 py-[3px] rounded-sm text-white text-[8px] font-semibold"
-                          }
-                        >
-                          {val.rute === "lurus" ? (
-                            <>Rute Lurus</>
-                          ) : val.rute === "belok" ? (
-                            <>Rute Kanan</>
-                          ) : (
-                            <></>
-                          )}
-                        </p>
+                        <p className="my-auto text-xl font-bold">{val.waktu}</p>
                       </div>
-                      <p className="text-xs">{val.tanggal}</p>
-                    </div>
-                    <p className="my-auto text-xl font-bold">{val.waktu}</p>
-                  </div>
-                ))}
+                    ))
+                )}
+              </div>
             </div>
-          </div>
-
-          {/* looping hari selasa */}
-          <div>
-            <div className="flex space-x-2 w-full pb-2">
-              <p className="text-[10px] w-1/2">Selasa, 22 November 2022</p>
-              <div className="h-[1px] bg-[#D9D9D9] w-full my-auto"></div>
-            </div>
-
-            {/* looping jadwal berdasarkan hari */}
-
-            <div className="space-y-2">
-              {/* looping jadwal berdasarkan hari */}
-              {dataSelasa.map((val: any) => (
-                <div className="h-[65px] border-[1px] rounded-xl p-3 flex justify-between">
-                  <div className="flex flex-col justify-center space-y-1">
-                    <div className="flex flex-row space-x-3">
-                      <div className="flex space-x-1">
-                        <Image src={bus} alt="" />
-                        <p className="bg-black-primary my-auto px-2.5 py-[3px] rounded-sm text-white text-[8px] font-semibold">
-                          {val.idBus}
-                        </p>
-                      </div>
-                      <p
-                        className={
-                          val.rute === "lurus"
-                            ? "bg-red-primary my-auto px-3 py-[3px] rounded-sm text-white text-[8px] font-semibold"
-                            : "bg-blue-primary my-auto px-3 py-[3px] rounded-sm text-white text-[8px] font-semibold"
-                        }
-                      >
-                        {val.rute === "lurus" ? (
-                          <>Rute Lurus</>
-                        ) : val.rute === "belok" ? (
-                          <>Rute Kanan</>
-                        ) : (
-                          <></>
-                        )}
-                      </p>
-                    </div>
-                    <p className="text-xs">{val.tanggal}</p>
-                  </div>
-                  <p className="my-auto text-xl font-bold">{val.waktu}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* looping hari rabu */}
-          <div>
-            <div className="flex space-x-2 w-full pb-2">
-              <p className="text-[10px] w-1/2">Rabu, 23 November 2022</p>
-              <div className="h-[1px] bg-[#D9D9D9] w-full my-auto"></div>
-            </div>
-
-            {/* looping jadwal berdasarkan hari */}
-            <div className="space-y-2">
-              {/* looping jadwal berdasarkan hari */}
-              {dataRabu.map((val: any) => (
-                <div className="h-[65px] border-[1px] rounded-xl p-3 flex justify-between">
-                  <div className="flex flex-col justify-center space-y-1">
-                    <div className="flex flex-row space-x-3">
-                      <div className="flex space-x-1">
-                        <Image src={bus} alt="" />
-                        <p className="bg-black-primary my-auto px-2.5 py-[3px] rounded-sm text-white text-[8px] font-semibold">
-                          {val.idBus}
-                        </p>
-                      </div>
-                      <p
-                        className={
-                          val.rute === "lurus"
-                            ? "bg-red-primary my-auto px-3 py-[3px] rounded-sm text-white text-[8px] font-semibold"
-                            : "bg-blue-primary my-auto px-3 py-[3px] rounded-sm text-white text-[8px] font-semibold"
-                        }
-                      >
-                        {val.rute === "lurus" ? (
-                          <>Rute Lurus</>
-                        ) : val.rute === "belok" ? (
-                          <>Rute Kanan</>
-                        ) : (
-                          <></>
-                        )}
-                      </p>
-                    </div>
-                    <p className="text-xs">{val.tanggal}</p>
-                  </div>
-                  <p className="my-auto text-xl font-bold">{val.waktu}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* looping hari kamis */}
-          <div>
-            <div className="flex space-x-2 w-full pb-2">
-              <p className="text-[10px] w-1/2">Kamis, 24 November 2022</p>
-              <div className="h-[1px] bg-[#D9D9D9] w-full my-auto"></div>
-            </div>
-
-            {/* looping jadwal berdasarkan hari */}
-            <div className="space-y-2">
-              {/* looping jadwal berdasarkan hari */}
-              {dataKamis.map((val: any) => (
-                <div className="h-[65px] border-[1px] rounded-xl p-3 flex justify-between">
-                  <div className="flex flex-col justify-center space-y-1">
-                    <div className="flex flex-row space-x-3">
-                      <div className="flex space-x-1">
-                        <Image src={bus} alt="" />
-                        <p className="bg-black-primary my-auto px-2.5 py-[3px] rounded-sm text-white text-[8px] font-semibold">
-                          {val.idBus}
-                        </p>
-                      </div>
-                      <p
-                        className={
-                          val.rute === "lurus"
-                            ? "bg-red-primary my-auto px-3 py-[3px] rounded-sm text-white text-[8px] font-semibold"
-                            : "bg-blue-primary my-auto px-3 py-[3px] rounded-sm text-white text-[8px] font-semibold"
-                        }
-                      >
-                        {val.rute === "lurus" ? (
-                          <>Rute Lurus</>
-                        ) : val.rute === "belok" ? (
-                          <>Rute Kanan</>
-                        ) : (
-                          <></>
-                        )}
-                      </p>
-                    </div>
-                    <p className="text-xs">{val.tanggal}</p>
-                  </div>
-                  <p className="my-auto text-xl font-bold">{val.waktu}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* looping hari jumat */}
-          <div>
-            <div className="flex space-x-2 w-full pb-2">
-              <p className="text-[10px] w-1/2">Jumat, 25 November 2022</p>
-              <div className="h-[1px] bg-[#D9D9D9] w-full my-auto"></div>
-            </div>
-
-            {/* looping jadwal berdasarkan hari */}
-            <div className="space-y-2">
-              {/* looping jadwal berdasarkan hari */}
-              {dataJumat.map((val: any) => (
-                <div className="h-[65px] border-[1px] rounded-xl p-3 flex justify-between">
-                  <div className="flex flex-col justify-center space-y-1">
-                    <div className="flex flex-row space-x-3">
-                      <div className="flex space-x-1">
-                        <Image src={bus} alt="" />
-                        <p className="bg-black-primary my-auto px-2.5 py-[3px] rounded-sm text-white text-[8px] font-semibold">
-                          {val.idBus}
-                        </p>
-                      </div>
-                      <p
-                        className={
-                          val.rute === "lurus"
-                            ? "bg-red-primary my-auto px-3 py-[3px] rounded-sm text-white text-[8px] font-semibold"
-                            : "bg-blue-primary my-auto px-3 py-[3px] rounded-sm text-white text-[8px] font-semibold"
-                        }
-                      >
-                        {val.rute === "lurus" ? (
-                          <>Rute Lurus</>
-                        ) : val.rute === "belok" ? (
-                          <>Rute Kanan</>
-                        ) : (
-                          <></>
-                        )}
-                      </p>
-                    </div>
-                    <p className="text-xs">{val.tanggal}</p>
-                  </div>
-                  <p className="my-auto text-xl font-bold">{val.waktu}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* looping hari sabtu */}
-          <div>
-            <div className="flex space-x-2 w-full pb-2">
-              <p className="text-[10px] w-1/2">Sabtu, 26 November 2022</p>
-              <div className="h-[1px] bg-[#D9D9D9] w-full my-auto"></div>
-            </div>
-
-            {/* looping jadwal berdasarkan hari */}
-            <div className="space-y-2">
-              {/* looping jadwal berdasarkan hari */}
-              {dataSabtu.map((val: any) => (
-                <div className="h-[65px] border-[1px] rounded-xl p-3 flex justify-between">
-                  <div className="flex flex-col justify-center space-y-1">
-                    <div className="flex flex-row space-x-3">
-                      <div className="flex space-x-1">
-                        <Image src={bus} alt="" />
-                        <p className="bg-black-primary my-auto px-2.5 py-[3px] rounded-sm text-white text-[8px] font-semibold">
-                          {val.idBus}
-                        </p>
-                      </div>
-                      <p
-                        className={
-                          val.rute === "lurus"
-                            ? "bg-red-primary my-auto px-3 py-[3px] rounded-sm text-white text-[8px] font-semibold"
-                            : "bg-blue-primary my-auto px-3 py-[3px] rounded-sm text-white text-[8px] font-semibold"
-                        }
-                      >
-                        {val.rute === "lurus" ? (
-                          <>Rute Lurus</>
-                        ) : val.rute === "belok" ? (
-                          <>Rute Kanan</>
-                        ) : (
-                          <></>
-                        )}
-                      </p>
-                    </div>
-                    <p className="text-xs">{val.tanggal}</p>
-                  </div>
-                  <p className="my-auto text-xl font-bold">{val.waktu}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* looping hari minggu */}
-          <div>
-            <div className="flex space-x-2 w-full pb-2">
-              <p className="text-[10px] w-1/2">Minggu, 27 November 2022</p>
-              <div className="h-[1px] bg-[#D9D9D9] w-full my-auto"></div>
-            </div>
-
-            {/* looping jadwal berdasarkan hari */}
-            <div className="space-y-2">
-              {/* looping jadwal berdasarkan hari */}
-              {dataMinggu.map((val: any) => (
-                <div className="h-[65px] border-[1px] rounded-xl p-3 flex justify-between">
-                  <div className="flex flex-col justify-center space-y-1">
-                    <div className="flex flex-row space-x-3">
-                      <div className="flex space-x-1">
-                        <Image src={bus} alt="" />
-                        <p className="bg-black-primary my-auto px-2.5 py-[3px] rounded-sm text-white text-[8px] font-semibold">
-                          {val.idBus}
-                        </p>
-                      </div>
-                      <p
-                        className={
-                          val.rute === "lurus"
-                            ? "bg-red-primary my-auto px-3 py-[3px] rounded-sm text-white text-[8px] font-semibold"
-                            : "bg-blue-primary my-auto px-3 py-[3px] rounded-sm text-white text-[8px] font-semibold"
-                        }
-                      >
-                        {val.rute === "lurus" ? (
-                          <>Rute Lurus</>
-                        ) : val.rute === "belok" ? (
-                          <>Rute Kanan</>
-                        ) : (
-                          <></>
-                        )}
-                      </p>
-                    </div>
-                    <p className="text-xs">{val.tanggal}</p>
-                  </div>
-                  <p className="my-auto text-xl font-bold">{val.waktu}</p>
-                </div>
-              ))}
-            </div>
-          </div>
+          ))}
         </div>
 
         {isFilter === true ? (
@@ -453,44 +191,85 @@ export default function jadwalbikun() {
                         <div className="flex justify-between space-x-2">
                           <div className="w-1/2 flex flex-col space-y-1">
                             <p className="text-sm">Tanggal Mulai</p>
-                            <div className="rounded-full py-1 px-2 border-[1px] border-[#EAEAEA] bg-[#FAFAFA] text-xs">
-                              21/11/2022
-                            </div>
+                            <select
+                              className="rounded-full py-1 px-2 border-[1px] border-[#EAEAEA] bg-[#FAFAFA] text-xs"
+                              onChange={(e) => {
+                                setStartDate(parseInt(e.target.value));
+                                setEndDate(parseInt(e.target.value));
+                              }}
+                              value={startDate}
+                            >
+                              <option value={0}> 21/11/2022 </option>
+                              <option value={1}> 22/11/2022 </option>
+                              <option value={2}> 23/11/2022 </option>
+                              <option value={3}> 24/11/2022 </option>
+                              <option value={4}> 25/11/2022 </option>
+                              <option value={5}> 26/11/2022 </option>
+                              <option value={6}> 27/11/2022 </option>
+                            </select>
                           </div>
                           <div className="w-1/2 flex flex-col space-y-1">
                             <p className="text-sm">Tanggal Berakhir</p>
-                            <div className="rounded-full py-1 px-2 border-[1px] border-[#EAEAEA] bg-[#FAFAFA] text-xs">
-                              27/11/2022
-                            </div>
+                            <select className="rounded-full py-1 px-2 border-[1px] border-[#EAEAEA] bg-[#FAFAFA] text-xs"
+                              onChange={(e) => {
+                                setEndDate(parseInt(e.target.value));
+                              }}
+                            >
+                              {startDate &&
+                                [...Array(7 - startDate)].map((_, index) => (
+                                  <option value={startDate + index} key={index}>
+                                    {" "}
+                                    2{startDate + 1 + index}/11/2022{" "}
+                                  </option>
+                                ))}
+                            </select>
                           </div>
                         </div>
                         <div className=" flex flex-col space-y-1">
                           <p className="text-sm">Rentang Jam</p>
                           <div className="flex flex-row space-x-2">
-                            <div className="rounded-full py-1 px-5 font-semibold border-[1px] border-[#EAEAEA] bg-[#FAFAFA] text-xs">
+                            <div
+                              className={`rounded-full py-1 px-5 font-semibold border-[1px] border-[#EAEAEA] text-xs ${
+                                filterTime === "all"
+                                  ? "bg-blue-primary text-white"
+                                  : "bg-[#FAFAFA]"
+                              }`}
+                              onClick={() => {
+                                setFilterTime("all");
+                              }}
+                            >
                               All
                             </div>
                             <div
-                              className="rounded-full py-1 px-5 font-semibold border-[1px] border-[#EAEAEA] bg-[#FAFAFA] text-xs"
-                              // onClick={() => (
-
-                              // )}
+                              className={`rounded-full py-1 px-5 font-semibold border-[1px] border-[#EAEAEA] text-xs ${
+                                filterTime === "6-9"
+                                  ? "bg-blue-primary text-white"
+                                  : "bg-[#FAFAFA]"
+                              }`}
+                              onClick={() => {
+                                setFilterTime("6-9");
+                              }}
                             >
                               06 AM - 09 AM
                             </div>
-                            <div className="rounded-full py-1 px-5 font-semibold border-[1px] border-[#EAEAEA] bg-[#FAFAFA] text-xs">
+                            <div
+                              className={`rounded-full py-1 px-5 font-semibold border-[1px] border-[#EAEAEA] text-xs ${
+                                filterTime === "9-12"
+                                  ? "bg-blue-primary text-white"
+                                  : "bg-[#FAFAFA]"
+                              }`}
+                              onClick={() => {
+                                setFilterTime("9-12");
+                              }}
+                            >
                               09 AM - 12 AM
                             </div>
-                            {/* <div className="rounded-full py-1 px-5 font-semibold border-[1px] border-[#EAEAEA] bg-[#FAFAFA] text-xs">
-                              12 PM - 15 PM
-                            </div>
-                            <div className="rounded-full py-1 px-5 font-semibold border-[1px] border-[#EAEAEA] bg-[#FAFAFA] text-xs">
-                              15 PM - 18 PM
-                            </div> */}
                           </div>
                         </div>
                         <div className="flex justify-center">
-                          <button className="rounded-full bg-blue-primary">
+                          <button className="rounded-full bg-blue-primary" 
+                            onClick={clickApplyFilter}
+                          >
                             <p className="flex items-center justify-center font-medium text-base text-white h-8 px-24">
                               Terapkan
                             </p>
