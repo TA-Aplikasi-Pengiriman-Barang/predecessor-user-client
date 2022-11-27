@@ -48,6 +48,7 @@ import gambar3 from "../public/assets/image/donts/3.svg";
 import gambar4 from "../public/assets/image/donts/4.svg";
 import gambar5 from "../public/assets/image/donts/5.svg";
 import gambar6 from "../public/assets/image/donts/6.svg";
+import halteNotFound from "../public/assets/image/halteNotFoundBG.png"
 import L from "leaflet";
 import Link from "next/link";
 
@@ -176,10 +177,10 @@ export default function Map(props: MapProps) {
       });
   };
 
-  const handleSearch = async (e:any) => {
+  const handleSearch = async (e: any) => {
     const searchHalte = e.target.value;
-    setWordSearch(searchHalte)
-  }
+    setWordSearch(searchHalte);
+  };
 
   const DetailHalte = (park: any) => {
     fetchData(park);
@@ -392,7 +393,7 @@ export default function Map(props: MapProps) {
                       setIsHalte(true);
                     }}
                     onChange={() => {
-                      handleSearch(event)
+                      handleSearch(event);
                     }}
                     // onBlur={() => {
                     //   setIsHalte(false);
@@ -476,62 +477,87 @@ export default function Map(props: MapProps) {
                     </div>
                   </div>
 
+                  {allHalte.filter((e: any) =>
+                    e.name.toLowerCase().includes(wordSearch)
+                  ).length === 0 ? (
+                    <>
+                    <Image alt="" src={halteNotFound} /></>
+                  ) : (
+                    <></>
+                  )}
+
                   {/* konten */}
                   {isFilter === "ALL" ? (
                     <>
-                      {allHalte.filter((e:any) => e.name.includes(wordSearch)).map((val: any, index: any) => (
-                        <div
-                          className="flex flex-row space-x-3 my-auto border-[1px] py-2 px-3 rounded-xl h-16"
-                          onClick={() => {
-                            DetailHalteByID(val.id);
-                            setIsHalte(false);
-                            setActivePark(val.id);
-                            setIsHalteClicked(true);
-                            getHalteClickedById(val.id);
-                          }}
-                        >
-                          <div className="my-auto w-1/12 overflow-y-hidden flex flex-col space-y-1">
-                            <Image src={position} alt="" className="mx-auto" />
-                            <p className="text-[8px]">{val.distance} km</p>
-                          </div>
-                          <div className="flex-col flex-grow">
-                            <p className="text-base">{val.name}</p>
-                            <div className="flex space-x-2">
-                              {" "}
-                              <p className="text-xs text-[#959595]">
-                                Halte Berikutnya
-                              </p>
-                              <p className="text-xs text-[#959595]">{">"}</p>
-                              <p className="text-xs text-[#959595]">
-                                {val.next}
-                              </p>
+                      {allHalte
+                        .filter((e: any) =>
+                          e.name.toLowerCase().includes(wordSearch)
+                        )
+                        .map((val: any, index: any) => (
+                          <div>
+                            <div
+                              className="flex flex-row space-x-3 my-auto border-[1px] py-2 px-3 rounded-xl h-16"
+                              onClick={() => {
+                                DetailHalteByID(val.id);
+                                setIsHalte(false);
+                                setActivePark(val.id);
+                                setIsHalteClicked(true);
+                                getHalteClickedById(val.id);
+                              }}
+                            >
+                              <div className="my-auto w-1/12 overflow-y-hidden flex flex-col space-y-1">
+                                <Image
+                                  src={position}
+                                  alt=""
+                                  className="mx-auto"
+                                />
+                                <p className="text-[8px]">{val.distance} km</p>
+                              </div>
+                              <div className="flex-col flex-grow">
+                                <p className="text-base">{val.name}</p>
+                                <div className="flex space-x-2">
+                                  {" "}
+                                  <p className="text-xs text-[#959595]">
+                                    Halte Berikutnya
+                                  </p>
+                                  <p className="text-xs text-[#959595]">
+                                    {">"}
+                                  </p>
+                                  <p className="text-xs text-[#959595]">
+                                    {val.next}
+                                  </p>
+                                </div>
+                              </div>
+                              <div className="my-auto w-[70px]">
+                                <p
+                                  className={
+                                    val.route === "RED"
+                                      ? "bg-red-primary my-auto px-3 py-[3px] rounded-sm text-white text-[8px] font-semibold"
+                                      : "bg-blue-primary my-auto px-3 py-[3px] rounded-sm text-white text-[8px] font-semibold"
+                                  }
+                                >
+                                  {val.route === "RED" ? (
+                                    <>Rute Lurus</>
+                                  ) : val.route === "BLUE" ? (
+                                    <>Rute Kanan</>
+                                  ) : (
+                                    <></>
+                                  )}
+                                </p>
+                              </div>
                             </div>
                           </div>
-                          <div className="my-auto w-[70px]">
-                            <p
-                              className={
-                                val.route === "RED"
-                                  ? "bg-red-primary my-auto px-3 py-[3px] rounded-sm text-white text-[8px] font-semibold"
-                                  : "bg-blue-primary my-auto px-3 py-[3px] rounded-sm text-white text-[8px] font-semibold"
-                              }
-                            >
-                              {val.route === "RED" ? (
-                                <>Rute Lurus</>
-                              ) : val.route === "BLUE" ? (
-                                <>Rute Kanan</>
-                              ) : (
-                                <></>
-                              )}
-                            </p>
-                          </div>
-                        </div>
-                      ))}
+                        ))}
                     </>
-                  ) : (
+                  ) : isFilter === "RED" || isFilter === "BLUE" ? (
                     <>
                       {" "}
                       {allHalte
-                        .filter((e: any) => e.route === isFilter && e.name.includes(wordSearch))
+                        .filter(
+                          (e: any) =>
+                            e.route === isFilter &&
+                            e.name.toLowerCase().includes(wordSearch)
+                        )
                         .map((val: any, index: any) => (
                           <div
                             className="flex flex-row space-x-3 my-auto border-[1px] py-2 px-3 rounded-xl h-16"
@@ -584,191 +610,11 @@ export default function Map(props: MapProps) {
                           </div>
                         ))}
                     </>
+                  ) : (
+                    <>
+                      <p>as</p>
+                    </>
                   )}
-
-                  {/* <div className="flex flex-row space-x-2 my-auto border-[1px] py-2 px-3 rounded-xl h-16">
-                    <div className="my-auto flex flex-col space-y-1">
-                      <Image src={position} alt="" className="mx-auto" />
-                      <p className="text-[8px]">0.1 km</p>
-                    </div>
-                    <div className="flex-col flex-grow">
-                      <p className="text-md">Asrama</p>
-                      <div className="flex space-x-2">
-                        {" "}
-                        <p className="text-xs text-[#959595]">
-                          Halte Berikutnya
-                        </p>
-                        <p className="text-xs text-[#959595]">{">"}</p>
-                        <p className="text-xs text-[#959595]">Stasiun UI</p>
-                      </div>
-                    </div>
-                    <div className="my-auto">
-                      <p className="bg-red-primary my-auto px-3 py-[3px] rounded-sm text-white text-[8px] font-semibold">
-                        Rute Lurus
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="flex flex-row space-x-2 my-auto border-[1px] py-2 px-3 rounded-xl h-16">
-                    <div className="my-auto flex flex-col space-y-1">
-                      <Image src={position} alt="" className="mx-auto" />
-                      <p className="text-[8px]">0.1 km</p>
-                    </div>
-                    <div className="flex-col flex-grow">
-                      <p className="text-md">Asrama</p>
-                      <div className="flex space-x-2">
-                        {" "}
-                        <p className="text-xs text-[#959595]">
-                          Halte Berikutnya
-                        </p>
-                        <p className="text-xs text-[#959595]">{">"}</p>
-                        <p className="text-xs text-[#959595]">Stasiun UI</p>
-                      </div>
-                    </div>
-                    <div className="my-auto">
-                      <p className="bg-blue-primary my-auto px-3 py-[3px] rounded-sm text-white text-[8px] font-semibold">
-                        Rute Kanan
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="flex flex-row space-x-2 my-auto border-[1px] py-2 px-3 rounded-xl h-16">
-                    <div className="my-auto flex flex-col space-y-1">
-                      <Image src={position} alt="" className="mx-auto" />
-                      <p className="text-[8px]">0.1 km</p>
-                    </div>
-                    <div className="flex-col flex-grow">
-                      <p className="text-md">Asrama</p>
-                      <div className="flex space-x-2">
-                        {" "}
-                        <p className="text-xs text-[#959595]">
-                          Halte Berikutnya
-                        </p>
-                        <p className="text-xs text-[#959595]">{">"}</p>
-                        <p className="text-xs text-[#959595]">Stasiun UI</p>
-                      </div>
-                    </div>
-                    <div className="my-auto">
-                      <p className="bg-red-primary my-auto px-3 py-[3px] rounded-sm text-white text-[8px] font-semibold">
-                        Rute Lurus
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="flex flex-row space-x-2 my-auto border-[1px] py-2 px-3 rounded-xl h-16">
-                    <div className="my-auto flex flex-col space-y-1">
-                      <Image src={position} alt="" className="mx-auto" />
-                      <p className="text-[8px]">0.1 km</p>
-                    </div>
-                    <div className="flex-col flex-grow">
-                      <p className="text-md">Asrama</p>
-                      <div className="flex space-x-2">
-                        {" "}
-                        <p className="text-xs text-[#959595]">
-                          Halte Berikutnya
-                        </p>
-                        <p className="text-xs text-[#959595]">{">"}</p>
-                        <p className="text-xs text-[#959595]">Stasiun UI</p>
-                      </div>
-                    </div>
-                    <div className="my-auto">
-                      <p className="bg-red-primary my-auto px-3 py-[3px] rounded-sm text-white text-[8px] font-semibold">
-                        Rute Lurus
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="flex flex-row space-x-2 my-auto border-[1px] py-2 px-3 rounded-xl h-16">
-                    <div className="my-auto flex flex-col space-y-1">
-                      <Image src={position} alt="" className="mx-auto" />
-                      <p className="text-[8px]">0.1 km</p>
-                    </div>
-                    <div className="flex-col flex-grow">
-                      <p className="text-md">Asrama</p>
-                      <div className="flex space-x-2">
-                        {" "}
-                        <p className="text-xs text-[#959595]">
-                          Halte Berikutnya
-                        </p>
-                        <p className="text-xs text-[#959595]">{">"}</p>
-                        <p className="text-xs text-[#959595]">Stasiun UI</p>
-                      </div>
-                    </div>
-                    <div className="my-auto">
-                      <p className="bg-red-primary my-auto px-3 py-[3px] rounded-sm text-white text-[8px] font-semibold">
-                        Rute Lurus
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="flex flex-row space-x-2 my-auto border-[1px] py-2 px-3 rounded-xl h-16">
-                    <div className="my-auto flex flex-col space-y-1">
-                      <Image src={position} alt="" className="mx-auto" />
-                      <p className="text-[8px]">0.1 km</p>
-                    </div>
-                    <div className="flex-col flex-grow">
-                      <p className="text-md">Asrama</p>
-                      <div className="flex space-x-2">
-                        {" "}
-                        <p className="text-xs text-[#959595]">
-                          Halte Berikutnya
-                        </p>
-                        <p className="text-xs text-[#959595]">{">"}</p>
-                        <p className="text-xs text-[#959595]">Stasiun UI</p>
-                      </div>
-                    </div>
-                    <div className="my-auto">
-                      <p className="bg-red-primary my-auto px-3 py-[3px] rounded-sm text-white text-[8px] font-semibold">
-                        Rute Lurus
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="flex flex-row space-x-2 my-auto border-[1px] py-2 px-3 rounded-xl h-16">
-                    <div className="my-auto flex flex-col space-y-1">
-                      <Image src={position} alt="" className="mx-auto" />
-                      <p className="text-[8px]">0.1 km</p>
-                    </div>
-                    <div className="flex-col flex-grow">
-                      <p className="text-md">Asrama</p>
-                      <div className="flex space-x-2">
-                        {" "}
-                        <p className="text-xs text-[#959595]">
-                          Halte Berikutnya
-                        </p>
-                        <p className="text-xs text-[#959595]">{">"}</p>
-                        <p className="text-xs text-[#959595]">Stasiun UI</p>
-                      </div>
-                    </div>
-                    <div className="my-auto">
-                      <p className="bg-blue-primary my-auto px-3 py-[3px] rounded-sm text-white text-[8px] font-semibold">
-                        Rute Kanan
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="flex flex-row space-x-2 my-auto border-[1px] py-2 px-3 rounded-xl h-16">
-                    <div className="my-auto flex flex-col space-y-1">
-                      <Image src={position} alt="" className="mx-auto" />
-                      <p className="text-[8px]">0.1 km</p>
-                    </div>
-                    <div className="flex-col flex-grow">
-                      <p className="text-md">Asrama</p>
-                      <div className="flex space-x-2">
-                        {" "}
-                        <p className="text-xs text-[#959595]">
-                          Halte Berikutnya
-                        </p>
-                        <p className="text-xs text-[#959595]">{">"}</p>
-                        <p className="text-xs text-[#959595]">Stasiun UI</p>
-                      </div>
-                    </div>
-                    <div className="my-auto">
-                      <p className="bg-blue-primary my-auto px-3 py-[3px] rounded-sm text-white text-[8px] font-semibold">
-                        Rute Kanan
-                      </p>
-                    </div>
-                  </div> */}
                 </div>
               </div>
             </div>

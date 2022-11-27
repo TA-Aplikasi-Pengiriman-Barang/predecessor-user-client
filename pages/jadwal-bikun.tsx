@@ -4,12 +4,44 @@ import bus from "../public/assets/icon/bus/busJadwal.svg";
 import location from "../public/assets/icon/location.svg";
 import calendar from "../public/assets/icon/calendar.svg";
 import fixJadwal from "../data/fixJadwal.json";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Draggable from "react-draggable";
 
 export default function jadwalbikun() {
   const [isFilter, setIsFilter] = useState(false);
+  const [searchWord, setSearchWord] = useState("");
+  // const [dataSenin, setDataSenin] = useState([])
+  // const [dataSelasa, setDataSelasa] = useState([])
+  // const [dataRabu, setDataRabu] = useState([])
+  // const [dataKamis, setDataKamis] = useState([])
+  // const [dataJumat, setDataJumat] = useState([])
+  // const [dataSabtu, setDataSabtu] = useState([])
+  // const [dataMinggu, setDataMinggu] = useState([])
 
+  // useEffect(() => {
+  //   const dataSenin = fixJadwal.data.filter((e: any) =>
+  //     e.tanggal.includes("Senin")
+  //   );
+  //   const dataSelasa = fixJadwal.data.filter((e: any) =>
+  //     e.tanggal.includes("Selasa")
+  //   );
+  //   const dataRabu = fixJadwal.data.filter((e: any) =>
+  //     e.tanggal.includes("Rabu")
+  //   );
+  //   const dataKamis = fixJadwal.data.filter((e: any) =>
+  //     e.tanggal.includes("Kamis")
+  //   );
+  //   const dataJumat = fixJadwal.data.filter((e: any) =>
+  //     e.tanggal.includes("Jumat")
+  //   );
+  //   const dataSabtu = fixJadwal.data.filter((e: any) =>
+  //     e.tanggal.includes("Sabtu")
+  //   );
+  //   const dataMinggu = fixJadwal.data.filter((e: any) =>
+  //     e.tanggal.includes("Minggu")
+  //   );
+
+  // }, [1]);
   const dataSenin = fixJadwal.data.filter((e: any) =>
     e.tanggal.includes("Senin")
   );
@@ -32,6 +64,11 @@ export default function jadwalbikun() {
     e.tanggal.includes("Minggu")
   );
 
+  const handleSearch = async (e: any) => {
+    const searchHalte = e.target.value;
+    setSearchWord(searchHalte);
+  };
+
   //   console.log(fixJadwal.data.filter((e: any) =>
   //   e.waktu.includes("06:") ||
   //   e.waktu.includes("07:") ||
@@ -51,6 +88,9 @@ export default function jadwalbikun() {
                 type="text"
                 className="w-full  bg-[#FAFAFA] focus:outline-none text-black"
                 placeholder="Cari halte"
+                // onChange={() => {
+                //   handleSearch(event);
+                // }}
               />
             </div>
             <div
@@ -79,37 +119,39 @@ export default function jadwalbikun() {
 
             <div className="space-y-2">
               {/* looping jadwal berdasarkan hari */}
-              {dataSenin.map((val: any) => (
-                <div className="h-[65px] border-[1px] rounded-xl p-3 flex justify-between">
-                  <div className="flex flex-col justify-center space-y-1">
-                    <div className="flex flex-row space-x-3">
-                      <div className="flex space-x-1">
-                        <Image src={bus} alt="" />
-                        <p className="bg-black-primary my-auto px-2.5 py-[3px] rounded-sm text-white text-[8px] font-semibold">
-                          {val.idBus}
+              {dataSenin
+                .filter((e: any) => e.halte.includes(searchWord))
+                .map((val: any) => (
+                  <div className="h-[65px] border-[1px] rounded-xl p-3 flex justify-between">
+                    <div className="flex flex-col justify-center space-y-1">
+                      <div className="flex flex-row space-x-3">
+                        <div className="flex space-x-1">
+                          <Image src={bus} alt="" />
+                          <p className="bg-black-primary my-auto px-2.5 py-[3px] rounded-sm text-white text-[8px] font-semibold">
+                            {val.idBus}
+                          </p>
+                        </div>
+                        <p
+                          className={
+                            val.rute === "lurus"
+                              ? "bg-red-primary my-auto px-3 py-[3px] rounded-sm text-white text-[8px] font-semibold"
+                              : "bg-blue-primary my-auto px-3 py-[3px] rounded-sm text-white text-[8px] font-semibold"
+                          }
+                        >
+                          {val.rute === "lurus" ? (
+                            <>Rute Lurus</>
+                          ) : val.rute === "belok" ? (
+                            <>Rute Kanan</>
+                          ) : (
+                            <></>
+                          )}
                         </p>
                       </div>
-                      <p
-                        className={
-                          val.rute === "lurus"
-                            ? "bg-red-primary my-auto px-3 py-[3px] rounded-sm text-white text-[8px] font-semibold"
-                            : "bg-blue-primary my-auto px-3 py-[3px] rounded-sm text-white text-[8px] font-semibold"
-                        }
-                      >
-                        {val.rute === "lurus" ? (
-                          <>Rute Lurus</>
-                        ) : val.rute === "belok" ? (
-                          <>Rute Kanan</>
-                        ) : (
-                          <></>
-                        )}
-                      </p>
+                      <p className="text-xs">{val.tanggal}</p>
                     </div>
-                    <p className="text-xs">{val.tanggal}</p>
+                    <p className="my-auto text-xl font-bold">{val.waktu}</p>
                   </div>
-                  <p className="my-auto text-xl font-bold">{val.waktu}</p>
-                </div>
-              ))}
+                ))}
             </div>
           </div>
 
@@ -418,7 +460,7 @@ export default function jadwalbikun() {
                           <div className="w-1/2 flex flex-col space-y-1">
                             <p className="text-sm">Tanggal Berakhir</p>
                             <div className="rounded-full py-1 px-2 border-[1px] border-[#EAEAEA] bg-[#FAFAFA] text-xs">
-                            27/11/2022
+                              27/11/2022
                             </div>
                           </div>
                         </div>
