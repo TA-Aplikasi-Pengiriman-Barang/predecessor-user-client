@@ -48,7 +48,7 @@ import gambar3 from "../public/assets/image/donts/3.svg";
 import gambar4 from "../public/assets/image/donts/4.svg";
 import gambar5 from "../public/assets/image/donts/5.svg";
 import gambar6 from "../public/assets/image/donts/6.svg";
-import halteNotFound from "../public/assets/image/halteNotFoundBG.png"
+import halteNotFound from "../public/assets/image/halteNotFoundBG.svg";
 import L from "leaflet";
 import Link from "next/link";
 
@@ -481,7 +481,10 @@ export default function Map(props: MapProps) {
                     e.name.toLowerCase().includes(wordSearch)
                   ).length === 0 ? (
                     <>
-                    <Image alt="" src={halteNotFound} /></>
+                      <div className="flex justify-center">
+                        <Image alt="" src={halteNotFound} />
+                      </div>
+                    </>
                   ) : (
                     <></>
                   )}
@@ -505,13 +508,15 @@ export default function Map(props: MapProps) {
                                 getHalteClickedById(val.id);
                               }}
                             >
-                              <div className="my-auto w-1/12 overflow-y-hidden flex flex-col space-y-1">
+                              <div className="my-auto w-8 overflow-y-hidden flex flex-col space-y-1">
                                 <Image
                                   src={position}
                                   alt=""
                                   className="mx-auto"
                                 />
-                                <p className="text-[8px]">{val.distance} km</p>
+                                <p className="text-[8px] text-center">
+                                  {val.distance} km
+                                </p>
                               </div>
                               <div className="flex-col flex-grow">
                                 <p className="text-base">{val.name}</p>
@@ -569,13 +574,15 @@ export default function Map(props: MapProps) {
                               getHalteClickedById(val.id);
                             }}
                           >
-                            <div className="my-auto w-1/12 overflow-y-hidden flex flex-col space-y-1">
+                            <div className="my-auto w-8 overflow-y-hidden flex flex-col space-y-1">
                               <Image
                                 src={position}
                                 alt=""
                                 className="mx-auto"
                               />
-                              <p className="text-[8px]">{val.distance} km</p>
+                              <p className="text-[8px] text-center">
+                                {val.distance} km
+                              </p>
                             </div>
                             <div className="flex-col flex-grow">
                               <p className="text-base">{val.name}</p>
@@ -612,7 +619,7 @@ export default function Map(props: MapProps) {
                     </>
                   ) : (
                     <>
-                      <p>as</p>
+                      <p></p>
                     </>
                   )}
                 </div>

@@ -424,7 +424,7 @@ export default function jadwalbikun() {
         {isFilter === true ? (
           <>
             {" "}
-            <div className="absolute bottom-[40%] w-full">
+            <div className="absolute bottom-[40%] w-full drop-shadow-xl">
               <div id="front1" className="h-screen">
                 <Draggable
                   axis="y"

@@ -102,22 +102,6 @@ export default function faq() {
           className="collapse collapse-arrow text-black-primary"
         >
           <div className="collapse-title text-base font-semibold">
-            <p>Apakah masyarakat umum dapat menggunakan bikun?</p>
-          </div>
-          <div className="collapse-content">
-            <p className="text-[#868686] text-[14px]">
-              Iya, sivitas akademika UI maupun masyarakat umum dapat menggunakan
-              layanan bikun.
-            </p>
-          </div>
-          <hr />
-        </div>
-
-        <div
-          tabIndex={0}
-          className="collapse collapse-arrow text-black-primary"
-        >
-          <div className="collapse-title text-base font-semibold">
             <p>Bagaimana jam operasional Bikun?</p>
           </div>
           <div className="collapse-content">

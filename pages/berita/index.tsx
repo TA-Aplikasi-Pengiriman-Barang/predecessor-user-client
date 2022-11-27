@@ -22,7 +22,7 @@ enum FilterType {
 
 export default function berita(data: Data) {
   const isExist = data.data.length > 0;
-
+  
   const [filter, setFilter] = useState<FilterType>(FilterType.ALL);
 
   const AllMapper = (dt: NewsData[]) => {
@@ -42,6 +42,7 @@ export default function berita(data: Data) {
       (d: NewsData) =>
         new Date(d.createdAt).toDateString() == new Date().toDateString()
     );
+    
     return dt.map((d: NewsData) => (
       <News
         key={d.id}
@@ -89,10 +90,10 @@ export default function berita(data: Data) {
           >
             <p
               className={`${
-                filter == FilterType.ALL ? "text-white" : "text-black"
+                filter == FilterType.ALL ? "text-white text-xs" : "text-black text-xs"
               }`}
             >
-              All
+              Semua
             </p>
           </div>
           <div
@@ -103,10 +104,10 @@ export default function berita(data: Data) {
           >
             <p
               className={`${
-                filter == FilterType.TODAY ? "text-white" : "text-black"
+                filter == FilterType.TODAY ? "text-white text-xs" : "text-black text-xs"
               }`}
             >
-              Today
+              Hari ini
             </p>
           </div>
           <div
@@ -119,10 +120,10 @@ export default function berita(data: Data) {
           >
             <p
               className={`${
-                filter == FilterType.LAST_7_DAY ? "text-white" : "text-black"
+                filter == FilterType.LAST_7_DAY ? "text-white text-xs" : "text-black text-xs"
               }`}
             >
-              Last 7 days
+              7 Hari Terakhir
             </p>
           </div>
         </div>
