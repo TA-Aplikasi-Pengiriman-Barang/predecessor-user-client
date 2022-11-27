@@ -1,6 +1,6 @@
 import Layout from "../../components/Layout";
 import beritaNotFoundBG from "../../public/assets/image/beritaNotFoundBG.svg";
-import News from "../../components/News";
+import News, { NotFoundNews } from "../../components/News";
 import { useState } from "react";
 
 interface NewsData {
@@ -21,11 +21,12 @@ enum FilterType {
 }
 
 export default function berita(data: Data) {
-  const isExist = data.data.length > 0;
-  
   const [filter, setFilter] = useState<FilterType>(FilterType.ALL);
 
   const AllMapper = (dt: NewsData[]) => {
+    if (dt.length == 0) {
+      return <NotFoundNews />;
+    }
     return dt.map((d: NewsData) => (
       <News
         key={d.id}
@@ -42,7 +43,9 @@ export default function berita(data: Data) {
       (d: NewsData) =>
         new Date(d.createdAt).toDateString() == new Date().toDateString()
     );
-    
+    if (dt.length == 0) {
+      return <NotFoundNews />;
+    }
     return dt.map((d: NewsData) => (
       <News
         key={d.id}
@@ -62,6 +65,10 @@ export default function berita(data: Data) {
       const daysBetweenDates = msBetweenDates / (24 * 60 * 60 * 1000);
       return daysBetweenDates < 7;
     });
+
+    if (dt.length == 0) {
+      return <NotFoundNews />;
+    }
 
     return dt.map((d: NewsData) => (
       <News
@@ -128,26 +135,15 @@ export default function berita(data: Data) {
           </div>
         </div>
 
-        {isExist ? (
-          <>
-            {/* konten */}
-            <div className="flex flex-col space-y-4 px-4 bg-white">
-              {/* loop */}
-              {filter == FilterType.ALL
-                ? AllMapper(data.data)
-                : filter == FilterType.TODAY
-                ? TodayMapper(data.data)
-                : Last7DayMapper(data.data)}
-            </div>
-          </>
-        ) : (
-          <>
-            <div
-              className="h-full bg-white pt-6 bg-no-repeat bg-[top]"
-              style={{ backgroundImage: `url(${beritaNotFoundBG.src})` }}
-            ></div>
-          </>
-        )}
+        {/* konten */}
+        <div className="flex flex-col space-y-4 px-4 bg-white h-full">
+          {/* loop */}
+          {filter == FilterType.ALL
+            ? AllMapper(data.data)
+            : filter == FilterType.TODAY
+            ? TodayMapper(data.data)
+            : Last7DayMapper(data.data)}
+        </div>
       </div>
     </Layout>
   );

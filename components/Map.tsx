@@ -22,6 +22,7 @@ import RoutineMachine from "./RoutineMachine";
 import RoutineMachine2 from "./RoutineMachine2";
 import RoutineMachine3 from "./RoutineMachine3";
 import RoutineMachine4 from "./RoutineMachine4";
+import RoutineMachine5 from "./RoutineMachine4";
 import { useRouter } from "next/router";
 import { getCookies } from "cookies-next";
 import userLoc from "../public/assets/icon/userLoc.svg";
@@ -51,6 +52,8 @@ import gambar6 from "../public/assets/image/donts/6.svg";
 import halteNotFound from "../public/assets/image/halteNotFoundBG.svg";
 import L from "leaflet";
 import Link from "next/link";
+import "leaflet-routing-machine";
+import { createControlComponent } from "@react-leaflet/core";
 
 interface MapProps {
   children: ReactNode;
@@ -92,6 +95,32 @@ export default function Map(props: MapProps) {
     setIsHalteClicked(false);
     const message = JSON.parse(evt.data);
     setBus(message);
+    // setTimeout(function () {
+      
+    //   marker.setLatLng([coord.lat, coord.lng]);
+    // }, 100 * index);
+    // console.log(RoutineMachine5([2,3]))
+
+    // map.on('click', function (e) {
+    // 	console.log(e)
+    // 	var newMarker = L.marker([e.latlng.lat, e.latlng.lng]).addTo(map);
+    // 	L.Routing.control({
+    // 		waypoints: [
+    // 			L.latLng(28.2380, 83.9956),
+    // 			L.latLng(e.latlng.lat, e.latlng.lng)
+    // 		]
+    // 	}).on('routesfound', function (e) {
+    // 		var routes = e.routes;
+    // 		console.log(routes);
+
+    // 		e.routes[0].coordinates.forEach(function (coord, index) {
+    // 			setTimeout(function () {
+    // 				marker.setLatLng([coord.lat, coord.lng]);
+    // 			}, 100 * index)
+    // 		})
+
+    // 	}).addTo(map);
+    // });
   };
 
   // Check already onboarding
@@ -204,8 +233,10 @@ export default function Map(props: MapProps) {
               attributionControl={false}
             >
               <TileLayer
-                attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                attribution= '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
+                // url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                // url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager_labels_under/{z}/{x}/{y}{r}.png"
+                url="https://tiles.stadiamaps.com/tiles/outdoors/{z}/{x}/{y}{r}.png"
               />
               {i === 0 ? (
                 <>
