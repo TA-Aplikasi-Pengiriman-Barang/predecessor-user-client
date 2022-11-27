@@ -3,6 +3,7 @@ import Image from "next/image";
 import beritaIcon from "../public/assets/icon/berita.svg";
 import schedule from "../public/assets/icon/schedule.svg";
 import chevron_right from "../public/assets/icon/chevron_right.svg";
+import beritaNotFoundBG from "../public/assets/image/beritaNotFoundBG.svg";
 
 interface NewsProps {
   title: string;
@@ -34,5 +35,14 @@ export default function News({ title, detail, createdAt, id }: NewsProps) {
         </div>
       </div>
     </Link>
+  );
+}
+
+export function NotFoundNews() {
+  return (
+    <div
+      className="h-full bg-white pt-6 bg-no-repeat bg-[top]"
+      style={{ backgroundImage: `url(${beritaNotFoundBG.src})` }}
+    ></div>
   );
 }
