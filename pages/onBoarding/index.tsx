@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import onBoarding1 from "../../public/assets/image/onBoarding/onBoarding1.svg";
 import onBoarding2 from "../../public/assets/image/onBoarding/onBoarding2.svg";
 import onBoarding3 from "../../public/assets/image/onBoarding/onBoarding3.svg";
-import onBoarding4 from "../../public/assets/image/onBoarding/onBoarding4.svg";
+import onBoarding4 from "../../public/assets/image/onBoarding/onBoarding4.png";
 import onBoarding5 from "../../public/assets/image/onBoarding/onBoarding5.svg";
 import bikunku from "../../public/assets/icon/bikunku.svg";
 import Image from "next/image";

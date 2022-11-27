@@ -72,6 +72,7 @@ export default function Map(props: MapProps) {
   const [isDonts, setIsDonts] = useState(true);
   const [isHalte, setIsHalte] = useState(false);
   const [isFilter, setIsFilter] = useState("ALL");
+  const [wordSearch, setWordSearch] = useState("");
   const [i, setI] = useState(0);
   const [detailHalte, setDetailHalte] = useState<any>();
   const [allHalte, setAllHalte] = useState<any>([]);
@@ -174,6 +175,11 @@ export default function Map(props: MapProps) {
         setAllHalte(data.data.terminal);
       });
   };
+
+  const handleSearch = async (e:any) => {
+    const searchHalte = e.target.value;
+    setWordSearch(searchHalte)
+  }
 
   const DetailHalte = (park: any) => {
     fetchData(park);
@@ -385,6 +391,9 @@ export default function Map(props: MapProps) {
                     onFocus={() => {
                       setIsHalte(true);
                     }}
+                    onChange={() => {
+                      handleSearch(event)
+                    }}
                     // onBlur={() => {
                     //   setIsHalte(false);
                     // }}
@@ -470,7 +479,7 @@ export default function Map(props: MapProps) {
                   {/* konten */}
                   {isFilter === "ALL" ? (
                     <>
-                      {allHalte.map((val: any, index: any) => (
+                      {allHalte.filter((e:any) => e.name.includes(wordSearch)).map((val: any, index: any) => (
                         <div
                           className="flex flex-row space-x-3 my-auto border-[1px] py-2 px-3 rounded-xl h-16"
                           onClick={() => {
@@ -522,7 +531,7 @@ export default function Map(props: MapProps) {
                     <>
                       {" "}
                       {allHalte
-                        .filter((e: any) => e.route === isFilter)
+                        .filter((e: any) => e.route === isFilter && e.name.includes(wordSearch))
                         .map((val: any, index: any) => (
                           <div
                             className="flex flex-row space-x-3 my-auto border-[1px] py-2 px-3 rounded-xl h-16"
