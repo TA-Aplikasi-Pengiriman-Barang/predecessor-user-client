@@ -116,6 +116,7 @@ export default function Map(props: MapProps) {
     setIsHalteClicked(false);
     const message = JSON.parse(evt.data);
     setBus(message);
+    console.log(message)
   };
 
   // Check already onboarding
