@@ -16,7 +16,17 @@ import halteAll from "../data/halteAll.json";
 import iconRed from "./IconRed";
 import iconBlue from "./IconBlue";
 import iconMix from "./IconMix";
-import iconBus from "./IconBus";
+import iconBus from "./iconBus/IconBus";
+import iconBus1 from "./iconBus/IconBus1";
+import iconBus2 from "./iconBus/IconBus2";
+import iconBus3 from "./iconBus/IconBus3";
+import iconBus4 from "./iconBus/IconBus4";
+import iconBus5 from "./iconBus/IconBus5";
+import iconBus6 from "./iconBus/IconBus6";
+import iconBus7 from "./iconBus/IconBus7";
+import iconBus8 from "./iconBus/IconBus8";
+import iconBus9 from "./iconBus/IconBus9";
+import iconBus10 from "./iconBus/IconBus10";
 import styles from "./Map.module.css";
 import RoutineMachine from "./RoutineMachine";
 import RoutineMachine2 from "./RoutineMachine2";
@@ -49,6 +59,17 @@ import gambar3 from "../public/assets/image/donts/3.svg";
 import gambar4 from "../public/assets/image/donts/4.svg";
 import gambar5 from "../public/assets/image/donts/5.svg";
 import gambar6 from "../public/assets/image/donts/6.svg";
+import bus from "../public/assets/image/bus/bus.svg";
+import bus1 from "../public/assets/image/bus/bus1.svg";
+import bus2 from "../public/assets/image/bus/bus2.svg";
+import bus3 from "../public/assets/image/bus/bus3.svg";
+import bus4 from "../public/assets/image/bus/bus4.svg";
+import bus5 from "../public/assets/image/bus/bus5.svg";
+import bus6 from "../public/assets/image/bus/bus6.svg";
+import bus7 from "../public/assets/image/bus/bus7.svg";
+import bus8 from "../public/assets/image/bus/bus8.svg";
+import bus9 from "../public/assets/image/bus/bus9.svg";
+import bus10 from "../public/assets/image/bus/bus10.svg";
 import halteNotFound from "../public/assets/image/halteNotFoundBG.svg";
 import L from "leaflet";
 import Link from "next/link";
@@ -95,32 +116,6 @@ export default function Map(props: MapProps) {
     setIsHalteClicked(false);
     const message = JSON.parse(evt.data);
     setBus(message);
-    // setTimeout(function () {
-      
-    //   marker.setLatLng([coord.lat, coord.lng]);
-    // }, 100 * index);
-    // console.log(RoutineMachine5([2,3]))
-
-    // map.on('click', function (e) {
-    // 	console.log(e)
-    // 	var newMarker = L.marker([e.latlng.lat, e.latlng.lng]).addTo(map);
-    // 	L.Routing.control({
-    // 		waypoints: [
-    // 			L.latLng(28.2380, 83.9956),
-    // 			L.latLng(e.latlng.lat, e.latlng.lng)
-    // 		]
-    // 	}).on('routesfound', function (e) {
-    // 		var routes = e.routes;
-    // 		console.log(routes);
-
-    // 		e.routes[0].coordinates.forEach(function (coord, index) {
-    // 			setTimeout(function () {
-    // 				marker.setLatLng([coord.lat, coord.lng]);
-    // 			}, 100 * index)
-    // 		})
-
-    // 	}).addTo(map);
-    // });
   };
 
   // Check already onboarding
@@ -233,7 +228,7 @@ export default function Map(props: MapProps) {
               attributionControl={false}
             >
               <TileLayer
-                attribution= '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
+                attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 // url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager_labels_under/{z}/{x}/{y}{r}.png"
                 // url="https://tiles.stadiamaps.com/tiles/outdoors/{z}/{x}/{y}{r}.png"
@@ -399,10 +394,110 @@ export default function Map(props: MapProps) {
                 <></>
               )}
               {bus.map((val: any, index) => (
-                <Marker
-                  position={[val?.lat, val?.long]}
-                  icon={iconBus}
-                ></Marker>
+                <>
+                  {val?.number === 0 ? (
+                    <>
+                      {" "}
+                      <Marker
+                        position={[val?.lat, val?.long]}
+                        icon={iconBus}
+                      ></Marker>
+                    </>
+                  ) : val?.number === 1 ? (
+                    <>
+                      {" "}
+                      <Marker
+                        position={[val?.lat, val?.long]}
+                        icon={iconBus1}
+                      ></Marker>
+                    </>
+                  ) : val?.number === 2 ? (
+                    <>
+                      {" "}
+                      <Marker
+                        position={[val?.lat, val?.long]}
+                        icon={iconBus2}
+                      ></Marker>
+                    </>
+                  ) : val?.number === 3 ? (
+                    <>
+                      {" "}
+                      <Marker
+                        position={[val?.lat, val?.long]}
+                        icon={iconBus3}
+                      ></Marker>
+                    </>
+                  ) : val?.number === 4 ? (
+                    <>
+                      {" "}
+                      <Marker
+                        position={[val?.lat, val?.long]}
+                        icon={iconBus4}
+                      ></Marker>
+                    </>
+                  ) : val?.number === 5 ? (
+                    <>
+                      {" "}
+                      <Marker
+                        position={[val?.lat, val?.long]}
+                        icon={iconBus5}
+                      ></Marker>
+                    </>
+                  ) : val?.number === 6 ? (
+                    <>
+                      {" "}
+                      <Marker
+                        position={[val?.lat, val?.long]}
+                        icon={iconBus6}
+                      ></Marker>
+                    </>
+                  ) : val?.number === 7 ? (
+                    <>
+                      {" "}
+                      <Marker
+                        position={[val?.lat, val?.long]}
+                        icon={iconBus7}
+                      ></Marker>
+                    </>
+                  ) : val?.number === 8 ? (
+                    <>
+                      {" "}
+                      <Marker
+                        position={[val?.lat, val?.long]}
+                        icon={iconBus1}
+                      ></Marker>
+                    </>
+                  ) : val?.number === 8 ? (
+                    <>
+                      {" "}
+                      <Marker
+                        position={[val?.lat, val?.long]}
+                        icon={iconBus1}
+                      ></Marker>
+                    </>
+                  ) : val?.number === 9 ? (
+                    <>
+                      {" "}
+                      <Marker
+                        position={[val?.lat, val?.long]}
+                        icon={iconBus9}
+                      ></Marker>
+                    </>
+                  ) : val?.number === 10 ? (
+                    <>
+                      {" "}
+                      <Marker
+                        position={[val?.lat, val?.long]}
+                        icon={iconBus10}
+                      ></Marker>
+                    </>
+                  ) : (
+                    <>                      <Marker
+                    position={[val?.lat, val?.long]}
+                    icon={iconBus}
+                  ></Marker></>
+                  )}
+                </>
               ))}
               <Marker position={[lat, lng]}></Marker>
               {isCentered && <RecenterAutomatically lat={lat} lng={lng} />}
