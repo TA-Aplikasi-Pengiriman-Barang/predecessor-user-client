@@ -193,17 +193,12 @@ export default function Map(props: MapProps) {
     })
       .then((res) => res.json())
       .then((data) => {
-        // get current time
         const date = new Date();
-        const hours = date.getHours();
-        const minutes = date.getMinutes();
-        const seconds = date.getSeconds();
-        //get estimate time
-        const estimate = data.data.bus[0].estimate;
-        const time = hours + ":" + minutes;
-        //get finaltime
-        const finalMinutes = minutes + estimate;
-        const finalTime = hours + ":" + finalMinutes;
+        data.data.bus.forEach((element: any) => {
+          const parsedData = new Date(date.getTime() + (element.estimate * 60000))
+          element.finalTime = parsedData.getHours() + ":" + parsedData.getMinutes();
+        });
+
         setBusEstimation(data.data.bus);
         const interval = setInterval(() => {
           const req = fetch("https://api.bikunku.com/bus/info/" + park, {
@@ -214,20 +209,11 @@ export default function Map(props: MapProps) {
           })
             .then((res) => res.json())
             .then((data) => {
-              // get current time
               const date = new Date();
-              const hours = date.getHours();
-              const minutes = date.getMinutes();
-              const seconds = date.getSeconds();
-
-              //get estimate time
-              // console.log(data.data.bus)
-              const estimate = data.data.bus[0].estimate;
-              const time = hours + ":" + minutes;
-
-              //get finaltime
-              const finalMinutes = minutes + estimate;
-              const finalTime = hours + ":" + finalMinutes;
+              data.data.bus.forEach((element: any) => {
+                const parsedData = new Date(date.getTime() + (element.estimate * 60000))
+                element.finalTime = parsedData.getHours() + ":" + parsedData.getMinutes();
+              });
               setBusEstimation(data.data.bus);
             });
         }, 5000);
@@ -891,7 +877,9 @@ export default function Map(props: MapProps) {
 
           {/* banner icon */}
           <div
-            className={isBanner === false ? "hidden" : "flex justify-center h-[100%]"}
+            className={
+              isBanner === false ? "hidden" : "flex justify-center h-[100%]"
+            }
           >
             <div id="front1" className={styles.banner}>
               <Image alt="" src={error} className="lg:ml-3" />
@@ -912,7 +900,9 @@ export default function Map(props: MapProps) {
           {/* donts */}
           <div
             className={
-              isDonts === false ? "hidden" : "flex h-[100%] justify-center overflow-y-scroll no-scrollbar"
+              isDonts === false
+                ? "hidden"
+                : "flex h-[100%] justify-center overflow-y-scroll no-scrollbar"
             }
           >
             <div id="front3" className={styles.donts}>
@@ -1055,25 +1045,75 @@ export default function Map(props: MapProps) {
                         <div className="overflow-y-scroll no-scrollbar h-[440px] not-draggable space-y-2">
                           {activeTabIndex === 0 ? (
                             <div className="flex flex-col justify-center space-y-2">
-                              <div className="h-[65px] border-[1px] rounded-xl p-3 flex justify-between">
+                              {busEstimation.map((val: any, indx: any) => (
+                                <>
+                                  <div className="h-[65px] border-[1px] rounded-xl p-3 flex justify-between">
+                                    <div className="flex flex-col justify-center space-y-1">
+                                      <div className="flex flex-row space-x-3">
+                                        <div className="flex space-x-1">
+                                          <Image src={busJadwal} alt="" />
+                                          <p className="bg-black-primary my-auto px-2.5 py-[3px] rounded-sm text-white text-[8px] font-semibold">
+                                            {val.id}
+                                          </p>
+                                        </div>
+                                        <p
+                                          className={
+                                            val?.route === "RED"
+                                              ? "bg-red-primary my-auto px-3 py-[3px] rounded-sm text-white text-[8px] font-semibold"
+                                              : "bg-blue-primary my-auto px-3 py-[3px] rounded-sm text-white text-[8px] font-semibold"
+                                          }
+                                        >
+                                          {val?.route === "RED" ? (
+                                            <>Rute Lurus</>
+                                          ) : val?.route === "BLUE" ? (
+                                            <>Rute Kanan</>
+                                          ) : (
+                                            <></>
+                                          )}
+                                        </p>
+                                      </div>
+                                      <div className="flex pt-0.5 space-x-1.5">
+                                        <p className="text-xs">
+                                          Akan tiba {val.finalTime}
+                                        </p>
+                                        <div className="bg-black w-0.5 h-0.5 rounded-full my-auto"></div>
+                                        <div className="flex space-x-1 my-auto">
+                                          <Image src={redCrowd} alt="" />
+                                          <p className="text-xs text-red-primary my-auto">
+                                            Penuh
+                                          </p>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div>
+                                      <p className="my-auto text-xl text-center font-bold mx-auto">
+                                        {val.estimate}
+                                      </p>
+                                      <p className="text-xs">menit</p>
+                                    </div>
+                                  </div>
+                                </>
+                              ))}
+
+                              {/* <div className="h-[65px] border-[1px] rounded-xl p-3 flex justify-between">
                                 <div className="flex flex-col justify-center space-y-1">
                                   <div className="flex flex-row space-x-3">
                                     <div className="flex space-x-1">
                                       <Image src={busJadwal} alt="" />
                                       <p className="bg-black-primary my-auto px-2.5 py-[3px] rounded-sm text-white text-[8px] font-semibold">
-                                        {busEstimation[0]?.id}
+                                        {busEstimation[1]?.id}
                                       </p>
                                     </div>
                                     <p
                                       className={
-                                        busEstimation[0]?.route === "RED"
+                                        busEstimation[1]?.route === "RED"
                                           ? "bg-red-primary my-auto px-3 py-[3px] rounded-sm text-white text-[8px] font-semibold"
                                           : "bg-blue-primary my-auto px-3 py-[3px] rounded-sm text-white text-[8px] font-semibold"
                                       }
                                     >
-                                      {busEstimation[0]?.route === "RED" ? (
+                                      {busEstimation[1]?.route === "RED" ? (
                                         <>Rute Lurus</>
-                                      ) : busEstimation[0]?.route === "BLUE" ? (
+                                      ) : busEstimation[1]?.route === "BLUE" ? (
                                         <>Rute Kanan</>
                                       ) : (
                                         <></>
@@ -1097,7 +1137,7 @@ export default function Map(props: MapProps) {
                                   </p>
                                   <p className="text-xs">menit</p>
                                 </div>
-                              </div>
+                              </div> */}
 
                               {/* <div className="h-[65px] border-[1px] rounded-xl p-3 flex justify-between">
                                 <div className="flex flex-col justify-center space-y-1">
