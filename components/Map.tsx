@@ -1027,14 +1027,14 @@ export default function Map(props: MapProps) {
                               >
                                 <div
                                   onClick={() => addActive(index)}
-                                  className="relative"
+                                  className="relative h-8"
                                 >
                                   {val}
                                   <svg
                                     className={
                                       val === "Info Bikun"
                                         ? "bg-red-primary h-2 w-2 rounded-full absolute top-0 right-0 animate-pulse"
-                                        : ""
+                                        : "h-0"
                                     }
                                   ></svg>
                                 </div>
