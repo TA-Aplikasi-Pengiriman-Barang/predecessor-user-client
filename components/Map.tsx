@@ -96,11 +96,13 @@ export default function Map(props: MapProps) {
   const [isBanner, setIsBanner] = useState(true);
   const [isDonts, setIsDonts] = useState(true);
   const [isHalte, setIsHalte] = useState(false);
+  const [isFirstInit, setIsFirstInit] = useState(true);
   const [isFilter, setIsFilter] = useState("ALL");
   const [wordSearch, setWordSearch] = useState("");
   const [i, setI] = useState(0);
   const [detailHalte, setDetailHalte] = useState<any>();
   const [allHalte, setAllHalte] = useState<any>([]);
+  const [busEstimation, setBusEstimation] = useState<any>([]);
   const addActive = (props: number) => {
     setActiveTabIndex(props);
   };
@@ -182,6 +184,57 @@ export default function Map(props: MapProps) {
     return setDetailHalte(newData.data);
   };
 
+  const getBusEstimation = async (park: number) => {
+    const req = fetch("https://api.bikunku.com/bus/info/" + park, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        // get current time
+        const date = new Date();
+        const hours = date.getHours();
+        const minutes = date.getMinutes();
+        const seconds = date.getSeconds();
+        //get estimate time
+        const estimate = data.data.bus[0].estimate;
+        const time = hours + ":" + minutes;
+        //get finaltime
+        const finalMinutes = minutes + estimate;
+        const finalTime = hours + ":" + finalMinutes;
+        setBusEstimation(data.data.bus);
+        const interval = setInterval(() => {
+          const req = fetch("https://api.bikunku.com/bus/info/" + park, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          })
+            .then((res) => res.json())
+            .then((data) => {
+              // get current time
+              const date = new Date();
+              const hours = date.getHours();
+              const minutes = date.getMinutes();
+              const seconds = date.getSeconds();
+
+              //get estimate time
+              // console.log(data.data.bus)
+              const estimate = data.data.bus[0].estimate;
+              const time = hours + ":" + minutes;
+
+              //get finaltime
+              const finalMinutes = minutes + estimate;
+              const finalTime = hours + ":" + finalMinutes;
+              setBusEstimation(data.data.bus);
+            });
+        }, 5000);
+        return () => clearInterval(interval);
+      });
+  };
+
   // fetch all halte
   const fetchAllHalte = async () => {
     const payload = {
@@ -248,6 +301,7 @@ export default function Map(props: MapProps) {
                           DetailHalte(park);
                           setIsHalteClicked(true);
                           getHalteClicked(park);
+                          getBusEstimation(park.properties.PARK_ID);
                         },
                       }}
                       icon={iconRed}
@@ -276,6 +330,7 @@ export default function Map(props: MapProps) {
                           DetailHalte(park);
                           setIsHalteClicked(true);
                           getHalteClicked(park);
+                          getBusEstimation(park.properties.PARK_ID);
                         },
                       }}
                       icon={iconBlue}
@@ -304,6 +359,7 @@ export default function Map(props: MapProps) {
                           DetailHalte(park);
                           setIsHalteClicked(true);
                           getHalteClicked(park);
+                          getBusEstimation(park.properties.PARK_ID);
                         },
                       }}
                       icon={iconMix}
@@ -339,6 +395,7 @@ export default function Map(props: MapProps) {
                           DetailHalte(park);
                           setIsHalteClicked(true);
                           getHalteClicked(park);
+                          getBusEstimation(park.properties.PARK_ID);
                         },
                       }}
                       icon={iconBlue}
@@ -371,6 +428,7 @@ export default function Map(props: MapProps) {
                           DetailHalte(park);
                           setIsHalteClicked(true);
                           getHalteClicked(park);
+                          getBusEstimation(park.properties.PARK_ID);
                         },
                       }}
                       icon={iconRed}
@@ -492,10 +550,13 @@ export default function Map(props: MapProps) {
                       ></Marker>
                     </>
                   ) : (
-                    <>                      <Marker
-                    position={[val?.lat, val?.long]}
-                    icon={iconBus}
-                  ></Marker></>
+                    <>
+                      {" "}
+                      <Marker
+                        position={[val?.lat, val?.long]}
+                        icon={iconBus}
+                      ></Marker>
+                    </>
                   )}
                 </>
               ))}
@@ -632,6 +693,7 @@ export default function Map(props: MapProps) {
                                 setActivePark(val.id);
                                 setIsHalteClicked(true);
                                 getHalteClickedById(val.id);
+                                getBusEstimation(val.id);
                               }}
                             >
                               <div className="my-auto w-8 overflow-y-hidden flex flex-col space-y-1">
@@ -698,6 +760,7 @@ export default function Map(props: MapProps) {
                               setActivePark(val.id);
                               setIsHalteClicked(true);
                               getHalteClickedById(val.id);
+                              getBusEstimation(val.id);
                             }}
                           >
                             <div className="my-auto w-8 overflow-y-hidden flex flex-col space-y-1">
@@ -828,7 +891,7 @@ export default function Map(props: MapProps) {
 
           {/* banner icon */}
           <div
-            className={isBanner === false ? "hidden" : "flex justify-center"}
+            className={isBanner === false ? "hidden" : "flex justify-center h-[100%]"}
           >
             <div id="front1" className={styles.banner}>
               <Image alt="" src={error} className="lg:ml-3" />
@@ -849,7 +912,7 @@ export default function Map(props: MapProps) {
           {/* donts */}
           <div
             className={
-              isDonts === false ? "hidden" : "flex h-screen justify-center"
+              isDonts === false ? "hidden" : "flex h-[100%] justify-center overflow-y-scroll no-scrollbar"
             }
           >
             <div id="front3" className={styles.donts}>
@@ -932,16 +995,6 @@ export default function Map(props: MapProps) {
                 </button>
               </div>
             </div>
-            {/* <button
-              id="front2"
-              className={styles.donts}
-              onClick={() => {
-                getPosition();
-                setIscenterd(true);
-              }}
-            >
-              <Image alt="" src={userLoc} />
-            </button> */}
           </div>
 
           {/* handle detail halte */}
@@ -1008,11 +1061,23 @@ export default function Map(props: MapProps) {
                                     <div className="flex space-x-1">
                                       <Image src={busJadwal} alt="" />
                                       <p className="bg-black-primary my-auto px-2.5 py-[3px] rounded-sm text-white text-[8px] font-semibold">
-                                        1
+                                        {busEstimation[0]?.id}
                                       </p>
                                     </div>
-                                    <p className="bg-blue-primary my-auto px-3 py-[3px] rounded-sm text-white text-[8px] font-semibold">
-                                      Rute Kanan
+                                    <p
+                                      className={
+                                        busEstimation[0]?.route === "RED"
+                                          ? "bg-red-primary my-auto px-3 py-[3px] rounded-sm text-white text-[8px] font-semibold"
+                                          : "bg-blue-primary my-auto px-3 py-[3px] rounded-sm text-white text-[8px] font-semibold"
+                                      }
+                                    >
+                                      {busEstimation[0]?.route === "RED" ? (
+                                        <>Rute Lurus</>
+                                      ) : busEstimation[0]?.route === "BLUE" ? (
+                                        <>Rute Kanan</>
+                                      ) : (
+                                        <></>
+                                      )}
                                     </p>
                                   </div>
                                   <div className="flex pt-0.5 space-x-1.5">
@@ -1026,12 +1091,15 @@ export default function Map(props: MapProps) {
                                     </div>
                                   </div>
                                 </div>
-                                <p className="my-auto text-base font-bold">
-                                  Sekarang
-                                </p>
+                                <div>
+                                  <p className="my-auto text-xl text-center font-bold mx-auto">
+                                    {busEstimation[0]?.estimate}
+                                  </p>
+                                  <p className="text-xs">menit</p>
+                                </div>
                               </div>
 
-                              <div className="h-[65px] border-[1px] rounded-xl p-3 flex justify-between">
+                              {/* <div className="h-[65px] border-[1px] rounded-xl p-3 flex justify-between">
                                 <div className="flex flex-col justify-center space-y-1">
                                   <div className="flex flex-row space-x-3">
                                     <div className="flex space-x-1">
@@ -1157,7 +1225,7 @@ export default function Map(props: MapProps) {
                                   </p>
                                   <p className="text-xs">menit</p>
                                 </div>
-                              </div>
+                              </div> */}
 
                               <Link
                                 href="/jadwal-bikun"
