@@ -33,7 +33,7 @@ const mockData = [
 ];
 
 export default function monitor() {
-  const [i, setI] = useState(3);
+  const [i, setI] = useState(0);
 
   const getInterval = (mode: number) => {
     switch (mode) {
@@ -51,12 +51,12 @@ export default function monitor() {
     }
   };
 
-  // useEffect(() => {
-  //   const interval = setInterval(() => {
-  //     setI((prevCount) => prevCount + 1);
-  //   }, getInterval(i));
-  //   return () => clearInterval(interval);
-  // });
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setI((prevCount) => prevCount + 1);
+    }, getInterval(i));
+    return () => clearInterval(interval);
+  });
 
   return (
     <>
