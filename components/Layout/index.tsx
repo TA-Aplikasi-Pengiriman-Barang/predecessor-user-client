@@ -37,7 +37,7 @@ export default function Layout(props: LayoutProps) {
   const MyAwesomeMap = dynamic(() => import("../Map"), { ssr: false });
 
   return (
-    <div className="drawer h-screen w-screen" >
+    <div className="drawer h-screen w-screen">
       <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
 
       <div className="relative drawer-content flex flex-col h-screen">
@@ -142,8 +142,18 @@ export default function Layout(props: LayoutProps) {
         </div>
 
         {/* Konten Navbar */}
-        <div id="frontt" className="h-[92%] overflow-y-hidden overflow-x-hidden top-[8%]">
-          <MyAwesomeMap>{children}</MyAwesomeMap>
+        <div
+          id="frontt"
+          className="h-[92%] overflow-y-hidden overflow-x-hidden top-[8%]"
+        >
+          {asPath === "/" || asPath === "/rute-bikun" ? (
+            <MyAwesomeMap>{children}</MyAwesomeMap>
+          ) : (
+            <>
+              {/* non-map component: bantuan, jadwal, & berita bikun */}
+              <div className="bg-blue-200">{children}</div>
+            </>
+          )}
         </div>
       </div>
       <div className="drawer-side">
