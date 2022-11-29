@@ -1,91 +1,138 @@
 import Image from "next/image";
 import Layout from "../components/Layout";
+import fixJadwal from "../data/fixJadwal.json";
+import { useState, useEffect } from "react";
+import Draggable from "react-draggable";
+import { days } from "../components/constant/days";
+
+// import assets
 import bus from "../public/assets/icon/bus/busJadwal.svg";
 import location from "../public/assets/icon/location.svg";
 import calendar from "../public/assets/icon/calendar.svg";
 import jadwalNotFound from "../public/assets/image/jadwalNotFound.svg";
-import fixJadwal from "../data/fixJadwal.json";
-import { useState } from "react";
-import Draggable from "react-draggable";
-import { days } from "../components/constant/days";
+import halteNotFound from "../public/assets/image/halteNotFoundBG.svg";
+import position from "../public/assets/icon/position.svg";
 
 export default function jadwalbikun() {
   const [isFilter, setIsFilter] = useState(false);
-  const [searchWord, setSearchWord] = useState<any>(null);
   const [startDate, setStartDate] = useState<number>(0);
   const [endDate, setEndDate] = useState<any>(null);
+  const [openEndDate, setOpenEndDate] = useState<any>(null);
   const [filterTime, setFilterTime] = useState("all");
   const [dataJadwal, setDataJadwal] = useState(fixJadwal.data);
+  const [isShow, setIsShow] = useState(false);
+  const [isHalte, setIsHalte] = useState(false);
+  const [isFilterHalte, setIsFilterHalte] = useState("ALL");
+  const [allHalte, setAllHalte] = useState<any>([]);
+  const [wordSearch, setWordSearch] = useState<any>("");
 
   const loopDay = [0, 1, 2, 3, 4, 5, 6];
 
-  const handleSearch = (keyword: String) => {
-    const filteredSearchData = fixJadwal.data.filter((e: any) =>
-      e.halte.toLowerCase().includes(keyword.toLowerCase())
-    );
-    setSearchWord(keyword);
-    setDataJadwal(filteredSearchData);
+  const handleSearch = async (e: any) => {
+    const searchHalte = e.target.value;
+    setWordSearch(searchHalte);
   };
 
-  const clearKeyword = () => {
-    setSearchWord(null);
-    setDataJadwal(fixJadwal.data);
+  const onClickHalte = (name: any, route: any) => {
+    let filteredData;
+    if (route === "BLUE") {
+      filteredData = fixJadwal.data.filter(
+        (e: any) =>
+          e.halte.toLowerCase().includes(name) || e.rute.includes("belok")
+      );
+    } else {
+      filteredData = fixJadwal.data.filter(
+        (e: any) =>
+          e.halte.toLowerCase().includes(name) || e.rute.includes("lurus")
+      );
+    }
+
+    setIsHalte(false)
+    setDataJadwal(filteredData)
+    setIsShow(true)
   };
 
   const clickApplyFilter = () => {
     if (endDate !== null) {
-      let tempData = fixJadwal.data;
-      let loopDay = []
+      let tempData = dataJadwal;
+      let loopDay = [];
       let conditions: any = [];
       for (let i = startDate; i <= endDate; i++) {
-        loopDay.push(i)
-        conditions.push(days[i])
+        loopDay.push(i);
+        conditions.push(days[i]);
       }
 
-      // @ts-ignore
-      let filteredData = tempData.filter((val: any) => conditions.some(el => val.tanggal.includes(el)))
+      let filteredData = tempData.filter((val: any) =>
+        // @ts-ignore
+        conditions.some((el) => val.tanggal.includes(el))
+      );
 
-      let newData
+      let newData;
       if (filterTime === "6-9") {
-        newData = filteredData.filter((val: any) => ["06:", "07:", "08:", "09:00"].some(el => val.waktu.includes(el)))
+        newData = filteredData.filter((val: any) =>
+          ["06:", "07:", "08:", "09:00"].some((el) => val.waktu.includes(el))
+        );
       } else if (filterTime === "9-12") {
-        newData = filteredData.filter((val: any) => ["09:", "10:", "11:", "12:00"].some(el => val.waktu.includes(el)))
+        newData = filteredData.filter((val: any) =>
+          ["09:", "10:", "11:", "12:00"].some((el) => val.waktu.includes(el))
+        );
       } else {
-        newData = filteredData
+        newData = filteredData;
       }
 
-      setDataJadwal(newData)
+      setIsFilter(false)
+      setDataJadwal(newData);
+      setIsShow(true);
     }
-  }
+  };
+
+  // fetch all halte
+  const fetchAllHalte = async () => {
+    const payload = {
+      lat: -6.361046716889507,
+      long: 106.8317240044786,
+    };
+    const req = fetch("https://api.bikunku.com/terminal/allTerminal", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setAllHalte(data.data.terminal);
+      });
+  };
+
+  useEffect(() => {
+    fetchAllHalte();
+  }, []);
 
   return (
     <Layout>
-      <div id="front" className="h-screen bg-white">
+      <div className="h-screen bg-white">
         {/* Komponen Cari & Filter Jadwal  */}
-        <div className="bg-blue-primary h-16 rounded-[0_0_1rem_1rem] flex justify-center">
+        <div id="front" className="bg-blue-primary h-16 rounded-[0_0_1rem_1rem] flex justify-center">
           <div className="h-28 w-5/6 rounded-lg bg-white flex flex-col justify-center mt-2 px-4 space-y-3 drop-shadow-xl">
             <div className="flex space-x-2 rounded-full border-[1px] border-[#EAEAEA] bg-[#FAFAFA] px-4 py-2 text-sm">
               <Image src={location} alt="" />
               <input
                 type="text"
-                className="w-full  bg-[#FAFAFA] focus:outline-none text-black"
-                placeholder={searchWord ? searchWord : "Cari halte"}
-                disabled={searchWord ? true : false}
-                onKeyDown={(event) => {
-                  if (event.key === "Enter") {
-                    // @ts-ignore
-                    if (event.target.value !== "") {
-                      // @ts-ignore
-                      handleSearch(event.target.value);
-                    }
-                  }
+                className="w-full  bg-[#FAFAFA] focus:outline-none"
+                placeholder="Cari halte"
+                onFocus={() => {
+                  setIsHalte(true);
+                }}
+                onChange={() => {
+                  handleSearch(event);
                 }}
               />
-              {searchWord && (
+              {/* {searchWord && (
                 <div className="text-blue-primary" onClick={clearKeyword}>
                   Reset
                 </div>
-              )}
+              )} */}
             </div>
             <div
               className="flex space-x-1 rounded-full border-[1px] border-[#EAEAEA] bg-[#FAFAFA] mx-20 px-2 py-1 text-xs"
@@ -97,73 +144,294 @@ export default function jadwalbikun() {
           </div>
         </div>
 
-        {/* Data Jadwal Bikun  */}
-        <div className="h-screen overflow-y-scroll bg-white pt-20 px-4 space-y-4">
-          {/* Looping Hari */}
-          {loopDay.map((angka) => (
-            <div key={angka}>
-              <div className="flex space-x-2 w-full pb-2">
-                <p className="text-[10px] w-1/2">
-                  {days[angka]}, 2{angka + 1} November 2022
-                </p>
-                <div className="h-[1px] bg-[#D9D9D9] w-full my-auto"></div>
+        {/* IsHalte */}
+        <div
+          className={
+            isHalte ? "h-full show overflow-y-scroll no-scrollbar" : "hidden"
+          }
+          id="frontt"
+        >
+          <div className="h-full">
+            <div className="pt-36 p-4 h-full space-y-4">
+              {/* filter */}
+              <div className="flex justify-center space-x-3">
+                <div
+                  className={
+                    isFilterHalte === "ALL"
+                      ? "border-[1px] rounded-full border-[#EAEAEA] px-6 bg-blue-primary text-white"
+                      : "border-[1px] rounded-full bg-[#FBFBFB] border-[#EAEAEA] px-6"
+                  }
+                  onClick={() => {
+                    setIsFilterHalte("ALL");
+                  }}
+                >
+                  <p
+                    className={
+                      isFilterHalte === "ALL"
+                        ? "text-xs text-white"
+                        : "text-xs text-black-primary"
+                    }
+                  >
+                    All
+                  </p>
+                </div>
+                <div
+                  className={
+                    isFilterHalte === "RED"
+                      ? "border-[1px] rounded-full border-[#EAEAEA] px-6 bg-blue-primary text-white"
+                      : "border-[1px] rounded-full bg-[#FBFBFB] border-[#EAEAEA] px-6"
+                  }
+                  onClick={() => {
+                    setIsFilterHalte("RED");
+                  }}
+                >
+                  <p
+                    className={
+                      isFilterHalte === "RED"
+                        ? "text-xs text-white"
+                        : "text-xs text-black-primary"
+                    }
+                  >
+                    Rute Lurus
+                  </p>
+                </div>
+                <div
+                  className={
+                    isFilterHalte === "BLUE"
+                      ? "border-[1px] rounded-full border-[#EAEAEA] px-6 bg-blue-primary text-white"
+                      : "border-[1px] rounded-full bg-[#FBFBFB] border-[#EAEAEA] px-6"
+                  }
+                  onClick={() => {
+                    setIsFilterHalte("BLUE");
+                  }}
+                >
+                  <p
+                    className={
+                      isFilterHalte === "BLUE"
+                        ? "text-xs text-white"
+                        : "text-xs text-black-primary"
+                    }
+                  >
+                    Rute Kanan
+                  </p>
+                </div>
               </div>
 
-              <div className="space-y-2">
-                {/* looping jadwal berdasarkan hari */}
-                {dataJadwal.filter((e) => e.tanggal.includes(days[angka]))
-                  .length === 0 ? (
-                  <div className="flex flex-col justify-center items-center mb-4">
-                    <Image src={jadwalNotFound} alt="" />
-                    <p className="text-[#9B9B9B]">
-                      Tidak terdapat jadwal bikun
-                    </p>
+              {allHalte.filter((e: any) =>
+                e.name.toLowerCase().includes(wordSearch)
+              ).length === 0 ? (
+                <>
+                  <div className="flex justify-center">
+                    <Image alt="" src={halteNotFound} />
                   </div>
-                ) : (
-                  dataJadwal
-                    .filter((e) => e.tanggal.includes(days[angka]))
-                    .map((val, index) => (
-                      <div className="h-[65px] border-[1px] rounded-xl p-3 flex justify-between" key={index}>
-                        <div className="flex flex-col justify-center space-y-1">
-                          <div className="flex flex-row space-x-3">
-                            <div className="flex space-x-1">
-                              <Image src={bus} alt="" />
-                              <p className="bg-black-primary my-auto px-2.5 py-[3px] rounded-sm text-white text-[8px] font-semibold">
-                                {val.idBus}
+                </>
+              ) : (
+                <></>
+              )}
+
+              {/* konten */}
+              {isFilterHalte === "ALL" ? (
+                <>
+                  {allHalte
+                    .filter((e: any) =>
+                      e.name.toLowerCase().includes(wordSearch)
+                    )
+                    .map((val: any, index: any) => (
+                      <div>
+                        <div
+                          className="flex flex-row space-x-3 my-auto border-[1px] py-2 px-3 rounded-xl h-16"
+                          key={index}
+                          onClick={() => {
+                            onClickHalte(val.name.toLowerCase(), val.route);
+                          }}
+                        >
+                          <div className="my-auto w-8 overflow-y-hidden flex flex-col space-y-1">
+                            <Image src={position} alt="" className="mx-auto" />
+                            <p className="text-[8px] text-center">
+                              {val.distance} km
+                            </p>
+                          </div>
+                          <div className="flex-col flex-grow">
+                            <p className="text-base">{val.name}</p>
+                            <div className="flex space-x-2">
+                              {" "}
+                              <p className="text-xs text-[#959595]">
+                                Halte Berikutnya
+                              </p>
+                              <p className="text-xs text-[#959595]">{">"}</p>
+                              <p className="text-xs text-[#959595]">
+                                {val.next}
                               </p>
                             </div>
+                          </div>
+                          <div className="my-auto w-[70px]">
                             <p
                               className={
-                                val.rute === "lurus"
+                                val.route === "RED"
                                   ? "bg-red-primary my-auto px-3 py-[3px] rounded-sm text-white text-[8px] font-semibold"
                                   : "bg-blue-primary my-auto px-3 py-[3px] rounded-sm text-white text-[8px] font-semibold"
                               }
                             >
-                              {val.rute === "lurus" ? (
+                              {val.route === "RED" ? (
                                 <>Rute Lurus</>
-                              ) : val.rute === "belok" ? (
+                              ) : val.route === "BLUE" ? (
                                 <>Rute Kanan</>
                               ) : (
                                 <></>
                               )}
                             </p>
                           </div>
-                          <p className="text-xs">{val.tanggal}</p>
                         </div>
-                        <p className="my-auto text-xl font-bold">{val.waktu}</p>
                       </div>
-                    ))
-                )}
-              </div>
+                    ))}
+                </>
+              ) : isFilterHalte === "RED" || isFilterHalte === "BLUE" ? (
+                <>
+                  {" "}
+                  {allHalte
+                    .filter(
+                      (e: any) =>
+                        e.route === isFilterHalte &&
+                        e.name.toLowerCase().includes(wordSearch)
+                    )
+                    .map((val: any, index: any) => (
+                      <div
+                        className="flex flex-row space-x-3 my-auto border-[1px] py-2 px-3 rounded-xl h-16"
+                        key={index}
+                        onClick={() => {
+                          onClickHalte(val.name.toLowerCase(), val.route);
+                        }}
+                      >
+                        <div className="my-auto w-8 overflow-y-hidden flex flex-col space-y-1">
+                          <Image src={position} alt="" className="mx-auto" />
+                          <p className="text-[8px] text-center">
+                            {val.distance} km
+                          </p>
+                        </div>
+                        <div className="flex-col flex-grow">
+                          <p className="text-base">{val.name}</p>
+                          <div className="flex space-x-2">
+                            {" "}
+                            <p className="text-xs text-[#959595]">
+                              Halte Berikutnya
+                            </p>
+                            <p className="text-xs text-[#959595]">{">"}</p>
+                            <p className="text-xs text-[#959595]">{val.next}</p>
+                          </div>
+                        </div>
+                        <div className="my-auto w-[70px]">
+                          <p
+                            className={
+                              val.route === "RED"
+                                ? "bg-red-primary my-auto px-3 py-[3px] rounded-sm text-white text-[8px] font-semibold"
+                                : "bg-blue-primary my-auto px-3 py-[3px] rounded-sm text-white text-[8px] font-semibold"
+                            }
+                          >
+                            {val.route === "RED" ? (
+                              <>Rute Lurus</>
+                            ) : val.route === "BLUE" ? (
+                              <>Rute Kanan</>
+                            ) : (
+                              <></>
+                            )}
+                          </p>
+                        </div>
+                      </div>
+                    ))}
+                </>
+              ) : (
+                <>
+                  <p></p>
+                </>
+              )}
             </div>
-          ))}
+          </div>
+        </div>
+
+        {/* Data Jadwal Bikun  */}
+        <div
+          className={`h-screen overflow-y-scroll bg-white pt-36 px-4 space-y-4 ${
+            isHalte && "hidden"
+          }`}
+        >
+          {/* Looping Hari (Tagged False) */}
+          {!isHalte && !isShow && (
+            <>
+              <div className="flex flex-col justify-center items-center mb-4 pt-28">
+                <Image src={jadwalNotFound} alt="" />
+                <p className="text-[#9B9B9B]">Pilih halte terlebih dahulu</p>
+              </div>
+            </>
+          )}
+          {isShow &&
+            loopDay.map((angka) => (
+              <div key={angka}>
+                <div className="flex space-x-2 w-full pb-2">
+                  <p className="text-[10px] w-1/2">
+                    {days[angka]}, 2{angka + 1} November 2022
+                  </p>
+                  <div className="h-[1px] bg-[#D9D9D9] w-full my-auto"></div>
+                </div>
+
+                <div className="space-y-2">
+                  {dataJadwal.filter((e) => e.tanggal.includes(days[angka]))
+                    .length === 0 ? (
+                    <div className="flex flex-col justify-center items-center mb-4">
+                      <Image src={jadwalNotFound} alt="" />
+                      <p className="text-[#9B9B9B]">
+                        Tidak terdapat jadwal bikun
+                      </p>
+                    </div>
+                  ) : (
+                    dataJadwal
+                      .filter((e) => e.tanggal.includes(days[angka]))
+                      .map((val, index) => (
+                        <div
+                          className="h-[65px] border-[1px] rounded-xl p-3 flex justify-between"
+                          key={index}
+                        >
+                          <div className="flex flex-col justify-center space-y-1">
+                            <div className="flex flex-row space-x-3">
+                              <div className="flex space-x-1">
+                                <Image src={bus} alt="" />
+                                <p className="bg-black-primary my-auto px-2.5 py-[3px] rounded-sm text-white text-[8px] font-semibold">
+                                  {val.idBus}
+                                </p>
+                              </div>
+                              <p
+                                className={
+                                  val.rute === "lurus"
+                                    ? "bg-red-primary my-auto px-3 py-[3px] rounded-sm text-white text-[8px] font-semibold"
+                                    : "bg-blue-primary my-auto px-3 py-[3px] rounded-sm text-white text-[8px] font-semibold"
+                                }
+                              >
+                                {val.rute === "lurus" ? (
+                                  <>Rute Lurus</>
+                                ) : val.rute === "belok" ? (
+                                  <>Rute Kanan</>
+                                ) : (
+                                  <></>
+                                )}
+                              </p>
+                            </div>
+                            <p className="text-xs">{val.tanggal}</p>
+                          </div>
+                          <p className="my-auto text-xl font-bold">
+                            {val.waktu}
+                          </p>
+                        </div>
+                      ))
+                  )}
+                </div>
+              </div>
+            ))}
         </div>
 
         {isFilter === true ? (
           <>
             {" "}
-            <div className="absolute bottom-[40%] w-full drop-shadow-xl">
-              <div id="front1" className="h-screen">
+            <div id="front3" className="absolute bottom-[40%] w-full drop-shadow-xl">
+              <div id="front3" className="h-screen">
                 <Draggable
                   axis="y"
                   bounds={{ left: 0, top: -200, right: 0, bottom: 50 }}
@@ -195,10 +463,11 @@ export default function jadwalbikun() {
                               className="rounded-full py-1 px-2 border-[1px] border-[#EAEAEA] bg-[#FAFAFA] text-xs"
                               onChange={(e) => {
                                 setStartDate(parseInt(e.target.value));
+                                setOpenEndDate(true);
                                 setEndDate(parseInt(e.target.value));
                               }}
-                              value={startDate}
                             >
+                              <option disabled selected> Pilih tanggal </option>
                               <option value={0}> 21/11/2022 </option>
                               <option value={1}> 22/11/2022 </option>
                               <option value={2}> 23/11/2022 </option>
@@ -210,12 +479,13 @@ export default function jadwalbikun() {
                           </div>
                           <div className="w-1/2 flex flex-col space-y-1">
                             <p className="text-sm">Tanggal Berakhir</p>
-                            <select className="rounded-full py-1 px-2 border-[1px] border-[#EAEAEA] bg-[#FAFAFA] text-xs"
+                            <select
+                              className="rounded-full py-1 px-2 border-[1px] border-[#EAEAEA] bg-[#FAFAFA] text-xs"
                               onChange={(e) => {
                                 setEndDate(parseInt(e.target.value));
                               }}
                             >
-                              {startDate &&
+                              {openEndDate &&
                                 [...Array(7 - startDate)].map((_, index) => (
                                   <option value={startDate + index} key={index}>
                                     {" "}
@@ -267,7 +537,8 @@ export default function jadwalbikun() {
                           </div>
                         </div>
                         <div className="flex justify-center">
-                          <button className="rounded-full bg-blue-primary" 
+                          <button
+                            className="rounded-full bg-blue-primary"
                             onClick={clickApplyFilter}
                           >
                             <p className="flex items-center justify-center font-medium text-base text-white h-8 px-24">
