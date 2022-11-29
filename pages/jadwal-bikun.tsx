@@ -12,6 +12,8 @@ import calendar from "../public/assets/icon/calendar.svg";
 import jadwalNotFound from "../public/assets/image/jadwalNotFound.svg";
 import halteNotFound from "../public/assets/image/halteNotFoundBG.svg";
 import position from "../public/assets/icon/position.svg";
+import { useRouter } from "next/router";
+
 
 export default function jadwalbikun() {
   const [isFilter, setIsFilter] = useState(false);
@@ -27,6 +29,10 @@ export default function jadwalbikun() {
   const [wordSearch, setWordSearch] = useState<any>("");
 
   const loopDay = [0, 1, 2, 3, 4, 5, 6];
+  const router = useRouter();
+  const { asPath, pathname } = useRouter();
+
+  // console.log(props)
 
   const handleSearch = async (e: any) => {
     const searchHalte = e.target.value;
@@ -35,16 +41,23 @@ export default function jadwalbikun() {
 
   const onClickHalte = (name: any, route: any) => {
     let filteredData;
+    
     if (route === "BLUE") {
       filteredData = fixJadwal.data.filter(
         (e: any) =>
           e.halte.toLowerCase().includes(name) || e.rute.includes("belok")
       );
-    } else {
+    } if (route === "RED") {
       filteredData = fixJadwal.data.filter(
         (e: any) =>
           e.halte.toLowerCase().includes(name) || e.rute.includes("lurus")
       );
+    } else {
+      filteredData = fixJadwal.data.filter(
+        (e: any) =>
+          e.halte.includes(name)
+      );
+      console.log(filteredData)
     }
 
     setIsHalte(false)
@@ -105,8 +118,20 @@ export default function jadwalbikun() {
       });
   };
 
+
+
+
   useEffect(() => {
     fetchAllHalte();
+
+    // Kalau refresh masih ada params yg blm ke cover
+    if(router.query !== null) {
+      const terminalPayload = router.query;
+      onClickHalte(terminalPayload.park, "");
+      console.log(terminalPayload)
+    } 
+
+
   }, []);
 
   return (
@@ -128,11 +153,6 @@ export default function jadwalbikun() {
                   handleSearch(event);
                 }}
               />
-              {/* {searchWord && (
-                <div className="text-blue-primary" onClick={clearKeyword}>
-                  Reset
-                </div>
-              )} */}
             </div>
             <div
               className="flex space-x-1 rounded-full border-[1px] border-[#EAEAEA] bg-[#FAFAFA] mx-20 px-2 py-1 text-xs"

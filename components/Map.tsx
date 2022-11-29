@@ -993,6 +993,7 @@ export default function Map(props: MapProps) {
           ) : (
             <>
               {" "}
+              
               <div className="absolute bottom-[40%] w-full">
                 <div id="front1" className="h-screen">
                   <Draggable
@@ -1012,6 +1013,7 @@ export default function Map(props: MapProps) {
                         >
                           X
                         </div>
+                        
                       </div>
 
                       <div className="p-4">
@@ -1096,8 +1098,15 @@ export default function Map(props: MapProps) {
                               ))}
 
                               <Link
-                                href="/jadwal-bikun"
+                                href={{
+                                  pathname: "/jadwal-bikun",
+                                  query: {
+                                    park: activePark.properties.NAME
+                                }
+                                }}
+                                
                                 className="px-6 h-10 rounded-full flex items-center justify-center bg-blue-primary "
+                                
                               >
                                 <p className="text-white font-semibold">
                                   Lihat jadwal rutin

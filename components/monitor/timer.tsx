@@ -1,6 +1,8 @@
 import busMonitor from "../../public/assets/image/bus/busMonitor.svg";
 import Image from "next/image";
 import sepi from "../../public/assets/image/monitor/sepi.svg";
+import normal from "../../public/assets/image/monitor/ramai.svg";
+import penuh from "../../public/assets/image/monitor/penuh.svg";
 
 interface TimeProps {
   estimate: string;
@@ -92,9 +94,32 @@ export function MonitorStatus({ num, status }: StatusProps) {
         </div>
       </div>
       <div className="w-4/5 flex justify-end">
-        <div className="flex space-x-4 2xl:space-x-8 w-2/5 2xl:w-1/3">
-          <Image alt="" src={sepi} />
-          <p className="text-white text-8xl">{status}</p>
+        <div className="flex space-x-4 2xl:space-x-8 w-3/5  2xl:w-1/3">
+          <div className="w-16 my-auto">
+          {status === "SEPI" ? (
+              <Image alt="" src={sepi} />
+            ) : status === "NORMAL" ? (
+              <Image alt="" src={normal} />
+            ) : status === "PENUH" ? (
+              <Image alt="" src={penuh} />
+            ) : (
+              <><p className="text-white text-8xl">{status}</p></>
+            )}
+            
+          </div>
+          <div className="w-1/2">
+            {status === "SEPI" ? (
+              <><p className="text-white text-8xl text-[#3EBC70]">{status}</p></>
+            ) : status === "NORMAL" ? (
+              <><p className="text-white text-8xl text-[#EDC808]">{status}</p></>
+            ) : status === "PENUH" ? (
+              <><p className="text-white text-8xl text-red-primary">{status}</p></>
+            ) : (
+              <><p className="text-white text-8xl">{status}</p></>
+            )}
+
+            
+          </div>
         </div>
       </div>
     </div>

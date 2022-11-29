@@ -17,14 +17,14 @@ const mockData = [
     status: "SEPI",
   },
   {
-    number: 2,
+    number: 3,
     estimate: "15:37",
     timeLeft: 17,
     route: "LURUS",
     status: "NORMAL",
   },
   {
-    number: 3,
+    number: 7,
     estimate: "15:44",
     timeLeft: 24,
     route: "LURUS",
@@ -33,7 +33,7 @@ const mockData = [
 ];
 
 export default function monitor() {
-  const [i, setI] = useState(0);
+  const [i, setI] = useState(3);
 
   const getInterval = (mode: number) => {
     switch (mode) {
@@ -43,18 +43,20 @@ export default function monitor() {
         return 15000;
       case 2:
         return 5000;
+        case 3:
+          return 5000;
       default:
         setI(0);
         return 50000;
     }
   };
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setI((prevCount) => prevCount + 1);
-    }, getInterval(i));
-    return () => clearInterval(interval);
-  });
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     setI((prevCount) => prevCount + 1);
+  //   }, getInterval(i));
+  //   return () => clearInterval(interval);
+  // });
 
   return (
     <>
