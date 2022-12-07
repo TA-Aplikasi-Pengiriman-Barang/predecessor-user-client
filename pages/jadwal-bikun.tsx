@@ -30,9 +30,6 @@ export default function jadwalbikun() {
 
   const loopDay = [0, 1, 2, 3, 4, 5, 6];
   const router = useRouter();
-  const { asPath, pathname } = useRouter();
-
-  // console.log(props)
 
   const handleSearch = async (e: any) => {
     const searchHalte = e.target.value;
@@ -57,7 +54,6 @@ export default function jadwalbikun() {
         (e: any) =>
           e.halte.includes(name)
       );
-      console.log(filteredData)
     }
 
     setIsHalte(false)
@@ -128,7 +124,6 @@ export default function jadwalbikun() {
     if(router.query !== null) {
       const terminalPayload = router.query;
       onClickHalte(terminalPayload.park, "");
-      console.log(terminalPayload)
     } 
 
 

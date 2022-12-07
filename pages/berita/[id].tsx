@@ -15,7 +15,6 @@ interface Data {
 }
 
 export default function detail({ data }: Data) {
-  console.log(data);
   return (
     <Layout>
       <div

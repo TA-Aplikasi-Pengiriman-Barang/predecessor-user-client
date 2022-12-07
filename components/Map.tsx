@@ -59,22 +59,9 @@ import gambar3 from "../public/assets/image/donts/3.svg";
 import gambar4 from "../public/assets/image/donts/4.svg";
 import gambar5 from "../public/assets/image/donts/5.svg";
 import gambar6 from "../public/assets/image/donts/6.svg";
-import bus from "../public/assets/image/bus/bus.svg";
-import bus1 from "../public/assets/image/bus/bus1.svg";
-import bus2 from "../public/assets/image/bus/bus2.svg";
-import bus3 from "../public/assets/image/bus/bus3.svg";
-import bus4 from "../public/assets/image/bus/bus4.svg";
-import bus5 from "../public/assets/image/bus/bus5.svg";
-import bus6 from "../public/assets/image/bus/bus6.svg";
-import bus7 from "../public/assets/image/bus/bus7.svg";
-import bus8 from "../public/assets/image/bus/bus8.svg";
-import bus9 from "../public/assets/image/bus/bus9.svg";
-import bus10 from "../public/assets/image/bus/bus10.svg";
 import halteNotFound from "../public/assets/image/halteNotFoundBG.svg";
-import L from "leaflet";
 import Link from "next/link";
 import "leaflet-routing-machine";
-import { createControlComponent } from "@react-leaflet/core";
 
 interface MapProps {
   children: ReactNode;
@@ -111,7 +98,6 @@ export default function Map(props: MapProps) {
 
   // Messaing Websocket
   ws.onopen = () => {
-    console.log("connected");
   };
   ws.onmessage = (evt) => {
     setIscenterd(false);
@@ -119,6 +105,14 @@ export default function Map(props: MapProps) {
     const message = JSON.parse(evt.data);
     setBus(message);
   };
+
+  const setActiveParkById = (id: any) => {
+    const HalteClickedById = halteAll.features.filter(
+      (e: any) => e.properties.PARK_ID === id
+    );
+    setActivePark(HalteClickedById[0])
+  };
+  
 
   // Check already onboarding
   useEffect(() => {
@@ -508,7 +502,7 @@ export default function Map(props: MapProps) {
                       {" "}
                       <Marker
                         position={[val?.lat, val?.long]}
-                        icon={iconBus1}
+                        icon={iconBus8}
                       ></Marker>
                     </>
                   ) : val?.number === 8 ? (
@@ -516,7 +510,7 @@ export default function Map(props: MapProps) {
                       {" "}
                       <Marker
                         position={[val?.lat, val?.long]}
-                        icon={iconBus1}
+                        icon={iconBus8}
                       ></Marker>
                     </>
                   ) : val?.number === 9 ? (
@@ -676,7 +670,8 @@ export default function Map(props: MapProps) {
                               onClick={() => {
                                 DetailHalteByID(val.id);
                                 setIsHalte(false);
-                                setActivePark(val.id);
+                                
+                                setActiveParkById(val.id);
                                 setIsHalteClicked(true);
                                 getHalteClickedById(val.id);
                                 getBusEstimation(val.id);
@@ -743,7 +738,7 @@ export default function Map(props: MapProps) {
                             onClick={() => {
                               DetailHalteByID(val.id);
                               setIsHalte(false);
-                              setActivePark(val.id);
+                              setActiveParkById(val.id);
                               setIsHalteClicked(true);
                               getHalteClickedById(val.id);
                               getBusEstimation(val.id);
