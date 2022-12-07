@@ -79,6 +79,7 @@ export default function Map(props: MapProps) {
   const [bus, setBus] = useState([]);
   const [activeTabIndex, setActiveTabIndex] = useState(0);
   const [isCentered, setIscenterd] = useState(false);
+  const [isUserPosition,setIsUserPosition] = useState(false);
   const [isHalteClicked, setIsHalteClicked] = useState(false);
   const [isBanner, setIsBanner] = useState(true);
   const [isDonts, setIsDonts] = useState(true);
@@ -152,6 +153,8 @@ export default function Map(props: MapProps) {
       setLat(position.coords.latitude);
       setLng(position.coords.longitude);
     });
+    setIsUserPosition(true);
+    fetchAllHalte()
   };
 
   // recenter map with user position
@@ -217,21 +220,54 @@ export default function Map(props: MapProps) {
 
   // fetch all halte
   const fetchAllHalte = async () => {
-    const payload = {
-      lat: -6.361046716889507,
-      long: 106.8317240044786,
-    };
-    const req = fetch("https://api.bikunku.com/terminal/allTerminal", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(payload),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        setAllHalte(data.data.terminal);
-      });
+    if(isUserPosition) {
+      const payload = {
+        lat: lat,
+        long: lng,
+      };
+      const req = fetch("https://api.bikunku.com/terminal/allTerminal", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          setAllHalte(data.data.terminal);
+        });
+    } else {
+      const payload = {
+        lat: -6.361046716889507,
+        long: 106.8317240044786,
+      };
+      const req = fetch("https://api.bikunku.com/terminal/allTerminal", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          setAllHalte(data.data.terminal);
+        });
+    }
+    // const payload = {
+    //   lat: -6.361046716889507,
+    //   long: 106.8317240044786,
+    // };
+    // const req = fetch("https://api.bikunku.com/terminal/allTerminal", {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: JSON.stringify(payload),
+    // })
+    //   .then((res) => res.json())
+    //   .then((data) => {
+    //     setAllHalte(data.data.terminal);
+    //   });
   };
 
   const handleSearch = async (e: any) => {
@@ -558,6 +594,7 @@ export default function Map(props: MapProps) {
                     placeholder="Cari halte"
                     onFocus={() => {
                       setIsHalte(true);
+                      fetchAllHalte();
                     }}
                     onChange={() => {
                       handleSearch(event);
