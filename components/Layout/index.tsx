@@ -158,7 +158,7 @@ export default function Layout(props: LayoutProps) {
       </div>
       <div className="drawer-side">
         <label htmlFor="my-drawer-3" className="drawer-overlay"></label>
-        <ul className="menu p-6 w-64 bg-base-100 space-y-4">
+        <ul className="menu p-6 w-64 bg-base-100 dark:bg-white space-y-4">
           {/* <!-- Sidebar content here --> */}
           <Link href="/">
             <div
