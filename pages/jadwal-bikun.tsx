@@ -115,18 +115,14 @@ export default function jadwalbikun() {
   };
 
 
-
-
   useEffect(() => {
     fetchAllHalte();
 
-    // Kalau refresh masih ada params yg blm ke cover
-    if(router.query !== null) {
+    // // Kalau refresh masih ada params yg blm ke cover
+    if(Object.keys(router.query).length !== 0) {
       const terminalPayload = router.query;
       onClickHalte(terminalPayload.park, "");
     } 
-
-
   }, []);
 
   return (
