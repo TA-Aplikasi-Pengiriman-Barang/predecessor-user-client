@@ -21,6 +21,7 @@ export default function index() {
   const handleOnBoarding = () => {
     setI(i + 1);
     setActiveTabIndex(i);
+    
 
     if (i === 5) {
       router.push({

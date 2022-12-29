@@ -117,7 +117,7 @@ export default function Map(props: MapProps) {
 
   // Check already onboarding
   useEffect(() => {
-    if (getCookies().isOnboarding) {
+    if (getCookies().isOnboarding || window.screen.width > 768 ) {
     } else {
       router.push({
         pathname: "/onBoarding",
