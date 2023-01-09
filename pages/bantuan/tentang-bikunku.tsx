@@ -25,6 +25,9 @@ export default function tentangbikunku() {
             mengetahui detail rute, jadwal, serta berita terbaru terkait bikun.{" "}
           </p>
           <p className="text-xs">
+            Website BikunKu sudah selesai dikembangkan dan dapat berfungsi dengan baik. Layanan BikunKu dapat diaktifkan jika dibutuhkan karena saat ini server BikunKu dimatikan. {" "}
+          </p>
+          <p className="text-xs">
             Untuk informasi lebih lanjut, anda dapat menghubungi pengembang pada
             surel dibawah ini:
             <li>hafiz.bhadrika@ui.ac.id</li>
