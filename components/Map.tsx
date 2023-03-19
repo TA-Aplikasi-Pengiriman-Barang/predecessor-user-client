@@ -9,6 +9,8 @@ import "leaflet/dist/leaflet.css";
 import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css";
 import "leaflet-defaulticon-compatibility";
 import { ReactNode, useEffect, useState } from "react";
+
+import { httpBaseUrl, wsBaseUrl } from "./constant/api";
 import halteRed from "../data/halteRed.json";
 import halteBlue from "../data/halteBlue.json";
 import halteMix from "../data/halteMix.json";
@@ -66,7 +68,7 @@ import "leaflet-routing-machine";
 interface MapProps {
   children: ReactNode;
 }
-const ws = new WebSocket("wss://api.bikunku.com/bus/stream?type=client");
+const ws = new WebSocket(`${wsBaseUrl}/bus/stream?type=client`);
 
 export default function Map(props: MapProps) {
   // Variabel helper
@@ -79,7 +81,7 @@ export default function Map(props: MapProps) {
   const [bus, setBus] = useState([]);
   const [activeTabIndex, setActiveTabIndex] = useState(0);
   const [isCentered, setIscenterd] = useState(false);
-  const [isUserPosition,setIsUserPosition] = useState(false);
+  const [isUserPosition, setIsUserPosition] = useState(false);
   const [isHalteClicked, setIsHalteClicked] = useState(false);
   const [isBanner, setIsBanner] = useState(true);
   const [isDonts, setIsDonts] = useState(true);
@@ -98,8 +100,7 @@ export default function Map(props: MapProps) {
   const arrayRute = ["Semua", "Rute Lurus", "Rute Kanan"];
 
   // Messaing Websocket
-  ws.onopen = () => {
-  };
+  ws.onopen = () => {};
   ws.onmessage = (evt) => {
     setIscenterd(false);
     setIsHalteClicked(false);
@@ -111,13 +112,12 @@ export default function Map(props: MapProps) {
     const HalteClickedById = halteAll.features.filter(
       (e: any) => e.properties.PARK_ID === id
     );
-    setActivePark(HalteClickedById[0])
+    setActivePark(HalteClickedById[0]);
   };
-  
 
   // Check already onboarding
   useEffect(() => {
-    if (getCookies().isOnboarding || window.screen.width > 768 ) {
+    if (getCookies().isOnboarding || window.screen.width > 768) {
     } else {
       router.push({
         pathname: "/onBoarding",
@@ -154,7 +154,7 @@ export default function Map(props: MapProps) {
       setLng(position.coords.longitude);
     });
     setIsUserPosition(true);
-    fetchAllHalte()
+    fetchAllHalte();
   };
 
   // recenter map with user position
@@ -169,20 +169,20 @@ export default function Map(props: MapProps) {
   // fetch data one halte
   const fetchData = async (park: any) => {
     const req = await fetch(
-      "https://api.bikunku.com/terminal/" + park.properties.PARK_ID
+      `${httpBaseUrl}/terminal/` + park.properties.PARK_ID
     );
     const newData = await req.json();
     return setDetailHalte(newData.data);
   };
 
   const fetchDataByID = async (park: number) => {
-    const req = await fetch("https://api.bikunku.com/terminal/" + park);
+    const req = await fetch(`${httpBaseUrl}/terminal/` + park);
     const newData = await req.json();
     return setDetailHalte(newData.data);
   };
 
   const getBusEstimation = async (park: number) => {
-    const req = fetch("https://api.bikunku.com/bus/info/" + park, {
+    const req = fetch(`${httpBaseUrl}/bus/info/` + park, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -192,13 +192,16 @@ export default function Map(props: MapProps) {
       .then((data) => {
         const date = new Date();
         data.data.bus.forEach((element: any) => {
-          const parsedData = new Date(date.getTime() + (element.estimate * 60000))
-          element.finalTime = parsedData.getHours() + ":" + parsedData.getMinutes();
+          const parsedData = new Date(
+            date.getTime() + element.estimate * 60000
+          );
+          element.finalTime =
+            parsedData.getHours() + ":" + parsedData.getMinutes();
         });
 
         setBusEstimation(data.data.bus);
         const interval = setInterval(() => {
-          const req = fetch("https://api.bikunku.com/bus/info/" + park, {
+          const req = fetch(`${httpBaseUrl}/bus/info/` + park, {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -208,8 +211,11 @@ export default function Map(props: MapProps) {
             .then((data) => {
               const date = new Date();
               data.data.bus.forEach((element: any) => {
-                const parsedData = new Date(date.getTime() + (element.estimate * 60000))
-                element.finalTime = parsedData.getHours() + ":" + parsedData.getMinutes();
+                const parsedData = new Date(
+                  date.getTime() + element.estimate * 60000
+                );
+                element.finalTime =
+                  parsedData.getHours() + ":" + parsedData.getMinutes();
               });
               setBusEstimation(data.data.bus);
             });
@@ -220,12 +226,12 @@ export default function Map(props: MapProps) {
 
   // fetch all halte
   const fetchAllHalte = async () => {
-    if(isUserPosition) {
+    if (isUserPosition) {
       const payload = {
         lat: lat,
         long: lng,
       };
-      const req = fetch("https://api.bikunku.com/terminal/allTerminal", {
+      const req = fetch(`${httpBaseUrl}/terminal/allTerminal`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -241,7 +247,7 @@ export default function Map(props: MapProps) {
         lat: -6.361046716889507,
         long: 106.8317240044786,
       };
-      const req = fetch("https://api.bikunku.com/terminal/allTerminal", {
+      const req = fetch(`${httpBaseUrl}/terminal/allTerminal`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -253,21 +259,6 @@ export default function Map(props: MapProps) {
           setAllHalte(data.data.terminal);
         });
     }
-    // const payload = {
-    //   lat: -6.361046716889507,
-    //   long: 106.8317240044786,
-    // };
-    // const req = fetch("https://api.bikunku.com/terminal/allTerminal", {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify(payload),
-    // })
-    //   .then((res) => res.json())
-    //   .then((data) => {
-    //     setAllHalte(data.data.terminal);
-    //   });
   };
 
   const handleSearch = async (e: any) => {
@@ -707,7 +698,7 @@ export default function Map(props: MapProps) {
                               onClick={() => {
                                 DetailHalteByID(val.id);
                                 setIsHalte(false);
-                                
+
                                 setActiveParkById(val.id);
                                 setIsHalteClicked(true);
                                 getHalteClickedById(val.id);
@@ -1025,7 +1016,6 @@ export default function Map(props: MapProps) {
           ) : (
             <>
               {" "}
-              
               <div className="absolute bottom-[40%] w-full">
                 <div id="front1" className="h-screen">
                   <Draggable
@@ -1045,7 +1035,6 @@ export default function Map(props: MapProps) {
                         >
                           X
                         </div>
-                        
                       </div>
 
                       <div className="p-4">
@@ -1133,12 +1122,10 @@ export default function Map(props: MapProps) {
                                 href={{
                                   pathname: "/jadwal-bikun",
                                   query: {
-                                    park: activePark.properties.NAME
-                                }
+                                    park: activePark.properties.NAME,
+                                  },
                                 }}
-                                
                                 className="px-6 h-10 rounded-full flex items-center justify-center bg-blue-primary "
-                                
                               >
                                 <p className="text-white font-semibold">
                                   Lihat jadwal rutin

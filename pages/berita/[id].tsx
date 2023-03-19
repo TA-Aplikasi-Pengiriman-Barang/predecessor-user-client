@@ -1,4 +1,6 @@
 import Image from "next/image";
+
+import { httpBaseUrl } from "../../components/constant/api";
 import Layout from "../../components/Layout";
 import schedule from "../../public/assets/icon/schedule.svg";
 import beritaBG from "../../public/assets/image/beritaBG.svg";
@@ -47,7 +49,7 @@ export default function detail({ data }: Data) {
 }
 
 export async function getServerSideProps({ params }: any) {
-  const res = await fetch(`https://api.bikunku.com/news/${params.id}`, {
+  const res = await fetch(`${httpBaseUrl}/news/${params.id}`, {
     method: "GET",
   });
   const data = await res.json();

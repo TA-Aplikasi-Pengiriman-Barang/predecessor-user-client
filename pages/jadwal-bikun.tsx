@@ -4,6 +4,7 @@ import fixJadwal from "../data/fixJadwal.json";
 import { useState, useEffect } from "react";
 import Draggable from "react-draggable";
 import { days } from "../components/constant/days";
+import { httpBaseUrl } from "../components/constant/api";
 
 // import assets
 import bus from "../public/assets/icon/bus/busJadwal.svg";
@@ -13,7 +14,6 @@ import jadwalNotFound from "../public/assets/image/jadwalNotFound.svg";
 import halteNotFound from "../public/assets/image/halteNotFoundBG.svg";
 import position from "../public/assets/icon/position.svg";
 import { useRouter } from "next/router";
-
 
 export default function jadwalbikun() {
   const [isFilter, setIsFilter] = useState(false);
@@ -38,27 +38,25 @@ export default function jadwalbikun() {
 
   const onClickHalte = (name: any, route: any) => {
     let filteredData;
-    
+
     if (route === "BLUE") {
       filteredData = fixJadwal.data.filter(
         (e: any) =>
           e.halte.toLowerCase().includes(name) || e.rute.includes("belok")
       );
-    } if (route === "RED") {
+    }
+    if (route === "RED") {
       filteredData = fixJadwal.data.filter(
         (e: any) =>
           e.halte.toLowerCase().includes(name) || e.rute.includes("lurus")
       );
     } else {
-      filteredData = fixJadwal.data.filter(
-        (e: any) =>
-          e.halte.includes(name)
-      );
+      filteredData = fixJadwal.data.filter((e: any) => e.halte.includes(name));
     }
 
-    setIsHalte(false)
-    setDataJadwal(filteredData)
-    setIsShow(true)
+    setIsHalte(false);
+    setDataJadwal(filteredData);
+    setIsShow(true);
   };
 
   const clickApplyFilter = () => {
@@ -89,7 +87,7 @@ export default function jadwalbikun() {
         newData = filteredData;
       }
 
-      setIsFilter(false)
+      setIsFilter(false);
       setDataJadwal(newData);
       setIsShow(true);
     }
@@ -101,7 +99,7 @@ export default function jadwalbikun() {
       lat: -6.361046716889507,
       long: 106.8317240044786,
     };
-    const req = fetch("https://api.bikunku.com/terminal/allTerminal", {
+    const req = fetch(`${httpBaseUrl}/terminal/allTerminal`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -114,22 +112,24 @@ export default function jadwalbikun() {
       });
   };
 
-
   useEffect(() => {
     fetchAllHalte();
 
     // // Kalau refresh masih ada params yg blm ke cover
-    if(Object.keys(router.query).length !== 0) {
+    if (Object.keys(router.query).length !== 0) {
       const terminalPayload = router.query;
       onClickHalte(terminalPayload.park, "");
-    } 
+    }
   }, []);
 
   return (
     <Layout>
       <div className="h-screen bg-white">
         {/* Komponen Cari & Filter Jadwal  */}
-        <div id="front" className="bg-blue-primary h-16 rounded-[0_0_1rem_1rem] flex justify-center">
+        <div
+          id="front"
+          className="bg-blue-primary h-16 rounded-[0_0_1rem_1rem] flex justify-center"
+        >
           <div className="h-28 w-5/6 rounded-lg bg-white flex flex-col justify-center mt-2 px-4 space-y-3 drop-shadow-xl">
             <div className="flex space-x-2 rounded-full border-[1px] border-[#EAEAEA] bg-[#FAFAFA] px-4 py-2 text-sm">
               <Image src={location} alt="" />
@@ -441,7 +441,10 @@ export default function jadwalbikun() {
         {isFilter === true ? (
           <>
             {" "}
-            <div id="front3" className="absolute bottom-[40%] w-full drop-shadow-xl">
+            <div
+              id="front3"
+              className="absolute bottom-[40%] w-full drop-shadow-xl"
+            >
               <div id="front3" className="h-screen">
                 <Draggable
                   axis="y"
@@ -478,7 +481,10 @@ export default function jadwalbikun() {
                                 setEndDate(parseInt(e.target.value));
                               }}
                             >
-                              <option disabled selected> Pilih tanggal </option>
+                              <option disabled selected>
+                                {" "}
+                                Pilih tanggal{" "}
+                              </option>
                               <option value={0}> 21/11/2022 </option>
                               <option value={1}> 22/11/2022 </option>
                               <option value={2}> 23/11/2022 </option>

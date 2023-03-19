@@ -3,6 +3,8 @@ import beritaNotFoundBG from "../../public/assets/image/beritaNotFoundBG.svg";
 import News, { NotFoundNews } from "../../components/News";
 import { useState } from "react";
 
+import { httpBaseUrl } from "../../components/constant/api";
+
 interface NewsData {
   id: number;
   detail: string;
@@ -97,7 +99,9 @@ export default function berita(data: Data) {
           >
             <p
               className={`${
-                filter == FilterType.ALL ? "text-white text-xs" : "text-black text-xs"
+                filter == FilterType.ALL
+                  ? "text-white text-xs"
+                  : "text-black text-xs"
               }`}
             >
               Semua
@@ -111,7 +115,9 @@ export default function berita(data: Data) {
           >
             <p
               className={`${
-                filter == FilterType.TODAY ? "text-white text-xs" : "text-black text-xs"
+                filter == FilterType.TODAY
+                  ? "text-white text-xs"
+                  : "text-black text-xs"
               }`}
             >
               Hari ini
@@ -127,7 +133,9 @@ export default function berita(data: Data) {
           >
             <p
               className={`${
-                filter == FilterType.LAST_7_DAY ? "text-white text-xs" : "text-black text-xs"
+                filter == FilterType.LAST_7_DAY
+                  ? "text-white text-xs"
+                  : "text-black text-xs"
               }`}
             >
               7 Hari Terakhir
@@ -150,7 +158,7 @@ export default function berita(data: Data) {
 }
 
 export async function getServerSideProps() {
-  const res = await fetch(`https://api.bikunku.com/news/`, { method: "GET" });
+  const res = await fetch(`${httpBaseUrl}/news/`, { method: "GET" });
   const data = await res.json();
 
   return { props: { data: data.data.news } };
